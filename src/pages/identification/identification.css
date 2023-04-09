@@ -1,0 +1,49 @@
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-size: 29px;
+    width: 550px;
+    height: 81px;
+    text-align: center;
+    margin:auto;
+}
+
+.IdentificationForm{
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 350px;
+    text-align: center;
+}
+.Group, .Fio{
+    height: 24px;
+    border-radius:6px;
+    border: 1px solid rgb(179, 178, 178);
+    transition: .3s border-color;
+    padding: 0 5px;
+}
+
+.Group:hover, .Fio:hover {
+    border: 1px solid rgb(107, 106, 106);
+  }
+.Group{
+    margin-top: 5px;
+    margin-right: 93px;
+}
+
+.Button2{
+   /* margin-left: 28px; */
+    margin-top: 10px;
+    width: 180px;
+    height: 27px;
+    border-radius: 10px;
+    border: 0;
+    background-color: #1F5D89;
+    opacity: 76%;
+    color: white;
+}
+
+.Button2:hover{
+    opacity: 100%;
+    transition: 300ms;
+}
