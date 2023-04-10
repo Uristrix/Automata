@@ -1,4 +1,5 @@
 import Efremov from '../../assets/efremov.jpg';
+import Button from '../Button/Button';
 
 const TeacherCard = () => {
   return (
@@ -26,13 +27,7 @@ const TeacherCard = () => {
           </div>
         </div>
         <form action="mailto:nvlefremov@mail.ru" className="mx-auto md:mx-0 mt-6 lg:mt-auto md:ml-auto">
-          <button
-            type="submit"
-            className=" bg-ocean transition hover:bg-green border-0 rounded-xl text-base text-white text-center
-                h-10 w-36"
-          >
-            Связаться
-          </button>
+          <Button type={'submit'}>Связаться</Button>
         </form>
       </div>
     </section>
