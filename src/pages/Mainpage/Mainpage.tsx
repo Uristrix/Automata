@@ -4,7 +4,7 @@ import Events from '../../components/Events/Events';
 
 const MainPage = () => {
   return (
-    <section className="flex flex-col lg:flex-row justify-between gap-2 lg:gap-16">
+    <section className="flex flex-col lg:flex-row justify-between gap-2">
       <Schedule />
       <div className="flex flex-col gap-14 lg:gap-2">
         <TeacherCard />

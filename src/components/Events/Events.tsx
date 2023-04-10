@@ -1,6 +1,6 @@
 const Events = ({ arr }: { arr: any }) => {
   return (
-    <section className="bg-white overflow-hidden rounded-2xl shadow-lg w-full min-h-[535px]">
+    <section className="bg-white overflow-hidden rounded-2xl shadow-lg min-h-[535px] mx-auto md:mx-0 min-w-[350px] md:max-w-full">
       <h3 className="font-bold text-center bg-ocean text-white">Ближайшие События</h3>
       {arr.length !== 0 ? (
         arr.map((el: { time: any; name: any; groups: any[]; all: { cabinet: any } }, i: any) => (
@@ -17,7 +17,7 @@ const Events = ({ arr }: { arr: any }) => {
           </div>
         ))
       ) : (
-        <div className="text-center align-middle text-2xl font-bold">Ближайших событий</div>
+        <div className="text-center align-middle text-2xl font-bold">Ближайших событий нет</div>
       )}
     </section>
   );
