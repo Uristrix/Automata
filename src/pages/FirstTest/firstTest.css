@@ -1,0 +1,105 @@
+.br_2{
+    height: 80px;
+    width: 80px;
+}
+@media screen and (max-width: 600px) {
+    .table_1{
+        width: 350px;
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .image_1{
+        width: 500px;
+        overflow: scroll;
+    }
+    .form_1{
+        margin: 15px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .image_1{
+        width: 300px;
+        overflow: scroll;
+    }
+}
+
+.i_3{
+    margin-bottom: 5px;
+    outline: none;
+    width: 300px;
+}
+
+.i_4{
+    margin-bottom: 5px;
+    margin-top: 7px;
+    outline: none;
+    width: 300px;
+}
+
+td{
+    padding: 0px;
+    border:1px solid #000;
+}
+table{
+    border-collapse:collapse;
+}
+.i_2{
+    border: none;
+    outline: none;
+    width: 40px;
+}
+
+input{
+    outline: none;
+}
+
+.i_5{
+    width: 150px;
+}
+
+.t_11{
+    color: #808080;
+    font-style:italic;
+}
+
+.h_1{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.button_1{
+    width: 140px;
+    height: 40px;
+    background: #3276f3;
+    border-radius: 20px;
+    display: block;
+    margin-top: 15px;
+}
+
+.button_1:hover{
+    transition: 0.5ms;
+    background: #064ee0;
+}
+
+.th_1{
+    padding-right: 7px;
+}
+
+.table_2{
+    margin: auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .table_2{
+        width: 100%;
+        overflow: scroll;
+    }
+}
+
+.i_6{
+    width: 100px;
+}
+
