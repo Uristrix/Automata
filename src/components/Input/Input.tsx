@@ -62,7 +62,6 @@ const Input = ({
         value={value ?? ''}
         required={required}
         disabled={disabled}
-        onChange={onchange}
         {...rest}
       />
     </div>
