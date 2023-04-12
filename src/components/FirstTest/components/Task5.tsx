@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Test1Task5 = () => {
+export const Task5 = () => {
   return (
     <div>
       <span className="h_1">5 Задание.</span>
@@ -21,5 +21,3 @@ const Test1Task5 = () => {
     </div>
   );
 };
-
-export default Test1Task5;

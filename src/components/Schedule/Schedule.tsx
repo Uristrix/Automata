@@ -151,27 +151,6 @@ const Day = ({ day }: { day: Day }) => {
                 </div>
               </>
             }
-            {/*{(el?.odd || el?.even) && (*/}
-            {/*  <>*/}
-            {/*    <span className="w-[40px] lg:w-[80px]">{el?.odd?.time || el.even?.time || '-'}</span>*/}
-            {/*    <div className="h-full lg:w-[350px]">*/}
-            {/*      <div className="w-full lg:w-auto border-b-2 border-dashed border-b-gray-300 h-1/2 flex gap-2 justify-between">*/}
-            {/*        <span className="w-[140px] lg:w-[190px] whitespace-nowrap overflow-hidden text-ellipsis">*/}
-            {/*          {el?.odd?.name || '-'}*/}
-            {/*        </span>*/}
-            {/*        <span className="w-[85px]">{el?.odd?.groups || '-'}</span>*/}
-            {/*        <span className="w-[40px] text-right">{el?.odd?.cabinet || '-'}</span>*/}
-            {/*      </div>*/}
-            {/*      <div className="w-full lg:w-auto h-1/2 flex gap-2 justify-between">*/}
-            {/*        <span className="w-[140px] lg:w-[190px] whitespace-nowrap overflow-hidden text-ellipsis">*/}
-            {/*          {el?.even?.name || '-'}*/}
-            {/*        </span>*/}
-            {/*        <span className="w-[85px]">{el?.even?.groups || '-'}</span>*/}
-            {/*        <span className="w-[40px] text-right">{el?.even?.cabinet || '-'}</span>*/}
-            {/*      </div>*/}
-            {/*    </div>*/}
-            {/*  </>*/}
-            {/*)}*/}
           </div>
         ))
       ) : (
@@ -188,11 +167,7 @@ const Schedule = () => {
     URL &&
       axios
         .get(URL)
-        // eslint-disable-next-line promise/always-return
-        .then((res) => {
-          setSchedule(res.data);
-          console.log(res.data);
-        })
+        .then((res) => setSchedule(res.data))
         .catch((err) => console.error(err));
   }, []);
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import CegmenSmesh from '../../assets/cegment-smesh.jpg';
+import CegmenSmesh from '../../../assets/cegment-smesh.jpg';
 
-const Test1Task3 = (props: any) => {
+export const Task3 = (props: any) => {
   return (
     <div>
       <span className="h_1">3 Задание.</span>
@@ -298,5 +298,3 @@ const Test1Task3 = (props: any) => {
     </div>
   );
 };
-
-export default Test1Task3;

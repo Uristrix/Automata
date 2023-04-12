@@ -4,17 +4,17 @@ import classNames from 'classnames';
 const defaultInputClassname = (
   value: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>['value'],
   invalid?: boolean,
+  variant?: string,
 ) => {
-  const classes = [
-    'border border-solid rounded-2xl px-6 py-2 lg:py-4 outline-none',
-    'placeholder:text-pseudo-white placeholder:italic',
-  ];
+  const classes = ['border-2 border-solid', 'placeholder:text-pseudo-white placeholder:italic'];
+  if (variant === 'classic') classes.push('rounded-2xl px-6 py-2 lg:py-4');
+  else classes.push('border-black border-[1px]');
   if (invalid) {
     classes.push('border-red text-red');
   } else if (value) {
     classes.push('border-pseudo-black focus:border-green text-pseudo-black');
   } else {
-    classes.push('border-gray-8 focus:border-green');
+    classes.push('border-gra focus:border-green');
   }
   return classes;
 };
@@ -23,7 +23,7 @@ interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
   label?: ReactNode;
   invalid?: boolean;
   classes?: { root?: string; label?: string; input?: string };
-  ref?: LegacyRef<HTMLInputElement>;
+  variant?: 'control' | 'classic';
 }
 
 const Input = ({
@@ -38,10 +38,12 @@ const Input = ({
   classes = {},
   disabled = false,
   ref = null,
+  variant = 'classic',
+  onChange,
   ...rest
 }: InputProps) => {
   return (
-    <div className={classNames('flex flex-col gap-1', classes.root)}>
+    <div className={classNames('flex flex-col gap-1 border-g', classes.root)}>
       {label && (
         <label
           htmlFor={id}
@@ -52,7 +54,7 @@ const Input = ({
       )}
       <input
         ref={ref}
-        className={classNames(defaultInputClassname(value, invalid), classes.input)}
+        className={classNames(defaultInputClassname(value, invalid, variant), classes.input)}
         id={id}
         name={name}
         type={type}
@@ -60,6 +62,7 @@ const Input = ({
         value={value ?? ''}
         required={required}
         disabled={disabled}
+        onChange={onchange}
         {...rest}
       />
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Test1Task7 = () => {
+export const Task7 = () => {
   return (
     <div>
       <br />
@@ -12,5 +12,3 @@ const Test1Task7 = () => {
     </div>
   );
 };
-
-export default Test1Task7;

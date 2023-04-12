@@ -1,7 +1,7 @@
 import React from 'react';
-import { MapCarno } from '../mapCarno/mapCarno';
+import { MapCarno } from '../../mapCarno/mapCarno';
 
-const Test1Task6 = () => {
+export const Task6 = () => {
   return (
     <div>
       <span className="h_1">6 Задание.</span>
@@ -24,5 +24,3 @@ const Test1Task6 = () => {
     </div>
   );
 };
-
-export default Test1Task6;
