@@ -1,20 +1,21 @@
-import { DetailedHTMLProps, InputHTMLAttributes, LegacyRef, ReactNode } from 'react';
+import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
 
 const defaultInputClassname = (
   value: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>['value'],
   invalid?: boolean,
-  variant?: string,
 ) => {
-  const classes = ['border-2 border-solid', 'placeholder:text-pseudo-white placeholder:italic'];
-  if (variant === 'classic') classes.push('rounded-2xl px-6 py-2 lg:py-4');
-  else classes.push('border-black border-[1px]');
+  const classes = [
+    'border-[2px] border-solid focus:outline-0 focus:!border-ocean',
+    'placeholder:text-pseudo-white placeholder:italic',
+    'rounded-xs md:rounded-xl px-1 md:px-6 lg:py-1',
+  ];
   if (invalid) {
     classes.push('border-red text-red');
   } else if (value) {
-    classes.push('border-pseudo-black focus:border-green text-pseudo-black');
+    classes.push('!border-black !text-pseudo-black');
   } else {
-    classes.push('border-gra focus:border-green');
+    classes.push('!border-pseudo-white !text-pseudo-black');
   }
   return classes;
 };
@@ -23,7 +24,7 @@ interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
   label?: ReactNode;
   invalid?: boolean;
   classes?: { root?: string; label?: string; input?: string };
-  variant?: 'control' | 'classic';
+  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
 }
 
 const Input = ({
@@ -38,12 +39,11 @@ const Input = ({
   classes = {},
   disabled = false,
   ref = null,
-  variant = 'classic',
   onChange,
   ...rest
 }: InputProps) => {
   return (
-    <div className={classNames('flex flex-col gap-1 border-g', classes.root)}>
+    <div className={classNames('flex flex-col gap-1 border-g min-w-[85px] w-full', classes.root)}>
       {label && (
         <label
           htmlFor={id}
@@ -54,14 +54,15 @@ const Input = ({
       )}
       <input
         ref={ref}
-        className={classNames(defaultInputClassname(value, invalid, variant), classes.input)}
+        className={classNames(defaultInputClassname(value, invalid), classes.input)}
         id={id}
         name={name}
         type={type}
         placeholder={placeholder}
-        value={value ?? ''}
+        value={value}
         required={required}
         disabled={disabled}
+        onChange={onChange}
         {...rest}
       />
     </div>
