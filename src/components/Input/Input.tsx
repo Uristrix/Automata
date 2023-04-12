@@ -24,6 +24,7 @@ interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
   label?: ReactNode;
   invalid?: boolean;
   classes?: { root?: string; label?: string; input?: string };
+  variant?: 'input' | 'textarea';
   onChange?: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
 }
 
@@ -39,6 +40,7 @@ const Input = ({
   classes = {},
   disabled = false,
   ref = null,
+  variant = 'input',
   onChange,
   ...rest
 }: InputProps) => {
@@ -52,19 +54,33 @@ const Input = ({
           {label}
         </label>
       )}
-      <input
-        ref={ref}
-        className={classNames(defaultInputClassname(value, invalid), classes.input)}
-        id={id}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        required={required}
-        disabled={disabled}
-        onChange={onChange}
-        {...rest}
-      />
+      {variant === 'input' && (
+        <input
+          ref={ref}
+          className={classNames(defaultInputClassname(value, invalid), classes.input)}
+          id={id}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          required={required}
+          disabled={disabled}
+          onChange={onChange}
+          {...rest}
+        />
+      )}
+      {variant === 'textarea' && (
+        <textarea
+          className={classNames(defaultInputClassname(value, invalid), classes.input)}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          required={required}
+          disabled={disabled}
+          onChange={onChange}
+        />
+      )}
     </div>
   );
 };

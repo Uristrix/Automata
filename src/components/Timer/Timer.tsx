@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 export const useTimer = (endTime: Date) => {
   const [seconds, setSeconds] = useState((endTime.getMinutes() - new Date(Date.now()).getMinutes()) * 60);
+  // console.log(endTime.getMinutes(), new Date(Date.now()).getMinutes());
   useEffect(() => {
     if (seconds > 0) {
       const interval = setInterval(() => {

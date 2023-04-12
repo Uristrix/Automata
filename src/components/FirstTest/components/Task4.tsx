@@ -1,12 +1,8 @@
-import React from 'react';
-
 export const Task4 = () => {
   return (
     <div>
-      <span className="h_1">4 Задание.</span>
-      <br />
-      Доопределите функцию и представьте её в СДНФ и СКНФ.
-      <br />
+      <h2 className="text-xl font-semibold">4 Задание.</h2>
+      <p>Доопределите функцию и представьте её в СДНФ и СКНФ.</p>
       <div className="table_1">
         <table>
           <tr>
