@@ -11,19 +11,23 @@ export const Task6 = () => {
         следующую разметку карты Карно.
       </p>
       <MapCarno />
-      <div>
-        ТДНФ = <Input variant="textarea" />
+      <div className="flex items-center">
+        <span className="min-w-[60px]"> ТДНФ = </span>
+        <Input variant="textarea" />
       </div>
-      <p className="t_11">Пример: (x1 & x2 & nx3) | (x3 & nx4 & nx2) </p>
-      <div>
-        Ответ = <Input />
+      <p>Пример: (x1 & x2 & nx3) | (x3 & nx4 & nx2) </p>
+      <div className="flex items-center">
+        <span className="min-w-[60px]"> Ответ = </span>
+        <Input />
       </div>
-      <div>
-        ТКНФ = <Input variant="textarea" />
+      <div className="flex items-center">
+        <span className="min-w-[60px]"> ТКНФ = </span>
+        <Input variant="textarea" />
       </div>
-      <p className="t_11">Пример: (x1 & x2 & nx3) | (x3 & nx4 & nx2) </p>
-      <div>
-        Ответ = <Input />
+      <p>Пример: (x1 & x2 & nx3) | (x3 & nx4 & nx2) </p>
+      <div className="flex items-center">
+        <span className="min-w-[60px]"> Ответ = </span>
+        <Input />
       </div>
     </div>
   );

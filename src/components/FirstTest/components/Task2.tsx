@@ -1,45 +1,43 @@
 import React from 'react';
 import Input from '../../Input/Input';
+import { Control1 } from '../../../model/Control1';
 
-export const Task2 = ({ num, p }: { num: number; p: number }) => {
+export const Task2 = ({ variant }: { variant: Control1 }) => {
   return (
     <div>
       <h2 className="text-xl font-semibold">2 Задание.</h2>
-      <p>
-        Целую часть числа переведите в другие системы счисления по схеме, изображенной на рисунке, где p — основание
-        системы счисления. Р=3,5,7 в зависимости от варианта.
-      </p>
+      <p>Целую часть числа переведите в другие системы счисления.</p>
 
       <div className="lg:max-w-[400px] flex flex-col gap-2">
         <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>{p}</sub> = <Input />
+          {variant.num}
+          <sub>{variant.p}</sub> = <Input />
           <sub>2</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>{p}</sub> = <Input />
+          {variant.num}
+          <sub>{variant.p}</sub> = <Input />
           <sub>3</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
+          {variant.num}
           <sub>10</sub> = <Input />
           <sub>2</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
+          {variant.num}
           <sub>10</sub> = <Input />
-          <sub>{p}</sub>
+          <sub>{variant.p}</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
+          {variant.num}
           <sub>2</sub> = <Input />
           <sub>3</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
+          {variant.num}
           <sub>2</sub> = <Input />
-          <sub>{p}</sub>
+          <sub>{variant.p}</sub>
         </i>
       </div>
     </div>

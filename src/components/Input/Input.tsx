@@ -8,7 +8,7 @@ const defaultInputClassname = (
   const classes = [
     'border-[2px] border-solid focus:outline-0 focus:!border-ocean',
     'placeholder:text-pseudo-white placeholder:italic',
-    'rounded-xs md:rounded-xl px-1 md:px-6 lg:py-1',
+    'rounded-xs md:rounded-xl px-1 md:px-2 lg:py-1',
   ];
   if (invalid) {
     classes.push('border-red text-red');
