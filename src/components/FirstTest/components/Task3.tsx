@@ -21,7 +21,7 @@ export const Task3 = ({ variant }: { variant: Control1 }) => {
 
       <div className="flex flex-wrap justify-between w-full items-center">
         {table.map((el, i) => (
-          <div className="w-1/5 text-center font-semibold" key={`table${i}`}>
+          <div className="!w-1/5 text-center font-semibold" key={`table${i}`}>
             {el}
           </div>
         ))}
@@ -29,7 +29,7 @@ export const Task3 = ({ variant }: { variant: Control1 }) => {
           <>
             {table.map((el2, i2) => (
               <Input
-                classes={{ root: 'w-1/5 !rounded-none !min-w-[40px]', input: '!rounded-none' }}
+                classes={{ root: '!w-1/5 !rounded-none !min-w-[40px]', input: '!rounded-none' }}
                 key={`Input${i2}`}
               />
             ))}
