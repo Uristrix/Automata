@@ -9,7 +9,7 @@ export const Task4 = ({ variant }: { variant: Control1 }) => {
       <p>Доопределите функцию и представьте её в СДНФ и СКНФ.</p>
       <div className="flex flex-wrap justify-between w-full items-center overflow-x-scroll md:overflow-auto">
         {table.map((el, i) => (
-          <div className="w-[14.286%] text-center font-semibold" key={`table${i}`}>
+          <div className="!w-[14.286%] text-center font-semibold" key={`table${i}`}>
             {el}
           </div>
         ))}
