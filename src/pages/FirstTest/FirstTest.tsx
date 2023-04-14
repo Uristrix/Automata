@@ -2,10 +2,17 @@ import { Task1, Task2, Task3, Task4, Task5, Task6, Task7 } from '../../component
 import Button from '../../components/Button/Button';
 import { useEffect, useState } from 'react';
 import { Control1, Inputs } from '../../model/Control1';
+import Timer, { useTimer } from '../../components/Timer/Timer';
+import { useNavigate } from 'react-router-dom';
 
 const FirstTest = () => {
+  //TODO: Заполнять автоматом инпуты из стора.
   const [inputs, setInputs] = useState<Inputs>({});
+  //TODO: Заглушка пока нет серверного времени.
+  const { seconds } = useTimer(new Date(Date.now() + 60 * 60 * 1000));
+  const navigate = useNavigate();
   const [variant, setVariant] = useState<Control1>({});
+
   useEffect(() => {
     const variant = Math.floor(Math.random() * 30) + 1; // от 1 до 30
     const randomVar: Control1 = {
@@ -18,8 +25,24 @@ const FirstTest = () => {
     setVariant(randomVar);
   }, []);
 
+  const SendResult = (e?: { preventDefault: () => void }) => {
+    //TODO: Поправить, когда появится запрос
+    // axios.post('postFirstLab', inputs);
+    e?.preventDefault();
+    console.log(inputs);
+  };
+
+  useEffect(() => {
+    console.log(seconds);
+    if (seconds < 1) {
+      SendResult();
+      navigate('/');
+    }
+  }, [seconds]);
+
   return (
     <div className="mx-3 md:mx-0">
+      <Timer seconds={seconds} />
       <h2 className="text-2xl text-center font-bold">Контрольная работа № 1</h2>
       <h3 className="text-xl text-center font-bold">Вариант № {variant.variant || 1} </h3>
       <form className="flex flex-col gap-5 text-justify">
