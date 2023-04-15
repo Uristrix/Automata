@@ -22,7 +22,7 @@ const Timer = ({ seconds }: { seconds: number }) => {
   return seconds > 0 ? (
     <div
       className={classNames(
-        'z-50 fixed top-[65px] right-0.5 lg:top-[100px] lg:right-4 min-w-[100px] h-[30px] rounded-3xl text-white text-sm flex gap-1 items-center p-2 opacity-60',
+        'z-50 fixed top-[65px] right-0.5 md:top-[100px] lg:right-4 min-w-[100px] h-[30px] rounded-3xl text-white text-sm flex gap-1 items-center p-2 opacity-60',
         seconds < 60 ? 'bg-red-700' : 'bg-ocean',
       )}
     >
