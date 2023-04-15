@@ -1,9 +1,11 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import Input from '../../components/Input/Input';
 import { Dispatch, useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '../../components/Button/Button';
 import Timer, { useTimer } from '../../components/Timer/Timer';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
 interface Inputs {
   [keys: string]: {
@@ -12,49 +14,94 @@ interface Inputs {
     additional?: string | null;
   };
 }
-const Line = ({ name, inputs, setInputs }: { name: string; inputs: Inputs; setInputs: Dispatch<Inputs> }) => {
+const Line = ({
+  id,
+  name,
+  inputs,
+  setInputs,
+  style,
+}: {
+  id: string;
+  name: string;
+  style?: string;
+  inputs: Inputs;
+  setInputs: Dispatch<Inputs>;
+}) => {
   return (
-    <div className="flex gap-2 mb-2">
+    <div className={classNames('flex gap-2 mb-2', style)}>
       <div className=" min-w-[40px] md:min-w-[58px] text-xs md:text-base flex items-center">{name}</div>
       <Input
-        value={inputs[name]?.straight || undefined}
+        classes={{ input: '!rounded-none' }}
+        value={inputs[id]?.straight || undefined}
         onChange={(e) => {
-          setInputs({ ...inputs, [name]: { ...inputs[name], straight: e.target.value } });
+          setInputs({ ...inputs, [id]: { ...inputs[id], straight: e.target.value } });
         }}
       />
       <Input
-        value={inputs[name]?.back || undefined}
+        classes={{ input: '!rounded-none' }}
+        value={inputs[id]?.back || undefined}
         onChange={(e) => {
-          setInputs({ ...inputs, [name]: { ...inputs[name], back: e.target.value } });
+          setInputs({ ...inputs, [id]: { ...inputs[id], back: e.target.value } });
         }}
       />
       <Input
-        value={inputs[name]?.additional || undefined}
+        classes={{ input: '!rounded-none' }}
+        value={inputs[id]?.additional || undefined}
         onChange={(e) => {
-          setInputs({ ...inputs, [name]: { ...inputs[name], additional: e.target.value } });
+          setInputs({ ...inputs, [id]: { ...inputs[id], additional: e.target.value } });
         }}
       />
     </div>
   );
 };
 
-const inputsParams = [
-  { name: 'A', id: '' },
-  { name: 'B', id: '' },
-  { name: '-A', id: '' },
-  { name: '-B', id: '' },
-  { name: 'A*2^-2', id: '' },
-  { name: 'A*2^-3', id: '' },
-  { name: 'A*2^+3', id: '' },
-  { name: 'A*2^+4', id: '' },
-  { name: 'B*2^-2', id: '' },
-  { name: 'B*2^-3', id: '' },
-  { name: 'B*2^+3', id: '' },
-  { name: 'B*2^+4', id: '' },
-  { name: 'A+B', id: '' },
-  { name: 'A-B', id: '' },
-  { name: '-A+B', id: '' },
-  { name: '-A-B', id: '' },
+const inputsParams1 = [
+  { name: 'A', id: 'A' },
+  { name: 'B', id: 'B' },
+  { name: '-A', id: '-A' },
+  { name: '-B', id: '-B' },
+  { name: 'A*2^-2', id: 'A*2^-2' },
+  { name: 'A*2^-3', id: 'A*2^-3' },
+  { name: 'A*2^+3', id: 'A*2^+3' },
+  { name: 'A*2^+4', id: 'A*2^+4' },
+  { name: 'B*2^-2', id: 'B*2^-2' },
+  { name: 'B*2^-3', id: 'B*2^-3' },
+  { name: 'B*2^+3', id: 'B*2^+3' },
+  { name: 'B*2^+4', id: 'B*2^+4' },
+];
+const inputsParams2 = [
+  {
+    name: 'A+B',
+    data: [
+      { name: 'A`', id: 'A+B_A' },
+      { name: 'B`', id: 'A+B_B' },
+      { name: 'A+B', id: 'A+B' },
+    ],
+  },
+  {
+    name: 'A-B',
+    data: [
+      { name: 'A`', id: 'A-B_A' },
+      { name: 'B`', id: 'A-B_B' },
+      { name: 'A-B', id: 'A-B' },
+    ],
+  },
+  {
+    name: '-A+B',
+    data: [
+      { name: 'A`', id: '-A+B_A' },
+      { name: 'B`', id: '-A+B_B' },
+      { name: '-A+B', id: '-A+B' },
+    ],
+  },
+  {
+    name: '-A-B',
+    data: [
+      { name: 'A`', id: '-A-B_A' },
+      { name: 'B`', id: '-A-B_B' },
+      { name: '-A-B', id: '-A-B' },
+    ],
+  },
 ];
 
 const SecondTest = () => {
@@ -62,7 +109,7 @@ const SecondTest = () => {
   const [inputs, setInputs] = useState<Inputs>({});
   const [randomVal, setRandomVal] = useState<{ A: number; B: number }>({ A: 0, B: 0 });
   //TODO: Заглушка пока нет серверного времени.
-  const { seconds } = useTimer(new Date(Date.now() + 5 * 60 * 1000));
+  const { seconds } = useTimer(new Date(Date.now() + 60 * 60 * 1000));
   const navigate = useNavigate();
 
   const SendResult = (e?: { preventDefault: () => void }) => {
@@ -98,18 +145,47 @@ const SecondTest = () => {
         onSubmit={SendResult}
         className="flex flex-col mx-auto mt-5 md:mt-10 w-[330px] md:w-[700px] lg:w-[1000px] overflow-x-scroll md:overflow-hidden"
       >
-        <div className="flex w-full justify-between gap-2">
-          <h3 className="!min-w-[40px] md:!min-w-[58px]"> </h3>
-          <div className="flex w-full justify-around [&>h3]:font-semibold">
-            <h3>Пр. код</h3>
-            <h3>Об. код</h3>
-            <h3>Доп. код</h3>
+        <div>
+          <h2 className="text-center font-semibold text-lg mb-2">Переведите числа в данные коды</h2>
+          <div className="flex w-full justify-between gap-2">
+            <h3 className="!min-w-[40px] md:!min-w-[58px]"> </h3>
+            <div className="flex w-full justify-around [&>h3]:font-semibold">
+              <h3>Пр. код</h3>
+              <h3>Об. код</h3>
+              <h3>Доп. код</h3>
+            </div>
           </div>
-        </div>
 
-        {inputsParams?.map((el, i) => (
-          <Line key={`line${i}`} inputs={inputs} setInputs={setInputs} name={el.name} />
-        ))}
+          {inputsParams1?.map((el, i) => (
+            <Line key={`line${i}`} inputs={inputs} setInputs={setInputs} name={el.name} id={el.id} />
+          ))}
+        </div>
+        <div className="flex-col mt-5">
+          <h2 className="text-center font-semibold text-lg mb-2">Посчитайте в столбик</h2>
+          {inputsParams2?.map((el, i) => (
+            <div className="relative" key={`operation${i}`}>
+              <div className="w-full">
+                <div className="flex w-full justify-around [&>h3]:font-semibold">
+                  <div className="flex w-full justify-between gap-2">
+                    <h3 className="!min-w-[40px] md:!min-w-[58px]"> </h3>
+                    <div className="flex w-full justify-around [&>h3]:font-semibold">
+                      <h3>Пр. код</h3>
+                      <h3>Об. код</h3>
+                      <h3>Доп. код</h3>
+                    </div>
+                  </div>
+                </div>
+                {el.data?.map((el2, i2) => (
+                  <>
+                    <Line id={el2.id} name={el2.name} inputs={inputs} setInputs={setInputs} />
+                    {i2 == 1 && <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />}
+                  </>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div className="relative"></div>
+        </div>
         <Button type="submit" style="!ml-auto mt-10">
           Отправить ответ
         </Button>

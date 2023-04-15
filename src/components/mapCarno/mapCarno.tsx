@@ -1,80 +1,63 @@
 import React from 'react';
-import './mapCarno.css';
+import Input from '../Input/Input';
+import classNames from 'classnames';
 
+const defClass = 'absolute flex text-center text-sm text-ocean font-semibold rounded-[50%] border-ocean -z-10';
+const termClasses = [
+  { div: 'border-2 -z-10 items-start w-[100px] h-[50px] -top-5', span: 'mx-auto leading-3 my-1', text: 'X1' },
+  {
+    div: 'border-2 -z-10 items-start w-[100px] h-[50px] -top-5 right-0',
+    span: 'mx-auto border-t border-ocean leading-3 my-1',
+    text: 'X1',
+  },
+  { div: 'border-2 -z-10 items-center w-[50px] h-[100px] -left-5', span: 'leading-3 ml-0.5', text: 'X2' },
+  {
+    div: 'border-2 -z-10 items-center w-[50px] h-[100px] -left-5 bottom-0',
+    span: 'border-t border-ocean leading-3 ml-0.5',
+    text: 'X2',
+  },
+  {
+    div: 'items-end w-[50px] h-[50px] left-0 -bottom-5',
+    span: 'mx-auto border-t border-ocean leading-3 mb-0.5',
+    text: 'X4',
+  },
+  { div: 'border-2 -z-10 items-end w-[100px] h-[50px] left-[25%] -bottom-5', span: 'mx-auto leading-3', text: 'X3' },
+  {
+    div: 'items-end w-[50px] h-[50px] right-0 -bottom-5',
+    span: 'mx-auto border-t border-ocean leading-3 mb-0.5',
+    text: 'X4',
+  },
+  {
+    div: 'justify-end items-center w-[50px] h-[50px] top-0 -right-5',
+    span: 'border-t border-ocean leading-3 mr-0.5',
+    text: 'X3',
+  },
+  {
+    div: 'border-2 justify-end items-center w-[50px] h-[100px] top-[25%] -right-5',
+    span: 'leading-3',
+    text: 'X4',
+  },
+  {
+    div: 'justify-end items-center w-[50px] h-[50px] bottom-0 -right-5',
+    span: 'border-t border-ocean leading-3 mr-0.5',
+    text: 'X3',
+  },
+];
 export const MapCarno = () => {
   return (
-    <div className="container">
-      <div className="t_1">x1</div>
-      <div className="t_2">x1</div>
-      <div className="t_3">x2</div>
-      <div className="t_4">x2</div>
-      <div className="t_5">x3</div>
-      <div className="t_6">x4</div>
-      <div className="t_7">x3</div>
-      <div className="t_8">x3</div>
-      <div className="t_9">x4</div>
-      <div className="t_10">x4</div>
-
-      <div className="d_1"></div>
-      <div className="d_2"></div>
-      <div className="d_3"></div>
-      <div className="d_4"></div>
-      <div className="d_5"></div>
-      <div className="d_6"></div>
-      <div className="d_7"></div>
-      <div className="d_8"></div>
-      <div className="d_9"></div>
-      <div className="d_10"></div>
-
-      <div className="grid">
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
-        <div className="d_11">
-          <input className="i_1" maxLength={1} />
-        </div>
+    <div className="relative m-10 w-[200px] h-[200px] box-content">
+      <div className="absolute grid grid-cols-4 w-full h-full box-content">
+        {Array.from(Array(16).keys()).map((el) => (
+          <Input
+            classes={{ root: '!min-h-[30px] !min-w-[30px]', input: '!rounded-none text-2xl' }}
+            key={`Input${el}`}
+          />
+        ))}
+        {termClasses.map((el, i) => (
+          <div key={`term${i}`} className={classNames(defClass, el.div)}>
+            <span className={el.span}>{el.text}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
