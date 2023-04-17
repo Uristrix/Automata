@@ -122,8 +122,8 @@ const SecondTest = () => {
   useEffect(() => {
     window.scroll(0, 0);
     return setRandomVal({
-      A: Math.floor(Math.random() * (64 - -64) + -64),
-      B: Math.floor(Math.random() * (64 - -64) + -64),
+      A: Math.floor(Math.random() * (63 - -63) + -63),
+      B: Math.floor(Math.random() * (63 - -63) + -63),
     });
   }, []);
 

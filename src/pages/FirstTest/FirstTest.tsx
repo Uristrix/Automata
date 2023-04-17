@@ -12,13 +12,14 @@ const FirstTest = () => {
   const { seconds } = useTimer(new Date(Date.now() + 60 * 60 * 1000));
   const navigate = useNavigate();
   const [variant, setVariant] = useState<Control1>({});
+  const varSegments: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'm', 'g', 'l'];
 
   useEffect(() => {
     const variant = Math.floor(Math.random() * 30) + 1; // от 1 до 30
     const randomVar: Control1 = {
       variant: variant,
       num: Math.floor(Math.random() * (1023 - 513 + 1)) + 513, // от 513 до 1023
-      segment: String.fromCharCode(97 + Math.floor(Math.random() * 10)), // от  0 до 9 в буквах a to j
+      segment: varSegments[Math.floor(Math.random() * 8)], // от  0 до 8
       p: variant % 3 === 0 ? 7 : (variant % 3) * 2 + 1, // 3 5 7
       bias: Math.floor(Math.random() * 7), // 0 до 6
     };
