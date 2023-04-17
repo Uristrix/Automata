@@ -20,7 +20,7 @@ const Events = ({ data }: PropsWithChildren<Events>) => {
         data?.map((el: Elem, i) => (
           <div
             key={`event${i}`}
-            className="h-12 gap-2 text-sm flex justify-between items-center gap-2 border-b border-b-black px-2 w-auto"
+            className="h-12 md:h-14 gap-2 text-sm flex justify-between items-center gap-2 border-b border-b-black px-2 w-auto"
           >
             <span className="w-[60px] md:w-[100px]">{el?.time || '-'}</span>
             <span className="w-[100px] md:w-[190px] overflow-hidden text-ellipsis">{el?.name || '-'}</span>
