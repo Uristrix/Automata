@@ -61,7 +61,7 @@ const Schedule = () => {
   return (
     <section>
       <h2 className="text-2xl text-center font-bold mb-4">Расписание занятий</h2>
-      <div className="flex w-full md:max-w-[710px] lg:max-w-[870px] lg:grid grid-cols-6 overflow-scroll md:overflow-auto md:grid-cols-2 gap-6 md:gap-2 mx-5 md:mx-0">
+      <div className="flex w-full md:max-w-[710px] lg:max-w-[870px] lg:grid grid-cols-6 overflow-scroll md:overflow-auto md:grid-cols-2 gap-6 md:gap-2">
         {schedule && schedule?.day?.map((el) => <Day day={el} key={el.number} />)}
       </div>
     </section>

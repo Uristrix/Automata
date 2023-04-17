@@ -30,7 +30,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <section className="flex flex-col lg:flex-row justify-between gap-2">
+    <section className="flex flex-col lg:flex-row justify-between gap-2 mx-5 md:mx-0">
       <Schedule />
       <div className="flex flex-col gap-14 lg:gap-2">
         <TeacherCard />
