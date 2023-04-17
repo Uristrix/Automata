@@ -2,7 +2,8 @@ import { Task1, Task2, Task3, Task4, Task5, Task6, Task7 } from '../../component
 import Button from '../../components/Button/Button';
 import { useEffect, useState } from 'react';
 import { Control1, Inputs } from '../../model/Control1';
-import Timer, { useTimer } from '../../components/Timer/Timer';
+import Timer from '../../components/Timer/Timer';
+import { useTimer } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 
 const FirstTest = () => {
@@ -34,7 +35,7 @@ const FirstTest = () => {
   };
 
   useEffect(() => {
-    console.log(seconds);
+    //console.log(seconds);
     if (seconds < 1) {
       SendResult();
       navigate('/');

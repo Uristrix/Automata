@@ -1,32 +1,23 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import Input from '../../components/Input/Input';
-import { Dispatch, useEffect, useState } from 'react';
+import { Dispatch, PropsWithChildren, useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '../../components/Button/Button';
-import Timer, { useTimer } from '../../components/Timer/Timer';
+import Timer from '../../components/Timer/Timer';
+import { useTimer } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
+import { Inputs } from '../../model/Control2';
 
-interface Inputs {
-  [keys: string]: {
-    straight?: string | null;
-    back?: string | null;
-    additional?: string | null;
-  };
-}
-const Line = ({
-  id,
-  name,
-  inputs,
-  setInputs,
-  style,
-}: {
+interface Line {
   id: string;
   name: string;
   style?: string;
   inputs: Inputs;
   setInputs: Dispatch<Inputs>;
-}) => {
+}
+
+const Line = ({ id, name, inputs, setInputs, style }: PropsWithChildren<Line>) => {
   return (
     <div className={classNames('flex gap-2 mb-2', style)}>
       <div className=" min-w-[40px] md:min-w-[58px] text-xs md:text-base flex items-center">{name}</div>
@@ -52,6 +43,45 @@ const Line = ({
         }}
       />
     </div>
+  );
+};
+
+interface stepData {
+  name: string;
+  data: Array<{ name: string; id: string }>;
+}
+interface StepLine {
+  arr: Array<stepData>;
+  inputs: Inputs;
+  setInputs: Dispatch<Inputs>;
+}
+
+const StepLines = ({ arr, inputs, setInputs }: PropsWithChildren<StepLine>) => {
+  return (
+    <>
+      {arr?.map((el, i) => (
+        <div className="relative" key={`operation${i}`}>
+          <div className="w-full">
+            <div className="flex w-full justify-around [&>h3]:font-semibold">
+              <div className="flex w-full justify-between gap-2">
+                <h3 className="!min-w-[40px] md:!min-w-[58px]"> </h3>
+                <div className="flex w-full justify-around [&>h3]:font-semibold">
+                  <h3>Пр. код</h3>
+                  <h3>Об. код</h3>
+                  <h3>Доп. код</h3>
+                </div>
+              </div>
+            </div>
+            {el.data?.map((el2, i2) => (
+              <>
+                <Line id={el2.id} name={el2.name} inputs={inputs} setInputs={setInputs} />
+                {i2 == 1 && <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />}
+              </>
+            ))}
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 
@@ -128,7 +158,7 @@ const SecondTest = () => {
   }, []);
 
   useEffect(() => {
-    console.log(seconds);
+    //console.log(seconds);
     if (seconds < 1) {
       SendResult();
       navigate('/');
@@ -162,29 +192,7 @@ const SecondTest = () => {
         </div>
         <div className="flex-col mt-5">
           <h2 className="text-center font-semibold text-lg mb-2">Посчитайте в столбик</h2>
-          {inputsParams2?.map((el, i) => (
-            <div className="relative" key={`operation${i}`}>
-              <div className="w-full">
-                <div className="flex w-full justify-around [&>h3]:font-semibold">
-                  <div className="flex w-full justify-between gap-2">
-                    <h3 className="!min-w-[40px] md:!min-w-[58px]"> </h3>
-                    <div className="flex w-full justify-around [&>h3]:font-semibold">
-                      <h3>Пр. код</h3>
-                      <h3>Об. код</h3>
-                      <h3>Доп. код</h3>
-                    </div>
-                  </div>
-                </div>
-                {el.data?.map((el2, i2) => (
-                  <>
-                    <Line id={el2.id} name={el2.name} inputs={inputs} setInputs={setInputs} />
-                    {i2 == 1 && <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />}
-                  </>
-                ))}
-              </div>
-            </div>
-          ))}
-          <div className="relative"></div>
+          <StepLines arr={inputsParams2} inputs={inputs} setInputs={setInputs} />
         </div>
         <Button type="submit" style="!ml-auto mt-10">
           Отправить ответ

@@ -2,38 +2,11 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Days, Schedules } from '../../model/Schedule';
 
-interface Schedule {
-  day?: Array<Day>;
-  semester?: number | null;
-  year?: number | null;
-  teacher?: string | null;
-}
-
-interface Day {
-  name?: string | null;
-  number?: number | null;
-  pairList?: Array<PairList>;
-  special_day?: boolean | false;
-}
-
-interface PairList {
-  pair?: Array<Pair>;
-  pairnumber?: number | null;
-  pairtime?: string | null;
-  groups?: Array<string>;
-}
-
-interface Pair {
-  aud?: string | null;
-  group?: Array<string>;
-  subgroup?: string | null;
-  subject?: string | null;
-  week?: number | null;
-}
 const URL = process.env.REACT_APP_SCHEDULE;
 
-const Day = ({ day }: { day: Day }) => {
+const Day = ({ day }: { day: Days }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg min-w-[350px] max-w-[470px] min-h-[260px] flex flex-col overflow-hidden">
       <h3 className="font-bold text-center bg-ocean text-white">{day.name}</h3>
@@ -76,7 +49,7 @@ const Day = ({ day }: { day: Day }) => {
 };
 
 const Schedule = () => {
-  const [schedule, setSchedule] = useState<Schedule | null>(null);
+  const [schedule, setSchedule] = useState<Schedules | null>(null);
 
   useEffect(() => {
     URL &&
@@ -88,7 +61,7 @@ const Schedule = () => {
   return (
     <section>
       <h2 className="text-2xl text-center font-bold mb-4">Расписание занятий</h2>
-      <div className="flex md:max-w-[710px] lg:max-w-[870px] lg:grid grid-cols-6 overflow-scroll md:overflow-auto md:grid-cols-2 gap-6 md:gap-2 mx-5 md:mx-0">
+      <div className="flex w-full md:max-w-[710px] lg:max-w-[870px] lg:grid grid-cols-6 overflow-scroll md:overflow-auto md:grid-cols-2 gap-6 md:gap-2 mx-5 md:mx-0">
         {schedule && schedule?.day?.map((el) => <Day day={el} key={el.number} />)}
       </div>
     </section>
