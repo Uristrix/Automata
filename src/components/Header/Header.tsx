@@ -17,10 +17,10 @@ const Header = () => {
               МГТУ им. Н.Э.Баумана
             </div>
           </a>
-          <a href="/" className="align-middle">
+          <a href="/training" className="align-middle">
             Тренажёр
           </a>
-          <a href="/">Учебный материал</a>
+          <a href="/schedule">Расписание</a>
         </div>
 
         <button className="flex gap-4 items-center h-full cursor-pointer" onClick={() => setOpenModal(true)}>

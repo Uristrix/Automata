@@ -2,6 +2,7 @@ import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import Schedule from '../../components/Schedule/Schedule';
 import Events from '../../components/Events/Events';
 import { useEffect } from 'react';
+import Topics from '../../components/Topics/Topics';
 
 const event_mock = [
   {
@@ -31,7 +32,8 @@ const MainPage = () => {
 
   return (
     <section className="flex flex-col lg:flex-row justify-between gap-2 mx-5 md:mx-0">
-      <Schedule />
+      {/*<Schedule />*/}
+      <Topics />
       <div className="flex flex-col gap-14 lg:gap-2">
         <TeacherCard />
         <Events data={event_mock} />

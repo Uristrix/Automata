@@ -178,7 +178,7 @@ const SecondTest = () => {
         <div>
           <h2 className="text-center font-semibold text-lg mb-2">Переведите числа в данные коды</h2>
           <div className="flex w-full justify-between gap-2">
-            <h3 className="!min-w-[40px] md:!min-w-[58px]"> </h3>
+            <div className="!min-w-[40px] md:!min-w-[58px]"> </div>
             <div className="flex w-full justify-around [&>h3]:font-semibold">
               <h3>Пр. код</h3>
               <h3>Об. код</h3>
