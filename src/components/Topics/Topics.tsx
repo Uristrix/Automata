@@ -109,9 +109,9 @@ const Link = ({ name, link }: { name: string; link: string }) => {
 
 const Topics = () => {
   return (
-    <section className="rounded-2xl bg-white shadow-md overflow-hidden">
+    <section className="rounded-2xl bg-white shadow-md overflow-hidden md:max-w-[710px] lg:max-w-[870px] h-[300px] md:h-[800px]">
       <h2 className="text-center text-white font-bold bg-ocean">Учебный материал</h2>
-      <div className="flex flex-col gap-2 w-full md:max-w-[710px] lg:max-w-[870px] overflow-y-scroll h-[805px]">
+      <div className="flex flex-col gap-2 w-full h-full overflow-y-scroll ">
         {Links &&
           Links?.map((el) => (
             <>
