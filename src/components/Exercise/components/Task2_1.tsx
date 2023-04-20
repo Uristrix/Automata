@@ -1,20 +1,29 @@
 import segments from '../../../assets/segments.jpg';
-import { Control1 } from '../../../model/Control1';
 import Input from '../../Input/Input';
 
-export const Task3 = ({ variant }: { variant: Control1 }) => {
-  const table = ['x1', 'x2', 'x3', 'x4', variant.segment];
+export const Task2_1 = ({
+  bias,
+  segment,
+  D,
+  header,
+}: {
+  bias: number;
+  segment: string;
+  D: number;
+  header?: string;
+}) => {
+  const table = ['x1', 'x2', 'x3', 'x4', segment];
 
   return (
-    <div className="lg:max-w-[800px]">
-      <h2 className="text-xl font-semibold">3 Задание.</h2>
+    <div className="">
+      {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">
         Составьте таблицу истинности для одной из функций a,b,c…i, управляющих работой соответствующего сегмента
         индикатора десятичной цифры, представленной в коде{' '}
-        <span className="font-semibold">{(variant?.variant || 1) % 2 === 1 ? 'Д1' : 'Д2'}</span>
+        <span className="font-semibold">{D === 0 ? 'Д1' : 'Д2'}</span>
       </p>
       <p className="font-semibold mb-2">
-        Смещение: {variant.bias}, сегмент: {variant.segment}
+        Смещение: {bias}, сегмент: {segment}
       </p>
 
       <img className="my-4" src={segments} alt="CegmentSmesh" />

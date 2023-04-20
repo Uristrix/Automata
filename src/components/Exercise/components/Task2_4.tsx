@@ -2,10 +2,10 @@ import React from 'react';
 import { MapCarno } from '../../mapCarno/mapCarno';
 import Input from '../../Input/Input';
 
-export const Task6 = () => {
+export const Task2_4 = ({ header }: { header?: string }) => {
   return (
     <div className="lg:max-w-[400px]">
-      <h2 className="text-xl font-semibold">6 Задание.</h2>
+      {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">
         Минимизируйте функцию из п. 3 методом Карно. Найдите тупиковую ДНФ, тупиковую КНФ. Рекомендуется использовать
         следующую разметку карты Карно.

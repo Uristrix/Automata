@@ -1,11 +1,10 @@
-import { Control1 } from '../../../model/Control1';
 import Input from '../../Input/Input';
 
-export const Task4 = ({ variant }: { variant: Control1 }) => {
-  const table = ['x1', 'x2', 'x3', 'x4', variant.segment, 'СДНФ', 'СКНФ'];
+export const Task2_2 = ({ segment, header }: { segment: string; header?: string }) => {
+  const table = ['x1', 'x2', 'x3', 'x4', segment, 'СДНФ', 'СКНФ'];
   return (
-    <div className="lg:max-w-[801px]">
-      <h2 className="text-xl font-semibold">4 Задание.</h2>
+    <div className="">
+      {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">Доопределите функцию и представьте её в СДНФ и СКНФ.</p>
       <div className="relative w-full">
         <div className="grid grid-cols-7 w-full">

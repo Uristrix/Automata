@@ -1,9 +1,9 @@
 import Input from '../../Input/Input';
 
-export const Task5 = () => {
+export const Task2_3 = ({ header }: { header?: string }) => {
   return (
     <div className="lg:max-w-[400px]">
-      <h2 className="text-xl font-semibold">5 Задание.</h2>
+      {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">Выполните минимизацию функции из п. 4 методом Квайна, Квайна-мак-Класки.</p>
       <div className="flex flex-nowrap items-center mb-2">
         <span className="min-w-[60px]"> СДНФ = </span>

@@ -1,5 +1,4 @@
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
-import Schedule from '../../components/Schedule/Schedule';
 import Events from '../../components/Events/Events';
 import { useEffect } from 'react';
 import Topics from '../../components/Topics/Topics';
@@ -9,19 +8,25 @@ const event_mock = [
     name: 'Контрольная работа №1',
     time: '-',
     groups: ['K3-43Б'],
-    href: '/first_control',
+    href: '/test1',
   },
   {
     name: 'Контрольная работа №2',
     time: '-',
     groups: ['K3-44Б', 'K3-46Б'],
-    href: '/second_control',
+    href: '/test2',
   },
   {
-    name: 'Контрольная работа №2',
+    name: 'Контрольная работа №3',
     time: '28.04.23 12:00',
     groups: ['K3-42Б', 'K3-43Б'],
-    href: '/second_control',
+    href: '/test3',
+  },
+  {
+    name: 'Контрольная работа №4',
+    time: '28.05.23 12:00',
+    groups: ['K3-42Б', 'K3-43Б', 'K3-44Б', 'K3-46Б'],
+    href: '/test4',
   },
 ];
 
