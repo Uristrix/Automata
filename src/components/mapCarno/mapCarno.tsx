@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import Input from '../Input/Input';
 import classNames from 'classnames';
 
@@ -43,14 +43,24 @@ const termClasses = [
     text: 'X3',
   },
 ];
-export const MapCarno = () => {
+
+interface Inputs {
+  [keys: string]: Array<string | null>;
+}
+
+export const MapCarno = ({ inputs, setInputs }: { inputs: Inputs; setInputs: Dispatch<Inputs> }) => {
   return (
     <div className="relative m-10 w-[200px] h-[200px] box-content">
       <div className="absolute grid grid-cols-4 w-full h-full box-content">
-        {Array.from(Array(16).keys()).map((el) => (
+        {Array.from(Array(16).keys()).map((el, i) => (
           <Input
             classes={{ root: '!min-h-[30px] !min-w-[30px] z-10  ', input: '!rounded-none text-2xl' }}
             key={`Input${el}`}
+            value={inputs['carno']?.[i] || ''}
+            onChange={(e) => {
+              inputs['carno'][i] = e.target.value;
+              setInputs({ ...inputs, ['carno']: inputs['carno'] });
+            }}
           />
         ))}
         {termClasses.map((el, i) => (

@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 
 interface Inputs {
   [keys: string]: {
-    t?: string | null;
+    res?: string | null;
   };
 }
 export const Task2_5 = ({
@@ -21,7 +21,11 @@ export const Task2_5 = ({
       <p className="mb-2">Выполните синтез функции в базисах: основном, Шеффера, Пирса.</p>
       <div className="flex items-center">
         <span className="min-w-[85px]">Решение = </span>
-        <Input variant="textarea" value={inputs['t']?.t || ' '} onChange={() => setInputs({ task2_5: {} })} />
+        <Input
+          variant="textarea"
+          value={inputs['task2_5']?.res || ''}
+          onChange={(e) => setInputs({ ...inputs, ['task2_5']: { ...inputs['task2_5'], res: e.target.value } })}
+        />
       </div>
     </div>
   );

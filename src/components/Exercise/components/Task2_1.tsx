@@ -1,6 +1,6 @@
 import segments from '../../../assets/segments.jpg';
 import Input from '../../Input/Input';
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 
 interface Inputs {
   [keys: string]: Array<{
@@ -24,6 +24,10 @@ export const Task2_1 = ({
   setInputs: Dispatch<Inputs>;
 }) => {
   const table: Array<string> = ['x1', 'x2', 'x3', 'x4', segment];
+
+  useEffect(() => {
+    inputs['true_table'] = [];
+  }, []);
 
   return (
     <div className="">
@@ -53,8 +57,8 @@ export const Task2_1 = ({
                   key={`Input${i2}`}
                   value={inputs['true_table']?.[i]?.[table[i2]] || ''}
                   onChange={(e) => {
-                    const newArr = (inputs['true_table'][i] = {});
-                    setInputs({ ...inputs, ['true_table']: [] });
+                    inputs['true_table'][i] = { ...inputs?.['true_table']?.[i], [table[i2]]: e.target.value };
+                    setInputs({ ...inputs, ['true_table']: inputs['true_table'] });
                   }}
                 />
               ))}

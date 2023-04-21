@@ -48,9 +48,9 @@ export const Test2 = () => {
           D={variant.D}
           header="Задание 1."
         />
-        <Task2_2 segment={variant.segment} header="Задание 2." />
-        <Task2_3 header="Задание 3." />
-        <Task2_4 header="Задание 4." />
+        <Task2_2 inputs={inputs} setInputs={setInputs} segment={variant.segment} header="Задание 2." />
+        <Task2_3 inputs={inputs} setInputs={setInputs} header="Задание 3." />
+        <Task2_4 inputs={inputs} setInputs={setInputs} header="Задание 4." />
         <Task2_5 inputs={inputs} setInputs={setInputs} header="Задание 5." />
         <Button style="mx-auto mt-5" type="submit">
           Отправить ответ

@@ -1,7 +1,29 @@
 import Input from '../../Input/Input';
+import { Dispatch, useEffect } from 'react';
 
-export const Task2_2 = ({ segment, header }: { segment: string; header?: string }) => {
+interface Inputs {
+  [keys: string]: Array<{
+    [keys: string]: string | null;
+  }>;
+}
+
+export const Task2_2 = ({
+  inputs,
+  setInputs,
+  segment,
+  header,
+}: {
+  inputs: Inputs;
+  setInputs: Dispatch<Inputs>;
+  segment: string;
+  header?: string;
+}) => {
   const table = ['x1', 'x2', 'x3', 'x4', segment, 'СДНФ', 'СКНФ'];
+
+  useEffect(() => {
+    inputs['add_table'] = [];
+  }, []);
+
   return (
     <div className="">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
@@ -13,10 +35,18 @@ export const Task2_2 = ({ segment, header }: { segment: string; header?: string 
               {el}
             </div>
           ))}
-          {Array.from(Array(16).keys()).map(() => (
+          {Array.from(Array(16).keys()).map((el, i) => (
             <>
               {table.map((el2, i2) => (
-                <Input classes={{ root: '!rounded-none !min-w-[20px]', input: '!rounded-none' }} key={`Input${i2}`} />
+                <Input
+                  classes={{ root: '!rounded-none !min-w-[20px]', input: '!rounded-none' }}
+                  key={`Input${i2}`}
+                  value={inputs['add_table']?.[i]?.[table[i2]] || ''}
+                  onChange={(e) => {
+                    inputs['add_table'][i] = { ...inputs?.['add_table']?.[i], [table[i2]]: e.target.value };
+                    setInputs({ ...inputs, ['add_table']: inputs['add_table'] });
+                  }}
+                />
               ))}
             </>
           ))}

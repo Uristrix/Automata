@@ -12,3 +12,26 @@ body {
  box-sizing: border-box;
 }
 
+/* scroll */
+:root {
+ scrollbar-color: #006a8d;
+}
+
+::-webkit-scrollbar {
+ @apply sm:w-[10px] sm:h-[10px];
+}
+/* Track */
+::-webkit-scrollbar-track {
+ background: none;
+}
+::-webkit-scrollbar-thumb {
+ background: #858585;
+ border-radius: 9em;
+}
+::-webkit-scrollbar-thumb:hover {
+ /* background: #E19F11; */
+ background-image: linear-gradient(138deg, #006a8d 0%, #2ba64a 100%);
+}
+.noScroll::-webkit-scrollbar {
+ display: none;
+}
