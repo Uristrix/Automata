@@ -40,7 +40,14 @@ export const Test2 = () => {
       <Timer seconds={seconds} />
       <h2 className="text-2xl text-center font-bold">Контрольная работа № 2</h2>
       <form className="flex flex-col gap-5 text-justify">
-        <Task2_1 bias={variant.bias} segment={variant.segment} D={variant.D} header="Задание 1." />
+        <Task2_1
+          inputs={inputs}
+          setInputs={setInputs}
+          bias={variant.bias}
+          segment={variant.segment}
+          D={variant.D}
+          header="Задание 1."
+        />
         <Task2_2 segment={variant.segment} header="Задание 2." />
         <Task2_3 header="Задание 3." />
         <Task2_4 header="Задание 4." />

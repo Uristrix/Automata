@@ -98,11 +98,11 @@ const Links = [
 
 const Link = ({ name, link }: { name: string; link: string }) => {
   return (
-    <li className="flex justify-between items-center min-h-6 w-full gap-2 px-2">
+    <li className="flex justify-start items-center min-h-6 w-full gap-2 px-2">
+      <div className="w-4 h-4 rounded-[50%] bg-ocean"> </div>
       <a className="w-[90%]" href={link}>
         {name}
       </a>
-      <div className="w-4 h-4 rounded-[50%] bg-ocean"> </div>
     </li>
   );
 };

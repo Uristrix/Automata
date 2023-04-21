@@ -1,7 +1,16 @@
 import segments from '../../../assets/segments.jpg';
 import Input from '../../Input/Input';
+import { Dispatch } from 'react';
+
+interface Inputs {
+  [keys: string]: Array<{
+    [keys: string]: string | null;
+  }>;
+}
 
 export const Task2_1 = ({
+  inputs,
+  setInputs,
   bias,
   segment,
   D,
@@ -11,8 +20,10 @@ export const Task2_1 = ({
   segment: string;
   D: number;
   header?: string;
+  inputs: Inputs;
+  setInputs: Dispatch<Inputs>;
 }) => {
-  const table = ['x1', 'x2', 'x3', 'x4', segment];
+  const table: Array<string> = ['x1', 'x2', 'x3', 'x4', segment];
 
   return (
     <div className="">
@@ -34,10 +45,18 @@ export const Task2_1 = ({
               {el}
             </div>
           ))}
-          {Array.from(Array(16).keys()).map(() => (
+          {Array.from(Array(16).keys()).map((el, i) => (
             <>
               {table.map((el2, i2) => (
-                <Input classes={{ root: '!rounded-none !min-w-[40px]', input: '!rounded-none' }} key={`Input${i2}`} />
+                <Input
+                  classes={{ root: '!rounded-none !min-w-[40px]', input: '!rounded-none' }}
+                  key={`Input${i2}`}
+                  value={inputs['true_table']?.[i]?.[table[i2]] || ''}
+                  onChange={(e) => {
+                    const newArr = (inputs['true_table'][i] = {});
+                    setInputs({ ...inputs, ['true_table']: [] });
+                  }}
+                />
               ))}
             </>
           ))}
