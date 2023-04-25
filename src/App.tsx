@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
+import SchedulePage from './pages/Schedule/SchedulePage';
 import { Test1, Test2, Test3, Test4 } from './pages/Tests';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test3" element={<Test3 />} />
             <Route path="/test4" element={<Test4 />} />
+            <Route path="/schedule" element={<SchedulePage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </main>
