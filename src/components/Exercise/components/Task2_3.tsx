@@ -1,11 +1,8 @@
 import Input from '../../Input/Input';
 import { Dispatch } from 'react';
+import { Inputs } from '../../../model/Inputs';
 
-interface Inputs {
-  [keys: string]: {
-    [keys: string]: string | null;
-  };
-}
+const task = 'kvain';
 
 export const Task2_3 = ({
   inputs,
@@ -24,9 +21,9 @@ export const Task2_3 = ({
         <span className="min-w-[60px]"> СДНФ = </span>
         <Input
           variant="textarea"
-          value={inputs['trans']?.sdnf3 || ''}
+          value={inputs[task]?.sdnf3 || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sdnf3: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sdnf3: e.target.value } });
           }}
         />
       </div>
@@ -34,9 +31,9 @@ export const Task2_3 = ({
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> Ответ = </span>
         <Input
-          value={inputs['trans']?.sdnf3_answer || ''}
+          value={inputs[task]?.sdnf3_answer || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sdnf3_answer: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sdnf3_answer: e.target.value } });
           }}
         />
       </div>
@@ -44,9 +41,9 @@ export const Task2_3 = ({
         <span className="min-w-[60px]"> СКНФ = </span>
         <Input
           variant="textarea"
-          value={inputs['trans']?.sknf3 || ''}
+          value={inputs[task]?.sknf3 || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sknf3: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sknf3: e.target.value } });
           }}
         />
       </div>
@@ -54,9 +51,9 @@ export const Task2_3 = ({
       <div className="flex items-center">
         <span className="min-w-[60px]"> Ответ = </span>
         <Input
-          value={inputs['trans']?.sknf3_answer || ''}
+          value={inputs[task]?.sknf3_answer || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sknf3_answer: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sknf3_answer: e.target.value } });
           }}
         />
       </div>

@@ -44,22 +44,27 @@ const termClasses = [
   },
 ];
 
-interface Inputs {
-  [keys: string]: Array<string | null>;
-}
+import { Inputs } from '../../model/Inputs';
 
-export const MapCarno = ({ inputs, setInputs }: { inputs: Inputs; setInputs: Dispatch<Inputs> }) => {
+export const MapCarno = ({
+  inputs,
+  setInputs,
+  name,
+}: {
+  inputs: Inputs;
+  setInputs: Dispatch<Inputs>;
+  name: string;
+}) => {
   return (
     <div className="relative m-10 w-[200px] h-[200px] box-content">
       <div className="absolute grid grid-cols-4 w-full h-full box-content">
         {Array.from(Array(16).keys()).map((el, i) => (
           <Input
-            classes={{ root: '!min-h-[30px] !min-w-[30px] z-10  ', input: '!rounded-none text-2xl' }}
+            classes={{ root: '!min-h-[30px] !min-w-[30px] z-10 ', input: '!rounded-none text-2xl text-center' }}
             key={`Input${el}`}
-            value={inputs['carno']?.[i] || ''}
+            value={inputs[name]?.[`carno_${i}`] || ''}
             onChange={(e) => {
-              inputs['carno'][i] = e.target.value;
-              setInputs({ ...inputs, ['carno']: inputs['carno'] });
+              setInputs({ ...inputs, [name]: { ...inputs[name], [`carno_${i}`]: e.target.value } });
             }}
           />
         ))}

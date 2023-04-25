@@ -1,11 +1,8 @@
 import Input from '../../Input/Input';
 import { Dispatch, useEffect } from 'react';
+import { InputsArr } from '../../../model/Inputs';
 
-interface Inputs {
-  [keys: string]: Array<{
-    [keys: string]: string | null;
-  }>;
-}
+const task = 'add_table';
 
 export const Task2_2 = ({
   inputs,
@@ -13,8 +10,8 @@ export const Task2_2 = ({
   segment,
   header,
 }: {
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
+  inputs: InputsArr;
+  setInputs: Dispatch<InputsArr>;
   segment: string;
   header?: string;
 }) => {
@@ -41,10 +38,10 @@ export const Task2_2 = ({
                 <Input
                   classes={{ root: '!rounded-none !min-w-[20px]', input: '!rounded-none' }}
                   key={`Input${i2}`}
-                  value={inputs['add_table']?.[i]?.[table[i2]] || ''}
+                  value={inputs[task]?.[i]?.[table[i2]] || ''}
                   onChange={(e) => {
-                    inputs['add_table'][i] = { ...inputs?.['add_table']?.[i], [table[i2]]: e.target.value };
-                    setInputs({ ...inputs, ['add_table']: inputs['add_table'] });
+                    inputs[task][i] = { ...inputs?.[task]?.[i], [table[i2]]: e.target.value };
+                    setInputs({ ...inputs, [task]: inputs[task] });
                   }}
                 />
               ))}

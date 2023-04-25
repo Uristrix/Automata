@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
 import Line from './Line';
+import { InputsCode } from '../../../model/Inputs';
 
 const inputsParams = [
   { name: 'A', id: 'A' },
@@ -16,22 +17,14 @@ const inputsParams = [
   { name: 'B*2^+4', id: 'B*2^+4' },
 ];
 
-interface Inputs {
-  [keys: string]: {
-    straight?: string | null;
-    back?: string | null;
-    additional?: string | null;
-  };
-}
-
 export const Task3_1 = ({
   header,
   inputs,
   setInputs,
 }: {
   header?: string;
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
+  inputs: InputsCode;
+  setInputs: Dispatch<InputsCode>;
 }) => {
   return (
     <div>

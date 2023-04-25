@@ -1,6 +1,7 @@
 import { Dispatch, PropsWithChildren } from 'react';
 import Line from './Line';
-import { Inputs } from './Line';
+import { InputsCode } from '../../../model/Inputs';
+
 const inputsParams = [
   {
     name: 'A+B',
@@ -42,8 +43,8 @@ interface stepData {
 }
 interface StepLine {
   arr: Array<stepData>;
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
+  inputs: InputsCode;
+  setInputs: Dispatch<InputsCode>;
 }
 
 const StepLines = ({ arr, inputs, setInputs }: PropsWithChildren<StepLine>) => {
@@ -81,8 +82,8 @@ export const Task4_1 = ({
   setInputs,
 }: {
   header?: string;
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
+  inputs: InputsCode;
+  setInputs: Dispatch<InputsCode>;
 }) => {
   return (
     <div className="flex-col mt-5">

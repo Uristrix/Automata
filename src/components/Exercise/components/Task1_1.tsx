@@ -1,13 +1,9 @@
 import React, { Dispatch } from 'react';
 import Input from '../../Input/Input';
+import { Inputs } from '../../../model/Inputs';
 
-interface Inputs {
-  [keys: string]: {
-    t10_2?: string | null;
-    t10_8?: string | null;
-    t10_16?: string | null;
-  };
-}
+const task = 'trans';
+
 export const Task1_1 = ({
   inputs,
   setInputs,
@@ -32,9 +28,9 @@ export const Task1_1 = ({
           {num}
           <sub>10</sub> ={' '}
           <Input
-            value={inputs['trans']?.t10_2 || ''}
+            value={inputs[task]?.t10_2 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], t10_2: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], t10_2: e.target.value } });
             }}
           />
           <sub>2</sub>
@@ -43,9 +39,9 @@ export const Task1_1 = ({
           {num}
           <sub>10</sub> ={' '}
           <Input
-            value={inputs['trans']?.t10_8 || ''}
+            value={inputs[task]?.t10_8 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], t10_8: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], t10_8: e.target.value } });
             }}
           />
           <sub>8</sub>
@@ -54,9 +50,9 @@ export const Task1_1 = ({
           {num}
           <sub>10</sub> ={' '}
           <Input
-            value={inputs['trans']?.t10_16 || ''}
+            value={inputs[task]?.t10_16 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], t10_16: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], t10_16: e.target.value } });
             }}
           />
           <sub>16</sub>

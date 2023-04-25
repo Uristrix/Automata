@@ -2,20 +2,14 @@
 import { Dispatch, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import Input from '../../Input/Input';
+import { InputsCode } from '../../../model/Inputs';
 
-export interface Inputs {
-  [keys: string]: {
-    straight?: string | null;
-    back?: string | null;
-    additional?: string | null;
-  };
-}
 interface Line {
   id: string;
   name: string;
   style?: string;
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
+  inputs: InputsCode;
+  setInputs: Dispatch<InputsCode>;
 }
 
 const Line = ({ id, name, inputs, setInputs, style }: PropsWithChildren<Line>) => {

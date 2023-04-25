@@ -1,16 +1,9 @@
 import React, { Dispatch } from 'react';
 import Input from '../../Input/Input';
+import { Inputs } from '../../../model/Inputs';
 
-interface Inputs {
-  [keys: string]: {
-    trn_2?: string | null;
-    trn_8?: string | null;
-    tr10_2?: string | null;
-    tr10_n?: string | null;
-    tr2_3?: string | null;
-    tr2_n?: string | null;
-  };
-}
+const task = 'trans_ext';
+
 export const Task1_2 = ({
   inputs,
   setInputs,
@@ -34,9 +27,9 @@ export const Task1_2 = ({
           {num}
           <sub>{p}</sub> ={' '}
           <Input
-            value={inputs['trans']?.trn_2 || ''}
+            value={inputs[task]?.trn_2 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], trn_2: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], trn_2: e.target.value } });
             }}
           />
           <sub>2</sub>
@@ -45,9 +38,9 @@ export const Task1_2 = ({
           {num}
           <sub>{p}</sub> ={' '}
           <Input
-            value={inputs['trans']?.trn_8 || ''}
+            value={inputs[task]?.trn_8 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], trn_8: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], trn_8: e.target.value } });
             }}
           />
           <sub>3</sub>
@@ -56,9 +49,9 @@ export const Task1_2 = ({
           {num}
           <sub>10</sub> ={' '}
           <Input
-            value={inputs['trans']?.tr10_2 || ''}
+            value={inputs[task]?.tr10_2 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], tr10_2: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], tr10_2: e.target.value } });
             }}
           />
           <sub>2</sub>
@@ -67,9 +60,9 @@ export const Task1_2 = ({
           {num}
           <sub>10</sub> ={' '}
           <Input
-            value={inputs['trans']?.tr10_n || ''}
+            value={inputs[task]?.tr10_n || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], tr10_n: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], tr10_n: e.target.value } });
             }}
           />
           <sub>{p}</sub>
@@ -78,9 +71,9 @@ export const Task1_2 = ({
           {num}
           <sub>2</sub> ={' '}
           <Input
-            value={inputs['trans']?.tr2_3 || ''}
+            value={inputs[task]?.tr2_3 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], tr2_3: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], tr2_3: e.target.value } });
             }}
           />
           <sub>3</sub>
@@ -89,9 +82,9 @@ export const Task1_2 = ({
           {num}
           <sub>2</sub> ={' '}
           <Input
-            value={inputs['trans']?.tr2_n || ''}
+            value={inputs[task]?.tr2_n || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, ['trans']: { ...inputs['trans'], tr2_n: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], tr2_n: e.target.value } });
             }}
           />
           <sub>{p}</sub>

@@ -1,12 +1,9 @@
 import React, { Dispatch } from 'react';
 import { MapCarno } from '../../mapCarno/mapCarno';
 import Input from '../../Input/Input';
+import { Inputs } from '../../../model/Inputs';
 
-interface Inputs {
-  [keys: string]: {
-    [keys: string]: string | null;
-  };
-}
+const task = 'Carno';
 
 export const Task2_4 = ({
   inputs,
@@ -24,14 +21,14 @@ export const Task2_4 = ({
         Минимизируйте функцию из п. 3 методом Карно. Найдите тупиковую ДНФ, тупиковую КНФ. Рекомендуется использовать
         следующую разметку карты Карно.
       </p>
-      {/*<MapCarno inputs={inputs} setInputs={setInputs} />*/}
+      <MapCarno inputs={inputs} setInputs={setInputs} name={task} />
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> ТДНФ = </span>
         <Input
           variant="textarea"
-          value={inputs['trans']?.sdnf4 || ''}
+          value={inputs[task]?.sdnf4 || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sdnf4: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sdnf4: e.target.value } });
           }}
         />
       </div>
@@ -39,9 +36,9 @@ export const Task2_4 = ({
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> Ответ = </span>
         <Input
-          value={inputs['trans']?.sdnf4_answer || ''}
+          value={inputs[task]?.sdnf4_answer || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sdnf4_answer: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sdnf4_answer: e.target.value } });
           }}
         />
       </div>
@@ -49,9 +46,9 @@ export const Task2_4 = ({
         <span className="min-w-[60px]"> ТКНФ = </span>
         <Input
           variant="textarea"
-          value={inputs['trans']?.sknf4 || ''}
+          value={inputs[task]?.sknf4 || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sknf4: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sknf4: e.target.value } });
           }}
         />
       </div>
@@ -59,9 +56,9 @@ export const Task2_4 = ({
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> Ответ = </span>
         <Input
-          value={inputs['trans']?.sknf4_answer || ''}
+          value={inputs[task]?.sknf4_answer || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, ['trans']: { ...inputs['trans'], sknf4_answer: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], sknf4_answer: e.target.value } });
           }}
         />
       </div>

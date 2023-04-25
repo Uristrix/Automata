@@ -1,11 +1,9 @@
 import Input from '../../Input/Input';
 import { Dispatch } from 'react';
+import { Inputs } from '../../../model/Inputs';
 
-interface Inputs {
-  [keys: string]: {
-    res?: string | null;
-  };
-}
+const task = 'sintez';
+
 export const Task2_5 = ({
   inputs,
   setInputs,
@@ -23,8 +21,8 @@ export const Task2_5 = ({
         <span className="min-w-[85px]">Решение = </span>
         <Input
           variant="textarea"
-          value={inputs['task2_5']?.res || ''}
-          onChange={(e) => setInputs({ ...inputs, ['task2_5']: { ...inputs['task2_5'], res: e.target.value } })}
+          value={inputs[task]?.res || ''}
+          onChange={(e) => setInputs({ ...inputs, [task]: { ...inputs[task], res: e.target.value } })}
         />
       </div>
     </div>
