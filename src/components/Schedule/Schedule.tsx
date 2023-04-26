@@ -52,6 +52,8 @@ const Schedule = () => {
   const [schedule, setSchedule] = useState<Schedules | null>(null);
 
   useEffect(() => {
+    //TODO:test
+    console.log(URL);
     URL &&
       axios
         .get(URL)
