@@ -8,7 +8,7 @@ const URL = process.env.REACT_APP_SCHEDULE;
 
 const Day = ({ day }: { day: Days }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-lg min-w-[350px] max-w-[470px] min-h-[260px] flex flex-col overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-lg max-w-[340px] md:max-w-[470px] min-h-[260px] flex flex-col overflow-hidden">
       <h3 className="font-bold text-center bg-ocean text-white">{day.name}</h3>
       {day?.pairList?.length !== 0 ? (
         day?.pairList?.map((el, i) => (
@@ -60,8 +60,7 @@ const Schedule = () => {
   }, []);
   return (
     <section>
-      <h2 className="text-2xl text-center font-bold mb-4">Расписание занятий</h2>
-      <div className="flex w-full md:max-w-[710px] lg:max-w-[870px] lg:grid grid-cols-6 overflow-scroll md:overflow-auto md:grid-cols-2 gap-6 md:gap-2">
+      <div className="grid w-max md:max-w-[710px] lg:max-w-[1400px] min-[330px]:grid-cols-1 min-[770px]:grid-cols-2 min-[1400px]:grid-cols-3 gap-2 md:gap-2 lg:gap-4 mx-auto lg:p-4">
         {schedule && schedule?.day?.map((el) => <Day day={el} key={el.number} />)}
       </div>
     </section>
