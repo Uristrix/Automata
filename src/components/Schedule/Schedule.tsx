@@ -57,7 +57,11 @@ const Schedule = () => {
     URL &&
       axios
         .get(URL)
-        .then((res) => setSchedule(res.data))
+        // eslint-disable-next-line promise/always-return
+        .then((res) => {
+          setSchedule(res.data);
+          console.log(res);
+        })
         .catch((err) => console.error(err));
   }, []);
   return (
