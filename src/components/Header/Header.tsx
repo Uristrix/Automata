@@ -7,20 +7,20 @@ const Header = () => {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-      <header className="fixed flex items-center justify-between w-full  h-[60px] md:h-[90px] bg-gradient-to-r from-blue to-green text-white px-2 md:px-6 text-sm md:text-base shadow-lg z-10">
+      <header className="fixed flex items-center justify-between w-full  h-[60px] md:h-[90px] bg-gradient-to-r from-blue to-green text-white px-2 md:px-6 text-sm md:text-base shadow-lg z-50">
         <div className="flex gap-8 items-center h-full ">
-          <a className="flex items-center h-full max-w-[260px]" href="https://mf.bmstu.ru/">
+          <a className="flex items-center h-full max-w-[260px]" href="/">
             <img src={logo} alt="bmstu-logo" className="h-full p-2" />
             <div className="hidden md:block">
-              Мытищинский филиал
-              <br />
               МГТУ им. Н.Э.Баумана
+              <br />
+              Теория автоматов
             </div>
           </a>
-          <a href="/" className="align-middle">
+          <a href="/training" className="align-middle">
             Тренажёр
           </a>
-          <a href="/">Учебный материал</a>
+          <a href="/schedule">Расписание</a>
         </div>
 
         <button className="flex gap-4 items-center h-full cursor-pointer" onClick={() => setOpenModal(true)}>

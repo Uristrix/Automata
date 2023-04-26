@@ -4,23 +4,36 @@ import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
-import FirstTest from './pages/FirstTest/FirstTest';
-import SecondTest from './pages/SecondTest/SecondTest';
+import SchedulePage from './pages/Schedule/SchedulePage';
+import { Test1, Test2, Test3, Test4 } from './pages/Tests';
+import { Topic4_1, Topic4_2, Topic4_3, Topic4_4, Topic4_5 } from './pages/Lectures';
 
 const App = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col justify-between">
+    <>
       <Header />
-      <main className="flex flex-col w-full md:max-w-[710px] lg:max-w-[1600px] min-h-screen pt-[100px] mx-auto relative ">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/first_control" element={<FirstTest />} />
-          <Route path="/second_control" element={<SecondTest />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+      <div className="w-full min-h-screen flex flex-col justify-between">
+        <main className="flex flex-col w-full md:max-w-[710px] lg:max-w-[1600px] pt-[70px] md:pt-[100px] mx-auto relative ">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/test1" element={<Test1 />} />
+            <Route path="/test2" element={<Test2 />} />
+            <Route path="/test3" element={<Test3 />} />
+            <Route path="/test4" element={<Test4 />} />
+            <Route path="/lecture">
+              <Route path="/lecture/4_1" element={<Topic4_1 />} />
+              <Route path="/lecture/4_2" element={<Topic4_2 />} />
+              <Route path="/lecture/4_3" element={<Topic4_3 />} />
+              <Route path="/lecture/4_4" element={<Topic4_4 />} />
+              <Route path="/lecture/4_5" element={<Topic4_5 />} />
+            </Route>
+            <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

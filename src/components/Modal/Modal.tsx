@@ -26,8 +26,8 @@ const Modal = ({ open, setOpen }: PropsWithChildren<ModalProps>) => {
       >
         <div className="w-full h-full flex flex-col justify-start gap-4 p-4 w-full md:w-auto md:min-w-[500px] md:rounded-2xl h-1/2md:h-auto">
           <h2 className="font-semibold text-2xl">Авторизация</h2>
-          <Input />
-          <Input />
+          <Input placeholder="Логин (номер студ. билета)" />
+          <Input placeholder="Пароль" />
           <Button style="m-auto">Войти</Button>
         </div>
       </div>
