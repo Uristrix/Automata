@@ -6,7 +6,20 @@ import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
 import SchedulePage from './pages/Schedule/SchedulePage';
 import { Test1, Test2, Test3, Test4 } from './pages/Tests';
-import { Topic4_1, Topic4_2, Topic4_3, Topic4_4, Topic4_5, Topic4_6, Topic4_7, Topic4_8 } from './pages/Lectures';
+import {
+  Topic4_1,
+  Topic4_10,
+  Topic4_11,
+  Topic4_12,
+  Topic4_2,
+  Topic4_3,
+  Topic4_4,
+  Topic4_5,
+  Topic4_6,
+  Topic4_7,
+  Topic4_8,
+  Topic4_9,
+} from './pages/Lectures';
 
 const App = () => {
   return (
@@ -29,6 +42,10 @@ const App = () => {
               <Route path="/lecture/4_6" element={<Topic4_6 />} />
               <Route path="/lecture/4_7" element={<Topic4_7 />} />
               <Route path="/lecture/4_8" element={<Topic4_8 />} />
+              <Route path="/lecture/4_9" element={<Topic4_9 />} />
+              <Route path="/lecture/4_10" element={<Topic4_10 />} />
+              <Route path="/lecture/4_11" element={<Topic4_11 />} />
+              <Route path="/lecture/4_12" element={<Topic4_12 />} />
             </Route>
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="*" element={<ErrorPage />} />
