@@ -10,6 +10,13 @@ export * from './components/topic4_9/Topic4_9';
 export * from './components/topic4_10/Topic4_10';
 export * from './components/topic4_11/Topic4_11';
 export * from './components/topic4_12/Topic4_12';
+export * from './components/topic4_13/Topic4_13';
+export * from './components/topic4_14/Topic4_14';
+export * from './components/topic4_15/Topic4_15';
+export * from './components/topic4_16/Topic4_16';
+export * from './components/topic4_17/Topic4_17';
+export * from './components/topic4_18/Topic4_18';
+export * from './components/topic4_19/Topic4_19';
 
 export const style =
   'mx-3 md:mx-auto lg:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl [&>h1]:text-2xl [&>h1]:font-semibold [&>h1]:mb-5 [&>h2]:text-xl [&>h2]:font-semibold [&>h1]:text-center [&>h2]:text-center [&>*]:mb-3 [&>p]:text-justify';
