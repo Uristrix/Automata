@@ -6,7 +6,27 @@ import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
 import SchedulePage from './pages/Schedule/SchedulePage';
 import { Test1, Test2, Test3, Test4 } from './pages/Tests';
-import { Topic4_1, Topic4_2, Topic4_3, Topic4_4, Topic4_5 } from './pages/Lectures';
+import {
+  Topic4_1,
+  Topic4_10,
+  Topic4_11,
+  Topic4_12,
+  Topic4_13,
+  Topic4_14,
+  Topic4_15,
+  Topic4_16,
+  Topic4_17,
+  Topic4_18,
+  Topic4_19,
+  Topic4_2,
+  Topic4_3,
+  Topic4_4,
+  Topic4_5,
+  Topic4_6,
+  Topic4_7,
+  Topic4_8,
+  Topic4_9,
+} from './pages/Lectures';
 
 const App = () => {
   return (
@@ -26,6 +46,20 @@ const App = () => {
               <Route path="/lecture/4_3" element={<Topic4_3 />} />
               <Route path="/lecture/4_4" element={<Topic4_4 />} />
               <Route path="/lecture/4_5" element={<Topic4_5 />} />
+              <Route path="/lecture/4_6" element={<Topic4_6 />} />
+              <Route path="/lecture/4_7" element={<Topic4_7 />} />
+              <Route path="/lecture/4_8" element={<Topic4_8 />} />
+              <Route path="/lecture/4_9" element={<Topic4_9 />} />
+              <Route path="/lecture/4_10" element={<Topic4_10 />} />
+              <Route path="/lecture/4_11" element={<Topic4_11 />} />
+              <Route path="/lecture/4_12" element={<Topic4_12 />} />
+              <Route path="/lecture/4_13" element={<Topic4_13 />} />
+              <Route path="/lecture/4_14" element={<Topic4_14 />} />
+              <Route path="/lecture/4_15" element={<Topic4_15 />} />
+              <Route path="/lecture/4_16" element={<Topic4_16 />} />
+              <Route path="/lecture/4_17" element={<Topic4_17 />} />
+              <Route path="/lecture/4_18" element={<Topic4_18 />} />
+              <Route path="/lecture/4_19" element={<Topic4_19 />} />
             </Route>
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="*" element={<ErrorPage />} />
