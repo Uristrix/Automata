@@ -103,13 +103,15 @@ const Links = [
   },
 ];
 
-const Link = ({ name, link }: { name: string; link: string }) => {
+import { Link } from 'react-router-dom';
+
+const TopicLink = ({ name, link }: { name: string; link: string }) => {
   return (
     <li className="flex justify-start items-center min-h-6 w-full gap-2 px-2">
       <div className="w-4 h-4 rounded-[50%] bg-ocean"> </div>
-      <a className="w-[90%]" href={link}>
+      <Link className="w-[90%]" to={link}>
         {name}
-      </a>
+      </Link>
     </li>
   );
 };
@@ -126,7 +128,7 @@ const Topics = () => {
                 {el.chapter}
               </li>
               {el?.topics.map((el2, i2) => (
-                <Link name={el2.name} link={el2.link} key={`topic${el.chapter}_${i2}`} />
+                <TopicLink name={el2.name} link={el2.link} key={`topic${el.chapter}_${i2}`} />
               ))}
             </>
           ))}
