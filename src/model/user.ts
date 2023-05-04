@@ -3,5 +3,5 @@ export interface User {
   password?: string | null;
   name?: string | null;
   group?: string | null;
-  role?: string | null;
+  role?: boolean;
 }

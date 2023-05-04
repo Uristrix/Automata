@@ -122,7 +122,9 @@ const Topics = () => {
         {Links &&
           Links?.map((el) => (
             <>
-              <li className="w-full text-lg font-semibold px-2">{el.chapter}</li>
+              <li className="w-full text-lg font-semibold px-2" key={`topic${el.chapter}`}>
+                {el.chapter}
+              </li>
               {el?.topics.map((el2, i2) => (
                 <Link name={el2.name} link={el2.link} key={`topic${el.chapter}_${i2}`} />
               ))}
