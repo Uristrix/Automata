@@ -2,8 +2,10 @@ import logo from '../../assets/bmstu-logo.svg';
 import user from '../../assets/user.svg';
 import Modal from '../Modal/Modal';
 import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import User from '../../store/user';
 
-const Header = () => {
+const Header = observer(() => {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
@@ -23,14 +25,19 @@ const Header = () => {
           <a href="/schedule">Расписание</a>
         </div>
 
-        <button className="flex gap-4 items-center h-full cursor-pointer" onClick={() => setOpenModal(true)}>
-          <img src={user} alt="user" className=" p-4 md:py-8 h-full" />
-          <span className="hidden md:block">Войти</span>
-        </button>
+        {User ? (
+          <a href="/profile">
+            <img src={user} alt="user" className=" p-4 md:py-8 h-full" />
+          </a>
+        ) : (
+          <button className="flex gap-4 items-center h-full cursor-pointer" onClick={() => setOpenModal(true)}>
+            <span className="hidden md:block">Войти</span>
+          </button>
+        )}
       </header>
       <Modal open={openModal} setOpen={setOpenModal} />
     </>
   );
-};
+});
 
 export default Header;
