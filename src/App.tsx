@@ -5,7 +5,7 @@ import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
-import Profile from './pages/Profile/Profile';
+import Account from './pages/Account/Account';
 import SchedulePage from './pages/Schedule/SchedulePage';
 import { Test1, Test2, Test3, Test4 } from './pages/Tests';
 import {
@@ -38,7 +38,7 @@ const App = observer(() => {
         <main className="flex flex-col w-full md:max-w-[710px] lg:max-w-[1600px] pt-[70px] md:pt-[100px] mx-auto relative ">
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/test1" element={<Test1 />} />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test3" element={<Test3 />} />

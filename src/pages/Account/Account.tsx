@@ -5,7 +5,7 @@ import User from '../../store/user';
 import Topics from '../../components/Topics/Topics';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 
-const Profile = observer(() => {
+const Account = observer(() => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,4 +27,4 @@ const Profile = observer(() => {
   );
 });
 
-export default Profile;
+export default Account;
