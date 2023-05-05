@@ -60,7 +60,10 @@ export const MapCarno = ({
       <div className="absolute grid grid-cols-4 w-full h-full box-content">
         {Array.from(Array(16).keys()).map((el, i) => (
           <Input
-            classes={{ root: '!min-h-[30px] !min-w-[30px] z-10 ', input: '!rounded-none text-2xl text-center' }}
+            classes={{
+              root: '!min-h-[30px] !min-w-[30px] z-10 ',
+              input: '!rounded-none text-2xl text-center !h-[50px]',
+            }}
             key={`Input${el}`}
             value={inputs[name]?.[`carno_${i}`] || ''}
             onChange={(e) => {
