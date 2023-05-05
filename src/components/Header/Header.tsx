@@ -29,8 +29,11 @@ const Header = observer(() => {
         </div>
 
         {User.user ? (
-          <Link className="flex gap-4 items-center h-full cursor-pointer" to="/account">
-            <img src={user} alt="user" className=" p-4 md:py-8 h-full" />
+          <Link
+            className="flex gap-4 items-center h-[40px] w-[40px] md:h-[60px] md:w-[60px] cursor-pointer bg-white rounded-[50%] border-[3px] border-ocean"
+            to="/account"
+          >
+            <img src={user} alt="user" className="h-full w-full p-2 md:p-3" />
           </Link>
         ) : (
           <button className="flex gap-4 items-center h-full cursor-pointer" onClick={() => setOpenModal(true)}>

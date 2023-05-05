@@ -28,7 +28,7 @@ const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolea
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-full flex flex-col justify-start gap-4 p-4 w-full md:w-auto md:min-w-[500px] md:rounded-2xl h-1/2md:h-auto"
+      className="flex flex-col justify-start gap-6 p-4 shadow-sm md:w-auto md:min-w-[500px] md:rounded-2xl h-1/2 md:h-auto"
     >
       <h2 className="font-semibold text-2xl">Авторизация</h2>
       <Input
@@ -41,6 +41,7 @@ const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolea
       <Input
         placeholder="Пароль"
         value={inputs?.password || ''}
+        type="password"
         onChange={(e) => {
           setInputs({ ...inputs, password: e.target.value });
         }}
