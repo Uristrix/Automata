@@ -1,8 +1,6 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { Days, Schedules } from '../../model/Schedule';
+import useSWR from 'swr';
 
 const URL = process.env.REACT_APP_SCHEDULE;
 
@@ -49,19 +47,12 @@ const Day = ({ day }: { day: Days }) => {
 };
 
 const Schedule = () => {
-  const [schedule, setSchedule] = useState<Schedules | null>(null);
+  const { data } = useSWR<Schedules>(URL, (url) => axios.get(url, { maxRedirects: 0 }).then((res) => res.data));
 
-  useEffect(() => {
-    URL &&
-      axios
-        .get(URL)
-        .then((res) => setSchedule(res.data))
-        .catch((err) => console.error(err));
-  }, []);
   return (
     <section>
       <div className="grid w-max md:max-w-[710px] lg:max-w-[1400px] min-[330px]:grid-cols-1 min-[770px]:grid-cols-2 min-[1400px]:grid-cols-3 gap-2 md:gap-2 lg:gap-4 mx-auto lg:p-4">
-        {schedule && schedule?.day?.map((el) => <Day day={el} key={el.number} />)}
+        {data && data?.day?.map((el) => <Day day={el} key={el.number} />)}
       </div>
     </section>
   );

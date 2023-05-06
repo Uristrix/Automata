@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 
 export interface Elem {
@@ -26,9 +27,9 @@ const Events = ({ data }: PropsWithChildren<Events>) => {
             <span className="w-[100px] md:w-[190px] overflow-hidden text-ellipsis">{el?.name || '-'}</span>
             <span className="w-[50px] md:w-[95px]">{el?.groups?.join(' ') || '-'}</span>
             <Button style="max-w-[70px] md:max-w-[110px]">
-              <a className="h-full w-full" href={el?.href}>
+              <Link className="h-full w-full" to={el?.href}>
                 Перейти
-              </a>
+              </Link>
             </Button>
           </div>
         ))

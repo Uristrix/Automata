@@ -12,7 +12,7 @@ const Footer = () => {
         </a>
       </div>
       <div className="flex flex-col gap-2">
-        <a href="tel:+8-495-583-64-90" className=" text-base lg:text-2xl">
+        <a href="tel:+8-495-583-64-90" className=" text-base lg:text-xl">
           8 495 583-64-90
         </a>
         <span className="flex gap-2 h-5 justify-evenly">
