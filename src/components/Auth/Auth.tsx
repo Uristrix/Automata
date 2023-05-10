@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite';
 import { useCookies } from 'react-cookie';
 import User from '../../store/user';
 import notification from '../../store/notification';
-import { NotificationManager } from 'react-notifications';
 
 const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolean> }>) => {
   const [inputs, setInputs] = useState({ login: '', password: '' });
