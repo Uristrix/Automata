@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { observer } from 'mobx-react-lite';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -29,6 +30,8 @@ import {
   Topic4_8,
   Topic4_9,
 } from './pages/Lectures';
+
+axios.defaults.baseURL = process.env.REACT_APP_API;
 
 const App = observer(() => {
   return (

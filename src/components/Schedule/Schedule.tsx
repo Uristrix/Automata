@@ -47,7 +47,7 @@ const Day = ({ day }: { day: Days }) => {
 };
 
 const Schedule = () => {
-  const { data } = useSWR<Schedules>(URL, (url) => axios.get(url, { maxRedirects: 0 }).then((res) => res.data));
+  const { data } = useSWR<Schedules>(URL, (url) => axios({ method: 'GET', baseURL: url }).then((res) => res.data));
 
   return (
     <section>
