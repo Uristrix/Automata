@@ -4,13 +4,15 @@ import { Dispatch, PropsWithChildren, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useCookies } from 'react-cookie';
 import User from '../../store/user';
+import notification from '../../store/notification';
+import { NotificationManager } from 'react-notifications';
 
 const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolean> }>) => {
   const [inputs, setInputs] = useState({ login: '', password: '' });
   const [cookies, setCookie] = useCookies(['Auth']);
 
   useEffect(() => {
-    if (typeof cookies.Auth !== undefined) {
+    if (typeof cookies?.Auth === 'string') {
       const field = cookies.Auth.split('|');
       User.user = {
         login: field[0],
@@ -33,9 +35,10 @@ const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolea
         group: 'Кафедра',
         role: true,
       };
+      notification.setMessage('Вход выполнен', 'success');
       setCookie('Auth', `${inputs.login}|${inputs.password}`, { path: '/' });
       setOpen(false);
-    }
+    } else notification.setMessage('Неверный логин или пароль', 'error');
   };
   return (
     <form

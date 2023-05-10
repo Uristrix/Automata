@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { User } from '../model/user';
 
 class UserStore {
-  _user?: User;
+  private _user?: User;
 
   constructor() {
     makeAutoObservable(this);

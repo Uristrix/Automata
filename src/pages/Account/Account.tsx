@@ -7,10 +7,12 @@ import user from '../../assets/user.svg';
 import Profile from './components/Profile';
 import Users from './components/Users';
 import Events from './components/Events';
+import { useCookies } from 'react-cookie';
+import notification from '../../store/notification';
 
 const navigation = [
-  { name: 'Профиль', href: '/profile', type: 'user', component: <Profile /> },
-  { name: 'Успеваемость', href: '/progress', type: 'user', component: <></> },
+  { name: 'Профиль', href: '/profile', type: '*', component: <Profile /> },
+  { name: 'Успеваемость', href: '/progress', type: '*', component: <></> },
   { name: 'Пользователи', href: '/users', type: 'admin', component: <Users /> },
   { name: 'События', href: '/events', type: 'admin', component: <Events /> },
 ];
@@ -18,6 +20,7 @@ const navigation = [
 const Account = observer(() => {
   const navigate = useNavigate();
   const [section, setSection] = useState(navigation[0]);
+  const [cookies, removeCookie] = useCookies(['Auth']);
 
   useEffect(() => {
     if (User.user === undefined) navigate('/');
@@ -38,38 +41,30 @@ const Account = observer(() => {
                 <h3>{User.user.group}</h3>
               </div>
             </div>
-            {User.user.role === true
-              ? navigation.map((el, i) => (
-                  <button
-                    key={`link${i}`}
-                    className={classNames(
-                      'text-left text-xs md:text-lg max-w-[140px]',
-                      section.name === el.name
-                        ? 'font-semibold text-green before:content-["|"] before:pr-2 before:text-ocean'
-                        : '',
-                    )}
-                    onClick={() => setSection(el)}
-                  >
-                    {el.name}
-                  </button>
-                ))
-              : navigation
-                  .filter((el) => el.type === '')
-                  .map((el, i) => (
-                    <button
-                      key={`link${i}`}
-                      className={classNames(
-                        'text-left text-xs md:text-lg max-w-[140px]',
-                        section.name === el.name
-                          ? 'font-semibold text-green before:content-["|"] before:pr-2 before:text-ocean'
-                          : '',
-                      )}
-                      onClick={() => setSection(el)}
-                    >
-                      {el.name}
-                    </button>
-                  ))}
-            <button className="text-left text-xs md:text-lg font-semibold" onClick={() => (User.user = undefined)}>
+            {navigation
+              .filter((el) => (User.user?.role === true ? true : el.type === '*'))
+              .map((el, i) => (
+                <button
+                  key={`link${i}`}
+                  className={classNames(
+                    'text-left text-xs md:text-lg max-w-[140px]',
+                    section.name === el.name
+                      ? 'font-semibold text-green before:content-["|"] before:pr-2 before:text-ocean'
+                      : '',
+                  )}
+                  onClick={() => setSection(el)}
+                >
+                  {el.name}
+                </button>
+              ))}
+            <button
+              className="text-left text-xs md:text-lg font-semibold"
+              onClick={() => {
+                User.user = undefined;
+                removeCookie('Auth', { path: '/' });
+                notification.setMessage('Выполнен выход', 'success');
+              }}
+            >
               Выйти
             </button>
           </ul>
