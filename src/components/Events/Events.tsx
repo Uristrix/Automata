@@ -16,7 +16,7 @@ export interface Events {
 
 const Events = ({ data }: PropsWithChildren<Events>) => {
   return (
-    <section className="bg-white overflow-hidden rounded-2xl shadow-lg h-[300px] lg:h-[480px] mx-auto md:mx-0 min-w-[335px] md:max-w-full">
+    <section className="bg-white overflow-hidden rounded-2xl shadow-lg h-[300px] lg:h-[480px] mx-auto md:mx-0 max-w-[350px] md:max-w-full">
       <h3 className="font-bold text-center bg-ocean text-white">Ближайшие События</h3>
       {data?.length !== 0 ? (
         data?.map((el: Elem, i) => (
