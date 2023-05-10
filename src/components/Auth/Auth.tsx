@@ -8,17 +8,17 @@ import User from '../../store/user';
 const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolean> }>) => {
   const [inputs, setInputs] = useState({ login: '', password: '' });
   const [cookies, setCookie] = useCookies(['Auth']);
+
   useEffect(() => {
     if (typeof cookies.Auth !== undefined) {
       const field = cookies.Auth.split('|');
-      const user = {
+      User.user = {
         login: field[0],
         password: field[1],
         name: 'Ефремов Николай Владимирович',
         group: 'Кафедра',
         role: true,
       };
-      User.user = user;
     }
   }, []);
 
