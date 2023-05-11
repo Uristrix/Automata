@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import User from '../../store/user';
 import notification from '../../store/notification';
 import { userAuth } from '../../utils/user';
+import { getGroup } from '../../utils/group';
 
 const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolean> }>) => {
   const [inputs, setInputs] = useState({ login: '', password: '' });
@@ -38,6 +39,14 @@ const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolea
       notification.setMessage('Неверный логин или пароль', 'error');
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const data = await getGroup(User.user?.group_id);
+      User.group = data.payload.groups;
+    })();
+  }, [User.user]);
+
   return (
     <form
       onSubmit={handleSubmit}

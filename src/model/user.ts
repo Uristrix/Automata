@@ -1,7 +1,12 @@
 export interface User {
-  login?: string | null;
-  password?: string | null;
-  name?: string | null;
-  group?: string | null;
-  role?: boolean;
+  id: number;
+  login: string;
+  password: string;
+  name: string;
+  group_id: number | null;
+  role: boolean;
 }
+
+// export interface exUser extends User {
+//   groupName: string | null;
+// }

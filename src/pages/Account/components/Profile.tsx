@@ -6,7 +6,7 @@ const Profile = () => {
   return (
     <form className="flex flex-col gap-4 w-full md:mx-auto max-w-[700px]">
       <Input label="Имя" placeholder="Имя" value={User?.user?.name || ''} disabled={true} />
-      <Input label="Группа" placeholder="Группа" value={User?.user?.group || ''} disabled={true} />
+      <Input label="Группа" placeholder="Группа" value={User?.group?.name || ''} disabled={true} />
       <Input label="Логин" placeholder="Логин" value={User?.user?.login || ''} disabled={true} />
       <Input label="Пароль" placeholder="Пароль" type="password" />
       <Input label="Подтвердить пароль" placeholder="Подтвердить пароль" type="password" />

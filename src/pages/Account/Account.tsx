@@ -38,7 +38,7 @@ const Account = observer(() => {
               </div>
               <div className="w-[192px]">
                 <h2 className="font-semibold">{User.user.name}</h2>
-                <h3>{User.user.group}</h3>
+                <h3>{User.group?.name}</h3>
               </div>
             </div>
             {navigation
