@@ -5,39 +5,38 @@ import { observer } from 'mobx-react-lite';
 import { useCookies } from 'react-cookie';
 import User from '../../store/user';
 import notification from '../../store/notification';
+import { userAuth } from '../../utils/user';
 
 const Auth = observer(({ setOpen }: PropsWithChildren<{ setOpen: Dispatch<boolean> }>) => {
   const [inputs, setInputs] = useState({ login: '', password: '' });
   const [cookies, setCookie] = useCookies(['Auth']);
 
   useEffect(() => {
-    if (typeof cookies?.Auth === 'string') {
-      const field = cookies.Auth.split('|');
-      User.user = {
-        login: field[0],
-        password: field[1],
-        name: 'Ефремов Николай Владимирович',
-        group: 'Кафедра',
-        role: true,
-      };
-    }
+    (async () => {
+      if (typeof cookies?.Auth === 'string') {
+        const field = cookies.Auth.split('|');
+        const data = await userAuth(field[0], field[1]);
+
+        if (!data.payload.error) {
+          User.user = data.payload.user;
+          notification.setMessage('Вход выполнен', 'success');
+        }
+      }
+    })();
   }, []);
 
-  const handleSubmit = (e?: { preventDefault: () => void }) => {
-    //TODO: заглушка, пока нет бд
+  const handleSubmit = async (e?: { preventDefault: () => void }) => {
     e?.preventDefault();
-    if (inputs.login === process.env.REACT_APP_LOGIN && inputs.password === process.env.REACT_APP_LOGIN) {
-      User.user = {
-        login: inputs.login,
-        password: inputs.password,
-        name: 'Ефремов Николай Владимирович',
-        group: 'Кафедра',
-        role: true,
-      };
+    const data = await userAuth(inputs.login, inputs.password);
+
+    if (!data.payload.error) {
+      User.user = data.payload.user;
       notification.setMessage('Вход выполнен', 'success');
       setCookie('Auth', `${inputs.login}|${inputs.password}`, { path: '/' });
       setOpen(false);
-    } else notification.setMessage('Неверный логин или пароль', 'error');
+    } else {
+      notification.setMessage('Неверный логин или пароль', 'error');
+    }
   };
   return (
     <form
