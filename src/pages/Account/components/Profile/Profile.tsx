@@ -1,6 +1,6 @@
-import Input from '../../../components/Input/Input';
-import Button from '../../../components/Button/Button';
-import User from '../../../store/user';
+import Input from '../../../../components/Input/Input';
+import Button from '../../../../components/Button/Button';
+import User from '../../../../store/user';
 
 const Profile = () => {
   return (

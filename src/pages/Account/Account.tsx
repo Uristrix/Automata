@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import User from '../../store/user';
 import user from '../../assets/user.svg';
-import Profile from './components/Profile';
-import Users from './components/Users';
-import Events from './components/Events';
+import Profile from './components/Profile/Profile';
+import Users from './components/Journal/Journal';
+import Events from './components/Events/Events';
 import { useCookies } from 'react-cookie';
 import notification from '../../store/notification';
 
