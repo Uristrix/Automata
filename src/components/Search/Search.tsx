@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { PropsWithChildren, useRef } from 'react';
-import { ReactComponent as Del } from './assets/close.svg';
-import { ReactComponent as MagnifierIcon } from './assets/lens.svg';
+import { ReactComponent as Del } from '../../assets/close.svg';
+import { ReactComponent as MagnifierIcon } from '../../assets/lens.svg';
 
 interface ISearchProps {
   placeholder?: string;

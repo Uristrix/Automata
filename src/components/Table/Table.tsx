@@ -1,37 +1,48 @@
 import { PropsWithChildren } from 'react';
 import { observer } from 'mobx-react-lite';
+import classNames from 'classnames';
 
-const UserTable = observer(({ header, items }: PropsWithChildren<{ header: any; items: any }>) => {
+interface Table {
+  header?: Array<string | JSX.Element>;
+  items?: Array<Array<string | JSX.Element>>;
+  classes?: { root?: string; table?: string; tbody?: string; thead?: string; tr?: string; th?: string; td?: string };
+}
+const Table = observer(({ header, items, classes }: PropsWithChildren<Table>) => {
   return (
-    <div className="w-full md:w-full overflow-x-scroll rounded-2xl shadow-lg box-border ">
-      <table className="w-full">
-        <thead className="bg-ocean text-white w-full">
-          <tr className="[&>th]:text-left [&>th]:px-2">
-            <th>ФИО</th>
-            <th>Группа</th>
-            <th>КР1</th>
-            <th>КР2</th>
-            <th>КР3</th>
-            <th>КР4</th>
-            <th>КР5</th>
-            <th>КР6</th>
-            <th>КР7</th>
-            <th>КР8</th>
+    <div
+      className={classNames(
+        'w-full md:w-full overflow-x-scroll md:overflow-x-auto shadow-lg box-border rounded-2xl h-full',
+        classes?.root,
+      )}
+    >
+      <table className={classNames('w-full', classes?.table)}>
+        <thead className={classNames('bg-ocean text-white w-full', classes?.thead)}>
+          <tr className={classNames('[&>th]:text-left [&>th]:px-2', classes?.tr)}>
+            {header?.map((el, i) => (
+              <th key={`th${i}`} className={classNames(classes?.th)}>
+                {el}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          <tr className="[&>td]:px-2 max-h-[80px]">
-            <td>Ярославцев Егор Викторович</td>
-            <td>К3-83Б</td>
-            <td>100</td>
-            <td>100</td>
-            <td>100</td>
-            <td>100</td>
-            <td>100</td>
-          </tr>
+          {items?.map((el, i) => {
+            return (
+              <tr
+                key={`hd${i}`}
+                className={classNames('[&>td]:px-2 max-h-[80px]', classes?.tr, i % 2 === 0 ? '' : 'bg-grey')}
+              >
+                {el?.map((el2, j) => (
+                  <td key={`td${i}${j}`} className={classNames('min-h-[40px]', classes?.td)}>
+                    {el2}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   );
 });
-export default UserTable;
+export default Table;
