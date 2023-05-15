@@ -25,6 +25,14 @@ export const Task5_1 = (props) => {
       {[...Array(inputCount)].map((inputCount) => (
         <Task5_1_block key={inputCount} />
       ))}
+      <div className={classNames('flex min-w-[40px] md:min-w-[58px] m-auto mb-2')}>
+        <div className="flex w-[150px] ml-[90px]">
+          <Input classes={{ input: '!rounded-none' }} />
+        </div>
+        <div className="flex w-[100px] ml-2">
+          <Input classes={{ input: '!rounded-none' }} />
+        </div>
+      </div>
       <button
         className="w-[130px] h-50 border-[2px] border-gray-400"
         onClick={(e) => {

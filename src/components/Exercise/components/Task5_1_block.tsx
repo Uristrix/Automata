@@ -13,7 +13,7 @@ interface Task5_1_block {
 
 const Task5_1_block = () => {
   return (
-    <div className={classNames('relative flex flex-col mt-3 gap-2 mb-2 w-[350px]')}>
+    <div className={classNames('relative flex flex-col mt-2 gap-2 w-[350px]')}>
       <div className={classNames('flex min-w-[40px] md:min-w-[58px] m-auto')}>
         <div className="flex w-[150px] ml-[90px]">
           <Input classes={{ input: '!rounded-none' }} />
