@@ -8,7 +8,7 @@ import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
 import Account from './pages/Account/Account';
 import SchedulePage from './pages/Schedule/SchedulePage';
-import { Test1, Test2, Test3, Test4 } from './pages/Tests';
+import { Test1, Test2, Test3, Test4, Test5 } from './pages/Tests';
 import {
   Topic4_1,
   Topic4_10,
@@ -46,6 +46,7 @@ const App = observer(() => {
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test3" element={<Test3 />} />
             <Route path="/test4" element={<Test4 />} />
+            <Route path="/test5" element={<Test5 />} />
             <Route path="/lecture">
               <Route path="/lecture/4_1" element={<Topic4_1 />} />
               <Route path="/lecture/4_2" element={<Topic4_2 />} />
