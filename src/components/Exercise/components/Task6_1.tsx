@@ -1,13 +1,10 @@
 import Input from '../../Input/Input';
 import Line from './Line';
-import Task5_1_block from './InputBlock3';
 import { useState } from 'react';
 import classNames from 'classnames';
-import StartBlock from './InputBlock2';
-import InputBlock3 from './InputBlock3';
 import InputBlock2 from './InputBlock2';
 
-export const Task5_1 = (props) => {
+export const Task6_1 = (props) => {
   const [inputCount, setInputCount] = useState(0);
   return (
     <div className="m-auto">
@@ -25,7 +22,7 @@ export const Task5_1 = (props) => {
       </div>
       <InputBlock2 />
       {[...Array(inputCount)].map((inputCount) => (
-        <InputBlock3 key={inputCount} />
+        <InputBlock2 key={inputCount} />
       ))}
       <div className={classNames('flex min-w-[40px] md:min-w-[58px] m-auto mb-2')}>
         <div className="flex w-[150px] ml-[90px]">

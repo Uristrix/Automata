@@ -11,7 +11,7 @@ interface Task5_1_block {
   setInputs: Dispatch<InputsCode>;
 }
 
-const Task5_1_startBlock = () => {
+const InputBlock2 = () => {
   return (
     <div className={classNames('relative flex flex-col mt-3 gap-2 mb-2 w-[350px]')}>
       <div className={classNames('flex min-w-[40px] md:min-w-[58px] m-auto')}>
@@ -39,4 +39,4 @@ const Task5_1_startBlock = () => {
   );
 };
 
-export default Task5_1_startBlock;
+export default InputBlock2;
