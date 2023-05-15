@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { User } from '../model/user';
 
-export const getUsers = async () => {
+export const getAllUsers = async () => {
   try {
     const response = await axios.get(`/api/users`);
-    console.log(response);
     return { payload: response.data };
   } catch (error) {
     return { error };
@@ -20,7 +19,7 @@ export const postUser = async (user: User) => {
   }
 };
 
-export const deleteUser = async (id: string) => {
+export const deleteUser = async (id: number) => {
   try {
     const response = await axios.delete(`/api/users/${id}`);
     return { payload: response.data };

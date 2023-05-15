@@ -28,7 +28,16 @@ export const addGroup = async (group: Group) => {
   }
 };
 
-export const deleteGroup = async (id: string) => {
+export const updateGroup = async (group: Group) => {
+  try {
+    const response = await axios.patch(`/api/grouplist`, group);
+    return { payload: response.data };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const deleteGroup = async (id: number) => {
   try {
     const response = await axios.post(`/api/grouplist${id}`);
     return { payload: response.data };
