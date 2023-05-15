@@ -5,6 +5,7 @@ import Search from '../../../../components/Search/Search';
 import { useState } from 'react';
 import Modal from '../../../../components/Modal/Modal';
 import Group from './components/Group';
+import User from './components/User';
 
 const options = [
   { value: 'name+', label: 'По имени(возр.)' },
@@ -51,7 +52,7 @@ const Journal = () => {
       </Modal>
 
       <Modal open={openUser} setOpen={setOpenUser}>
-        <div></div>
+        <User />
       </Modal>
     </>
   );
