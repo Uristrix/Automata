@@ -60,9 +60,7 @@ const GroupAddEdit = ({ groups, trigger }: { groups: Array<Group>; trigger: () =
     }
   };
 
-  const genList = () => {
-    return groups?.map((el) => [<Line key={`group${el?.id}`} group={el} />]);
-  };
+  const genList = groups?.map((el) => [<Line key={`group${el?.id}`} group={el} />]);
 
   return (
     <form className="h-[400px] w-[300px] md:w-full overflow-hidden p-3" onSubmit={handlerSubmit}>
@@ -73,7 +71,7 @@ const GroupAddEdit = ({ groups, trigger }: { groups: Array<Group>; trigger: () =
           Добавить
         </Button>
       </div>
-      <Table header={['Название']} classes={{ root: '!h-[265px]' }} items={genList()} />
+      <Table header={['Название']} classes={{ root: '!h-[265px]' }} items={genList} />
     </form>
   );
 };

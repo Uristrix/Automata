@@ -68,6 +68,8 @@ function Select<
               backgroundColor: 'transparent',
             },
             fontWeight: state.isSelected ? 'bold' : base.fontWeight,
+            overflowY: 'scroll',
+            Height: '5rem',
           }),
         }}
       />

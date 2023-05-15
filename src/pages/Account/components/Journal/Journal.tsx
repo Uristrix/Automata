@@ -5,8 +5,9 @@ import Search from '../../../../components/Search/Search';
 import { useEffect, useState } from 'react';
 import Modal from '../../../../components/Modal/Modal';
 import { Group as group } from '../../../../model/group';
-import { User } from '../../../../model/user';
+import { User as user } from '../../../../model/user';
 import Group from './components/Group';
+import AddUser from './components/Users';
 import { ReactComponent as Check } from '../../../../assets/checkbox.svg';
 import { ReactComponent as Edit } from '../../../../assets/edit.svg';
 import { ReactComponent as Close } from '../../../../assets/close.svg';
@@ -29,61 +30,62 @@ const items = [
 ];
 
 const style = 'bg-transparent text-sm w-full focus:outline-0';
+
 const Item = (exUser, inputs, setInputs, edit) => {
   return [
     <input
       className={style}
-      value={inputs[`name${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`name${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.name || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], user: e.target.value } })}
       key={`name${exUser.id}`}
     />,
     <select key={`select${exUser.id}`} className={style} />,
     <input
       className={style}
-      value={inputs[`cr1${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr1${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr1 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr1: e.target.value } })}
       key={`cr1${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr2${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr2${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr2 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr2: e.target.value } })}
       key={`cr2${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr3${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr3${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr3 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr3: e.target.value } })}
       key={`cr3${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr4${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr4${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr4 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr4: e.target.value } })}
       key={`cr4${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr5${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr5${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr5 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr5: e.target.value } })}
       key={`cr5${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr6${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr6${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr6 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr6: e.target.value } })}
       key={`cr6${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr7${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr7${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr7 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr7: e.target.value } })}
       key={`cr7${exUser.id}`}
     />,
     <input
       className={style}
-      value={inputs[`cr8${exUser.id}`] || ''}
-      onChange={(e) => setInputs({ ...inputs, [`cr8${exUser.id}`]: e.target.value })}
+      value={inputs[exUser.id]?.cr8 || ''}
+      onChange={(e) => setInputs({ ...inputs, [exUser.id]: { ...inputs[exUser.id], cr8: e.target.value } })}
       key={`cr8${exUser.id}`}
     />,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exUser.id}`}>
@@ -99,7 +101,7 @@ const Journal = () => {
   const [openGroup, setOpenGroup] = useState(false);
   const [openUser, setOpenUser] = useState(false);
   const [groups, setGroups] = useState<Array<group>>();
-  const [users, setUsers] = useState<Array<User>>();
+  const [users, setUsers] = useState<Array<user>>();
 
   const [inputs, setInputs] = useState<Inputs>({});
   const [edit, setEdit] = useState(false);
@@ -124,6 +126,19 @@ const Journal = () => {
     })();
   }, [trigger]);
 
+  useEffect(() => {
+    if (users) {
+      for (const el of users) {
+        setInputs({ ...inputs, [`${el.id}`]: { ...inputs[`${el.id}`], name: el.name } });
+      }
+    }
+    if (groups) {
+      for (const el of groups) {
+        setInputs({ ...inputs, [`${el.id}`]: { ...inputs[`${el.id}`], group: el.name } });
+      }
+    }
+  }, [users, groups]);
+
   const generateItems = () => {
     if (users && groups) {
       return users?.map((u) => {
@@ -133,7 +148,7 @@ const Journal = () => {
     }
     return [[]];
   };
-
+  console.log(inputs);
   return (
     <>
       <div className="flex flex-col gap-4 w-full min-[1080px]:max-w-[1080px] items-start ">
@@ -144,7 +159,7 @@ const Journal = () => {
             onChange={setSelectedSort}
             options={options}
             placeholder="Сортировать по"
-            classes={{ root: 'min-w-[300px] w-full md:w-auto' }}
+            classes={{ root: 'min-w-[300px] w-full' }}
           />
           <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenUser(true)}>
             Добавить пользователей
@@ -165,7 +180,7 @@ const Journal = () => {
       </Modal>
 
       <Modal open={openUser} setOpen={setOpenUser}>
-        <div></div>
+        <AddUser groups={groups || []} />
       </Modal>
     </>
   );
