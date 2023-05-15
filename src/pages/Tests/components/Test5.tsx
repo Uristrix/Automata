@@ -1,4 +1,5 @@
 import { Task5_1 } from '../../../components/Exercise/components/Task5_1';
+import Button from '../../../components/Button/Button';
 
 export const Test5 = () => {
   return (
@@ -11,14 +12,14 @@ export const Test5 = () => {
         className="flex flex-col mx-auto mt-2 md:mt-5 w-[330px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
         <Task5_1 />
-      </form>
 
-      <h3 className="text-xl text-center font-bold mt-2">Умножение одновременно на два разряда множителя: </h3>
-      <form
-        //onSubmit={SendResult}
-        className="flex flex-col mx-auto mt-2 md:mt-5 w-[330px] md:w-full overflow-x-scroll md:overflow-hidden"
-      >
+        <h3 className="text-xl text-center font-bold mt-5 mb-5">Умножение одновременно на два разряда множителя: </h3>
+
         <Task5_1 />
+
+        <Button style="mx-auto mt-5" type="submit">
+          Отправить ответ
+        </Button>
       </form>
     </div>
   );
