@@ -38,12 +38,12 @@ export const Task1_2 = ({
           {num}
           <sub>{p}</sub> ={' '}
           <Input
-            value={inputs[task]?.trn_8 || ''}
+            value={inputs[task]?.trn_10 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], trn_8: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], trn_10: e.target.value } });
             }}
           />
-          <sub>3</sub>
+          <sub>10</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
           {num}
@@ -71,12 +71,12 @@ export const Task1_2 = ({
           {num}
           <sub>2</sub> ={' '}
           <Input
-            value={inputs[task]?.tr2_3 || ''}
+            value={inputs[task]?.tr2_10 || ''}
             onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], tr2_3: e.target.value } });
+              setInputs({ ...inputs, [task]: { ...inputs[task], tr2_10: e.target.value } });
             }}
           />
-          <sub>3</sub>
+          <sub>10</sub>
         </i>
         <i className="flex items-center w-full [&>sub]:pt-4">
           {num}
