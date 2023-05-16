@@ -1,6 +1,6 @@
 import ReactPlayer from 'react-player';
 import img from './assets';
-import { style } from '../../index';
+import { style } from '../../../../index';
 
 export const Topic4_1 = () => {
   return (

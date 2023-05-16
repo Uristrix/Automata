@@ -1,4 +1,4 @@
-export * from './components/Topic4_1/Topic4_1';
+export * from './components/Topic4/components/Topic4_1/Topic4_1';
 export * from './components/topic4_2/Topic4_2';
 export * from './components/topic4_3/Topic4_3';
 export * from './components/topic4_4/Topic4_4';
