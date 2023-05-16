@@ -1,4 +1,4 @@
-import { Task6_1 } from '../../../components/Exercise/components/Task6_1';
+import { Task5_1 } from '../../../components/Exercise/components/Task5_1';
 import Button from '../../../components/Button/Button';
 
 export const Test6 = () => {
@@ -11,9 +11,9 @@ export const Test6 = () => {
         //onSubmit={SendResult}
         className="flex flex-col mx-auto mt-2 md:mt-5 w-[330px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
-        <Task6_1 />
+        <Task5_1 />
         <h3 className="text-xl text-center font-bold mt-5 mb-5">Cекционное умножение: </h3>
-        <Task6_1 />
+        <Task5_1 />
 
         <Button style="mx-auto mt-5" type="submit">
           Отправить ответ

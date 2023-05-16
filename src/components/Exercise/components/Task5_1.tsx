@@ -1,60 +1,72 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import Input from '../../Input/Input';
-import Line from './Line';
-import Task5_1_block from './InputBlock3';
 import { useState } from 'react';
-import classNames from 'classnames';
-import StartBlock from './InputBlock2';
-import InputBlock3 from './InputBlock3';
-import InputBlock2 from './InputBlock2';
+
 import Button from '../../Button/Button';
 
-export const Task5_1 = (props) => {
+const Block = () => {
+  return (
+    <div className="relative flex flex-col gap-2 w-full">
+      <div className="flex gap-2 w-full">
+        <span className="min-w-[120px]" />
+        <Input classes={{ input: '!rounded-none' }} />
+        <Input classes={{ input: '!rounded-none' }} />
+      </div>
+      <div className="absolute top-[28px] left-[85px] font-bold">+</div>
+      <div className="flex gap-2 w-full">
+        <div className="flex min-w-[120px]">
+          <Input classes={{ input: '!rounded-none w-[50px]' }} />
+        </div>
+        <Input classes={{ input: '!rounded-none' }} />
+        <Input classes={{ input: '!rounded-none' }} />
+      </div>
+      <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
+    </div>
+  );
+};
+
+export const Task5_1 = () => {
   const [inputCount, setInputCount] = useState(0);
   return (
-    <div className="m-auto">
-      <div className="flex mb-2">
-        [X]п = -9/16 =
-        <div className="w-60">
-          <Input classes={{ input: 'ml-[5px]' }} />
-        </div>
+    <div className="m-auto max-w-[300px] md:max-w-[400px] flex flex-col gap-2">
+      <div className="flex gap-2 items-center">
+        <span className="min-w-[120px]">[X]п = -9/16 =</span>
+        <Input />
       </div>
-      <div className="flex">
-        [Y]п = -9/16 =
-        <div className="w-60">
-          <Input classes={{ input: 'ml-[5px]' }} />
-        </div>
+      <div className="flex gap-2 items-center">
+        <span className="min-w-[120px]">[Y]п = -9/16 =</span>
+        <Input />
       </div>
-      <InputBlock2 />
+      <Block />
       {[...Array(inputCount)].map((inputCount) => (
-        <InputBlock3 key={inputCount} />
+        <Block key={inputCount} />
       ))}
-      <div className={classNames('flex min-w-[40px] md:min-w-[58px] m-auto mb-2')}>
-        <div className="flex w-[150px] ml-[90px]">
-          <Input classes={{ input: '!rounded-none' }} />
-        </div>
-        <div className="flex w-[100px] ml-2">
-          <Input classes={{ input: '!rounded-none' }} />
-        </div>
+      <div className="flex gap-2">
+        <span className="min-w-[120px]" />
+        <Input classes={{ input: '!rounded-none' }} />
+        <Input classes={{ input: '!rounded-none' }} />
       </div>
-      <Button
-        onClick={() => {
-          setInputCount(inputCount + 1);
-        }}
-      >
-        Добавить блок
-      </Button>
-      <Button
-        onClick={() => {
-          if (inputCount > 0) setInputCount(inputCount - 1);
-        }}
-      >
-        Убрать блок
-      </Button>
-      <div className="flex mt-2">
-        Ответ =
-        <div className="w-60">
-          <Input classes={{ input: 'ml-[5px]' }} />
-        </div>
+      <div className="ml-[130px] flex gap-2">
+        <Button
+          style="text-[10px] md:text-base"
+          onClick={() => {
+            setInputCount(inputCount + 1);
+          }}
+        >
+          Добавить блок
+        </Button>
+        <Button
+          style="text-[10px] md:text-base"
+          onClick={() => {
+            if (inputCount > 0) setInputCount(inputCount - 1);
+          }}
+        >
+          Убрать блок
+        </Button>
+      </div>
+      <div className="flex items-center mt-2 ">
+        <span className="min-w-[50px]">[Z]п = </span>
+        <Input classes={{ input: '' }} placeholder={'?'} />
       </div>
     </div>
   );
