@@ -33,6 +33,7 @@ export const Task6_1 = (props) => {
         </div>
       </div>
       <Button
+        style={'mr-2'}
         onClick={() => {
           setInputCount(inputCount + 1);
         }}
