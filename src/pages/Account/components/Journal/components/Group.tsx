@@ -9,7 +9,7 @@ import { ReactComponent as Close } from '../../../../../assets/close.svg';
 import { ReactComponent as Edit } from '../../../../../assets/edit.svg';
 import { ReactComponent as Check } from '../../../../../assets/checkbox.svg';
 
-const Line = ({ group }: { group: Group }) => {
+const Line = ({ group, trigger }: { group: Group; trigger: () => void }) => {
   const [inputLine, setInputLine] = useState(group.name);
   const [edit, setEdit] = useState(false);
 
@@ -20,6 +20,7 @@ const Line = ({ group }: { group: Group }) => {
         await updateGroup(group)
           .then(() => notification.setMessage('Группа успешно обновлена', 'success'))
           .catch(() => notification.setMessage('Не удалось обновить группу', 'error'));
+        trigger();
       }
     })();
   }, [edit]);
@@ -29,6 +30,7 @@ const Line = ({ group }: { group: Group }) => {
       await deleteGroup(group.id)
         .then(() => notification.setMessage('Группа успешно удалена', 'success'))
         .catch(() => notification.setMessage('Не удалось удалить группу', 'error'));
+    trigger();
   };
 
   return (
@@ -60,7 +62,7 @@ const GroupAddEdit = ({ groups, trigger }: { groups: Array<Group>; trigger: () =
     }
   };
 
-  const genList = groups?.map((el) => [<Line key={`group${el?.id}`} group={el} />]);
+  const genList = groups?.map((el) => [<Line key={`group${el?.id}`} group={el} trigger={trigger} />]);
 
   return (
     <form className="h-[400px] w-[300px] md:w-full overflow-hidden p-3" onSubmit={handlerSubmit}>

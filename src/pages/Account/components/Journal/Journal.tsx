@@ -180,7 +180,7 @@ const Journal = () => {
       </Modal>
 
       <Modal open={openUser} setOpen={setOpenUser}>
-        <AddUser groups={groups || []} />
+        <AddUser groups={groups || []} trigger={() => setTrigger(!trigger)} />
       </Modal>
     </>
   );

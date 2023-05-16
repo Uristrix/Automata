@@ -12,7 +12,6 @@ import notification from '../../store/notification';
 
 const navigation = [
   { name: 'Профиль', href: '/profile', type: '*', component: <Profile /> },
-  { name: 'Успеваемость', href: '/progress', type: '*', component: <></> },
   { name: 'Журнал', href: '/users', type: 'admin', component: <Users /> },
   { name: 'События', href: '/events', type: 'admin', component: <Events /> },
 ];

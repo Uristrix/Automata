@@ -19,9 +19,18 @@ export const postUser = async (user: User) => {
   }
 };
 
+export const putUser = async (user: User) => {
+  try {
+    const response = await axios.put(`/api/users/update`, user);
+    return { payload: response.data };
+  } catch (error) {
+    return { error };
+  }
+};
+
 export const deleteUser = async (id: number) => {
   try {
-    const response = await axios.delete(`/api/users/${id}`);
+    const response = await axios.delete(`/api/users/delete/${id}`);
     return { payload: response.data };
   } catch (error) {
     return { error };
