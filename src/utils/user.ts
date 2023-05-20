@@ -10,6 +10,15 @@ export const getAllUsers = async () => {
   }
 };
 
+export const getFullUser = async (id) => {
+  try {
+    const response = await axios.get(`/api/full_user/${id}`);
+    return { payload: response.data };
+  } catch (error) {
+    return { error };
+  }
+};
+
 export const postUser = async (user: User) => {
   try {
     const response = await axios.post(`/api/users`, user);
