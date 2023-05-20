@@ -3,15 +3,17 @@ import classNames from 'classnames';
 
 const defaultInputClassname = (
   value: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>['value'],
-  invalid?: boolean,
+  invalid?: any | undefined,
 ) => {
   const classes = [
     'border-[2px] border-solid focus:outline-0 focus:!border-ocean',
     'placeholder:text-pseudo-white placeholder:italic',
     'rounded-xs md:rounded-xl px-1 md:px-2 lg:py-1 h-10',
   ];
-  if (invalid) {
+  if (invalid !== undefined && !invalid) {
     classes.push('border-red text-red');
+  } else if (Boolean(invalid !== undefined && invalid)) {
+    classes.push('border-green text-green');
   } else if (value) {
     classes.push('!border-black !text-pseudo-black');
   } else {
