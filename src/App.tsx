@@ -8,7 +8,7 @@ import MainPage from './pages/Mainpage/Mainpage';
 import ErrorPage from './pages/Errorpage/Errorpage';
 import Account from './pages/Account/Account';
 import SchedulePage from './pages/Schedule/SchedulePage';
-import { Test1, Test2, Test3, Test4 } from './pages/Tests';
+import { Test1, Test2, Test3, Test4, Test5, Test6, Test7, Test8 } from './pages/Tests';
 import {
   Topic4_1,
   Topic4_10,
@@ -38,7 +38,7 @@ const App = observer(() => {
     <>
       <Header />
       <div className="w-full min-h-screen flex flex-col justify-between">
-        <main className="flex flex-col w-full md:max-w-[710px] lg:max-w-[1600px] pt-[70px] md:pt-[100px] mx-auto relative ">
+        <main className="flex flex-col w-full md:max-w-[710px] min-[1000px]:max-w-[1250px] lg:max-w-[1600px] pt-[70px] md:pt-[100px] mx-auto relative ">
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/account" element={<Account />} />
@@ -46,6 +46,10 @@ const App = observer(() => {
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test3" element={<Test3 />} />
             <Route path="/test4" element={<Test4 />} />
+            <Route path="/test5" element={<Test5 />} />
+            <Route path="/test6" element={<Test6 />} />
+            <Route path="/test7" element={<Test7 />} />
+            <Route path="/test8" element={<Test8 />} />
             <Route path="/lecture">
               <Route path="/lecture/4_1" element={<Topic4_1 />} />
               <Route path="/lecture/4_2" element={<Topic4_2 />} />

@@ -4,15 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import User from '../../store/user';
 import user from '../../assets/user.svg';
-import Profile from './components/Profile';
-import Users from './components/Users';
-import Events from './components/Events';
+import Profile from './components/Profile/Profile';
+import Users from './components/Journal/Journal';
+import Events from './components/Events/Events';
 import { useCookies } from 'react-cookie';
 import notification from '../../store/notification';
 
 const navigation = [
   { name: 'Профиль', href: '/profile', type: '*', component: <Profile /> },
-  { name: 'Успеваемость', href: '/progress', type: '*', component: <></> },
   { name: 'Журнал', href: '/users', type: 'admin', component: <Users /> },
   { name: 'События', href: '/events', type: 'admin', component: <Events /> },
 ];
@@ -38,7 +37,7 @@ const Account = observer(() => {
               </div>
               <div className="w-[192px]">
                 <h2 className="font-semibold">{User.user.name}</h2>
-                <h3>{User.user.group}</h3>
+                <h3>{User.group?.name}</h3>
               </div>
             </div>
             {navigation

@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 
 const Header = observer(() => {
   const [openModal, setOpenModal] = useState(false);
-  console.log(User.user);
   return (
     <>
       <header className="fixed flex items-center justify-between w-full h-[60px] md:h-[90px] bg-gradient-to-r from-blue to-green text-white px-2 md:px-6 text-sm md:text-base shadow-lg z-50">

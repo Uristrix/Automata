@@ -37,7 +37,6 @@ export const Task3_1 = ({
           <h3>Доп. код</h3>
         </div>
       </div>
-
       {inputsParams?.map((el, i) => (
         <Line key={`line${i}`} inputs={inputs} setInputs={setInputs} name={el.name} id={el.id} />
       ))}

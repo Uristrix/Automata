@@ -1,94 +1,83 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import Input from '../../Input/Input';
-import { Inputs } from '../../../model/Inputs';
+import { InputsArr } from '../../../model/Inputs';
 
-const task = 'trans_ext';
+const task = 'numb_with_system';
 
 export const Task1_2 = ({
   inputs,
+  invalid,
   setInputs,
-  num,
   p,
   header,
 }: {
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
-  num: number;
-  p: number;
+  inputs: InputsArr;
+  invalid: object;
+  setInputs: Dispatch<InputsArr>;
+  p: string;
   header?: string;
 }) => {
+  useEffect(() => {
+    inputs[task] = [
+      { system_from: '10', system_to: '2' },
+      { system_from: '10', system_to: p },
+      { system_from: '2', system_to: '10' },
+      { system_from: '2', system_to: p },
+      { system_from: p, system_to: '2' },
+      { system_from: p, system_to: '10' },
+    ];
+    setInputs({ ...inputs, [task]: inputs[task] });
+  }, []);
+
+  useEffect(() => {
+    const temp = invalid['numb_with_system'];
+    temp?.map((el) => {
+      for (const i in inputs[task]) {
+        if (el?.system_from === inputs[task][i].system_from && el?.system_to === inputs[task][i].system_to) {
+          inputs[task][i] = { ...inputs?.[task]?.[i], invalid: el?.result.toString() };
+          console.log(el?.result);
+        }
+      }
+    });
+    setInputs({ ...inputs, [task]: inputs[task] });
+    console.log(inputs);
+  }, [invalid]);
+
   return (
-    <div className="w-full">
+    <div className="w-full min-h-[340px]">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">Целую часть числа переведите в другие системы счисления.</p>
 
       <div className="lg:max-w-[400px] flex flex-col gap-2">
-        <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>{p}</sub> ={' '}
-          <Input
-            value={inputs[task]?.trn_2 || ''}
-            onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], trn_2: e.target.value } });
-            }}
-          />
-          <sub>2</sub>
-        </i>
-        <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>{p}</sub> ={' '}
-          <Input
-            value={inputs[task]?.trn_8 || ''}
-            onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], trn_8: e.target.value } });
-            }}
-          />
-          <sub>3</sub>
-        </i>
-        <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>10</sub> ={' '}
-          <Input
-            value={inputs[task]?.tr10_2 || ''}
-            onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], tr10_2: e.target.value } });
-            }}
-          />
-          <sub>2</sub>
-        </i>
-        <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>10</sub> ={' '}
-          <Input
-            value={inputs[task]?.tr10_n || ''}
-            onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], tr10_n: e.target.value } });
-            }}
-          />
-          <sub>{p}</sub>
-        </i>
-        <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>2</sub> ={' '}
-          <Input
-            value={inputs[task]?.tr2_3 || ''}
-            onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], tr2_3: e.target.value } });
-            }}
-          />
-          <sub>3</sub>
-        </i>
-        <i className="flex items-center w-full [&>sub]:pt-4">
-          {num}
-          <sub>2</sub> ={' '}
-          <Input
-            value={inputs[task]?.tr2_n || ''}
-            onChange={(e) => {
-              setInputs({ ...inputs, [task]: { ...inputs[task], tr2_n: e.target.value } });
-            }}
-          />
-          <sub>{p}</sub>
-        </i>
+        {inputs[task]?.map((el, i) => (
+          <i className="flex items-center w-full [&>sub]:pt-4" key={`key${i}`}>
+            <Input
+              type="number"
+              value={inputs[task]?.[i]?.['numb'] || ''}
+              classes={{ root: '!max-w-[120px]' }}
+              onChange={(e) => {
+                inputs[task][i] = { ...inputs?.[task]?.[i], numb: e.target.value };
+                setInputs({ ...inputs, [task]: inputs[task] });
+              }}
+            />
+            <sub>{el.system_from}</sub> ={' '}
+            <Input
+              value={inputs[task]?.[i]?.['result'] || ''}
+              invalid={
+                inputs?.[task]?.[i]?.invalid === 'true'
+                  ? true
+                  : inputs?.[task]?.[i]?.invalid === 'false'
+                  ? false
+                  : undefined
+              }
+              onChange={(e) => {
+                inputs[task][i] = { ...inputs?.[task]?.[i], result: e.target.value, invalid: '' };
+                setInputs({ ...inputs, [task]: inputs[task] });
+              }}
+            />
+            <sub>{el.system_to}</sub>
+          </i>
+        ))}
       </div>
     </div>
   );
