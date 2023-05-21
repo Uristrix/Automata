@@ -66,6 +66,7 @@ export const MapCarno = ({
             }}
             key={`Input${el}`}
             value={inputs[name]?.[`carno_${i}`] || ''}
+            maxLength={1}
             onChange={(e) => {
               setInputs({ ...inputs, [name]: { ...inputs[name], [`carno_${i}`]: e.target.value } });
             }}

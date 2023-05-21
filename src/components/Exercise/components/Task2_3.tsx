@@ -47,7 +47,7 @@ export const Task2_3 = ({
           }}
         />
       </div>
-      <p className="mb-2">Пример: (x1 & x2 & nx3) | (x3 & nx4 & nx2) </p>
+      <p className="mb-2">Пример: (x1 | x2 | nx3) v (x3 | nx4 | nx2) </p>
       <div className="flex items-center">
         <span className="min-w-[60px]"> Ответ = </span>
         <Input

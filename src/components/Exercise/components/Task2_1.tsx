@@ -3,7 +3,7 @@ import Input from '../../Input/Input';
 import { Dispatch, useEffect } from 'react';
 import { InputsArr } from '../../../model/Inputs';
 
-const task = 'true_table';
+const task = 'table';
 
 export const Task2_1 = ({
   inputs,

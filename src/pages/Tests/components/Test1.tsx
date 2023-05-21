@@ -33,7 +33,7 @@ export const Test1 = () => {
       setInvalid(res.payload.checked);
       setResult(res.payload.checked.score);
     }
-    console.log(res.payload);
+    console.log(data);
     setDisable(true);
   };
 
