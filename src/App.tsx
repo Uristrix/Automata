@@ -32,6 +32,25 @@ import {
   Topic3_1,
   Topic3_2,
   Topic3_3,
+  Topic3_4,
+  Topic3_5,
+  Topic3_6,
+  Topic3_7,
+  Topic3_8,
+  Topic3_9,
+  Topic3_10,
+  Topic3_11,
+  Topic3_12,
+  Topic3_13,
+  Topic3_14,
+  Topic3_15,
+  Topic3_16,
+  Topic3_17,
+  Topic3_18,
+  Topic3_19,
+  Topic3_20,
+  Topic3_21,
+  Topic3_22,
 } from './pages/Lectures';
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
@@ -57,6 +76,25 @@ const App = observer(() => {
               <Route path="/lecture/3_1" element={<Topic3_1 />} />
               <Route path="/lecture/3_2" element={<Topic3_2 />} />
               <Route path="/lecture/3_3" element={<Topic3_3 />} />
+              <Route path="/lecture/3_4" element={<Topic3_4 />} />
+              <Route path="/lecture/3_5" element={<Topic3_5 />} />
+              <Route path="/lecture/3_6" element={<Topic3_6 />} />
+              <Route path="/lecture/3_7" element={<Topic3_7 />} />
+              <Route path="/lecture/3_8" element={<Topic3_8 />} />
+              <Route path="/lecture/3_9" element={<Topic3_9 />} />
+              <Route path="/lecture/3_10" element={<Topic3_10 />} />
+              <Route path="/lecture/3_11" element={<Topic3_11 />} />
+              <Route path="/lecture/3_12" element={<Topic3_12 />} />
+              <Route path="/lecture/3_13" element={<Topic3_13 />} />
+              <Route path="/lecture/3_14" element={<Topic3_14 />} />
+              <Route path="/lecture/3_15" element={<Topic3_15 />} />
+              <Route path="/lecture/3_16" element={<Topic3_16 />} />
+              <Route path="/lecture/3_17" element={<Topic3_17 />} />
+              <Route path="/lecture/3_18" element={<Topic3_18 />} />
+              <Route path="/lecture/3_19" element={<Topic3_19 />} />
+              <Route path="/lecture/3_20" element={<Topic3_20 />} />
+              <Route path="/lecture/3_21" element={<Topic3_21 />} />
+              <Route path="/lecture/3_22" element={<Topic3_22 />} />
               <Route path="/lecture/4_1" element={<Topic4_1 />} />
               <Route path="/lecture/4_2" element={<Topic4_2 />} />
               <Route path="/lecture/4_3" element={<Topic4_3 />} />
