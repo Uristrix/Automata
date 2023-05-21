@@ -10,10 +10,16 @@ export interface InputsArr {
   }>;
 }
 
+export interface InputsDict {
+  [keys: string]: {
+    [keys: string]: Array<string | null>;
+  };
+}
+
 export interface InputsCode {
   [keys: string]: {
-    straight?: string | null;
-    back?: string | null;
-    additional?: string | null;
+    str?: string | null;
+    rev?: string | null;
+    dop?: string | null;
   };
 }

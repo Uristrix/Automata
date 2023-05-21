@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import Line from './Line';
 import { InputsCode } from '../../../model/Inputs';
 
@@ -21,11 +21,19 @@ export const Task3_1 = ({
   header,
   inputs,
   setInputs,
+  invalid,
 }: {
   header?: string;
   inputs: InputsCode;
   setInputs: Dispatch<InputsCode>;
+  invalid: object;
 }) => {
+  useEffect(() => {
+    inputsParams.map((el) => {
+      inputs[el.name] = { str: '', rev: '', dop: '' };
+    });
+    setInputs({ ...inputs });
+  }, []);
   return (
     <div>
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
@@ -38,7 +46,7 @@ export const Task3_1 = ({
         </div>
       </div>
       {inputsParams?.map((el, i) => (
-        <Line key={`line${i}`} inputs={inputs} setInputs={setInputs} name={el.name} id={el.id} />
+        <Line key={`line${i}`} inputs={inputs} setInputs={setInputs} invalid={invalid} name={el.name} id={el.id} />
       ))}
     </div>
   );
