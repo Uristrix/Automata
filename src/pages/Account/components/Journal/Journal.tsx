@@ -2,7 +2,7 @@ import Button from '../../../../components/Button/Button';
 import Table from '../../../../components/Table/Table';
 import Select from '../../../../components/Select/Select';
 import Search from '../../../../components/Search/Search';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../../../../components/Modal/Modal';
 import { Group as group } from '../../../../model/group';
 import { exUser } from '../../../../model/user';
@@ -29,6 +29,18 @@ const style = 'bg-transparent text-sm w-full focus:outline-0';
 
 const Item = (exUser, groups, inputs, setInputs, edit) => {
   console.log(inputs[exUser.user.id]);
+
+  const tests = Array.from(Array(8).keys()).map((el, i) => (
+    <input
+      className={style}
+      value={inputs[exUser.user.id]?.[`test${i + 1}`] || ''}
+      onChange={(e) =>
+        setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], [`test${i + 1}`]: e.target.value } })
+      }
+      key={`test${i + 1}_${exUser.id}`}
+    />
+  ));
+
   return [
     <input
       className={style}
@@ -37,54 +49,7 @@ const Item = (exUser, groups, inputs, setInputs, edit) => {
       key={`name${exUser.id}`}
     />,
     <select key={`select${exUser.id}`} className={style} />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test1 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test1: e.target.value } })}
-      key={`cr1${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test2 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test2: e.target.value } })}
-      key={`cr2${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test3 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test3: e.target.value } })}
-      key={`cr3${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test4 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test4: e.target.value } })}
-      key={`cr4${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test5 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test5: e.target.value } })}
-      key={`cr5${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test6 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test6: e.target.value } })}
-      key={`cr6${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test7 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test7: e.target.value } })}
-      key={`cr7${exUser.id}`}
-    />,
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.test8 || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], test8: e.target.value } })}
-      key={`cr8${exUser.id}`}
-    />,
+    ...tests,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exUser.id}`}>
       {edit ? <Check /> : <Edit />}
       <Close />
