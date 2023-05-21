@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import { MapCarno } from '../../mapCarno/mapCarno';
 import Input from '../../Input/Input';
 import { Inputs } from '../../../model/Inputs';
@@ -14,6 +14,13 @@ export const Task2_4 = ({
   setInputs: Dispatch<Inputs>;
   header?: string;
 }) => {
+  useEffect(() => {
+    inputs[task] = { tdnf: '', tknf: '' };
+    Array.from(Array(16).keys()).map((el) => {
+      inputs[task] = { ...inputs[task], [`carno_${el}`]: '' };
+    });
+    setInputs({ ...inputs });
+  }, []);
   return (
     <div className="lg:max-w-[400px]">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
@@ -27,9 +34,9 @@ export const Task2_4 = ({
         <span className="min-w-[60px]"> ТДНФ = </span>
         <Input
           variant="textarea"
-          value={inputs[task]?.tdnf4 || ''}
+          value={inputs[task]?.tdnf || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, [task]: { ...inputs[task], tdnf4: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], tdnf: e.target.value } });
           }}
         />
       </div>
@@ -38,9 +45,9 @@ export const Task2_4 = ({
         <span className="min-w-[60px]"> ТКНФ = </span>
         <Input
           variant="textarea"
-          value={inputs[task]?.tknf4 || ''}
+          value={inputs[task]?.tknf || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, [task]: { ...inputs[task], tknf4: e.target.value } });
+            setInputs({ ...inputs, [task]: { ...inputs[task], tknf: e.target.value } });
           }}
         />
       </div>

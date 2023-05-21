@@ -1,7 +1,7 @@
 import segments from '../../../assets/segments.jpg';
 import Input from '../../Input/Input';
-import { Dispatch, useEffect } from 'react';
-import { InputsArr } from '../../../model/Inputs';
+import { Dispatch } from 'react';
+import { InputsDict } from '../../../model/Inputs';
 
 const task = 'table';
 
@@ -17,14 +17,10 @@ export const Task2_1 = ({
   segment: string;
   D: number;
   header?: string;
-  inputs: InputsArr;
-  setInputs: Dispatch<InputsArr>;
+  inputs: InputsDict;
+  setInputs: Dispatch<InputsDict>;
 }) => {
   const table: Array<string> = ['x1', 'x2', 'x3', 'x4', segment];
-
-  useEffect(() => {
-    inputs[task] = [];
-  }, []);
 
   return (
     <div className="">
@@ -52,9 +48,9 @@ export const Task2_1 = ({
                 <Input
                   classes={{ root: '!rounded-none !min-w-[40px]', input: '!rounded-none' }}
                   key={`Input${i2}`}
-                  value={inputs[task]?.[i]?.[table[i2]] || ''}
+                  value={inputs[task]?.[table[i2]]?.[i] || ''}
                   onChange={(e) => {
-                    inputs[task][i] = { ...inputs?.[task]?.[i], [table[i2]]: e.target.value };
+                    inputs[task][table[i2]][i] = e.target.value;
                     setInputs({ ...inputs, [task]: inputs[task] });
                   }}
                 />

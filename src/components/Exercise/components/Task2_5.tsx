@@ -1,5 +1,5 @@
 import Input from '../../Input/Input';
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { Inputs } from '../../../model/Inputs';
 import Button from '../../Button/Button';
 
@@ -14,6 +14,10 @@ export const Task2_5 = ({
   setInputs: Dispatch<Inputs>;
   header?: string;
 }) => {
+  useEffect(() => {
+    inputs[task] = { base: '', sheffer: '', pirs: '' };
+    setInputs({ ...inputs });
+  }, []);
   return (
     <div className="lg:max-w-[700px]">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}

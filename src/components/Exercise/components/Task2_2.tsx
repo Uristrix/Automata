@@ -1,6 +1,6 @@
 import Input from '../../Input/Input';
 import { Dispatch, useEffect } from 'react';
-import { InputsArr } from '../../../model/Inputs';
+import { InputsDict } from '../../../model/Inputs';
 
 const task = 'table';
 
@@ -10,15 +10,18 @@ export const Task2_2 = ({
   segment,
   header,
 }: {
-  inputs: InputsArr;
-  setInputs: Dispatch<InputsArr>;
+  inputs: InputsDict;
+  setInputs: Dispatch<InputsDict>;
   segment: string;
   header?: string;
 }) => {
   const table = ['x1', 'x2', 'x3', 'x4', segment, 'СДНФ', 'СКНФ'];
 
   useEffect(() => {
-    inputs['add_table'] = [];
+    inputs[task] = {};
+    table.map((el) => {
+      inputs[task][el] = Array.from(Array(16).keys()).map(() => '');
+    });
   }, []);
 
   return (
@@ -38,9 +41,9 @@ export const Task2_2 = ({
                 <Input
                   classes={{ root: '!rounded-none !min-w-[20px]', input: '!rounded-none' }}
                   key={`Input${i2}`}
-                  value={inputs[task]?.[i]?.[table[i2]] || ''}
+                  value={inputs[task]?.[table[i2]]?.[i] || ''}
                   onChange={(e) => {
-                    inputs[task][i] = { ...inputs?.[task]?.[i], [table[i2]]: e.target.value };
+                    inputs[task][table[i2]][i] = e.target.value;
                     setInputs({ ...inputs, [task]: inputs[task] });
                   }}
                 />

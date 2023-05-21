@@ -10,6 +10,12 @@ export interface InputsArr {
   }>;
 }
 
+export interface InputsDict {
+  [keys: string]: {
+    [keys: string]: Array<string | null>;
+  };
+}
+
 export interface InputsCode {
   [keys: string]: {
     str?: string | null;
