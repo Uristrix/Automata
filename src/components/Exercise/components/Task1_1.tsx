@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import Input from '../../Input/Input';
 import { Inputs } from '../../../model/Inputs';
 
@@ -19,6 +19,10 @@ export const Task1_1 = ({
   precision: number;
   header?: string;
 }) => {
+  useEffect(() => {
+    inputs[task] = { A_dvoich: '', A_oct: '', A_hex: '' };
+    setInputs({ ...inputs });
+  }, []);
   return (
     <div className="w-full">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}

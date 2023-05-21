@@ -19,12 +19,12 @@ export const Task1_2 = ({
 }) => {
   useEffect(() => {
     inputs[task] = [
-      { system_from: '10', system_to: '2' },
-      { system_from: '10', system_to: p },
-      { system_from: '2', system_to: '10' },
-      { system_from: '2', system_to: p },
-      { system_from: p, system_to: '2' },
-      { system_from: p, system_to: '10' },
+      { system_from: '10', system_to: '2', numb: '', result: '' },
+      { system_from: '10', system_to: p, numb: '', result: '' },
+      { system_from: '2', system_to: '10', numb: '', result: '' },
+      { system_from: '2', system_to: p, numb: '', result: '' },
+      { system_from: p, system_to: '2', numb: '', result: '' },
+      { system_from: p, system_to: '10', numb: '', result: '' },
     ];
     setInputs({ ...inputs, [task]: inputs[task] });
   }, []);
