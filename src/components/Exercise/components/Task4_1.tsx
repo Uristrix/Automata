@@ -1,4 +1,4 @@
-import { Dispatch, PropsWithChildren } from 'react';
+import { Dispatch, PropsWithChildren, useEffect } from 'react';
 import Line from './Line';
 import { InputsCode } from '../../../model/Inputs';
 
@@ -44,10 +44,11 @@ interface stepData {
 interface StepLine {
   arr: Array<stepData>;
   inputs: InputsCode;
+  invalid: object;
   setInputs: Dispatch<InputsCode>;
 }
 
-const StepLines = ({ arr, inputs, setInputs }: PropsWithChildren<StepLine>) => {
+const StepLines = ({ arr, inputs, setInputs, invalid }: PropsWithChildren<StepLine>) => {
   return (
     <>
       {arr?.map((el, i) => (
@@ -65,7 +66,7 @@ const StepLines = ({ arr, inputs, setInputs }: PropsWithChildren<StepLine>) => {
             </div>
             {el.data?.map((el2, i2) => (
               <>
-                <Line id={el2.id} name={el2.name} inputs={inputs} setInputs={setInputs} />
+                <Line id={el2.id} name={el2.name} inputs={inputs} setInputs={setInputs} invalid={invalid} />
                 {i2 == 1 && <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />}
               </>
             ))}
@@ -80,15 +81,25 @@ export const Task4_1 = ({
   header,
   inputs,
   setInputs,
+  invalid,
 }: {
   header?: string;
   inputs: InputsCode;
   setInputs: Dispatch<InputsCode>;
+  invalid: object;
 }) => {
+  useEffect(() => {
+    inputsParams.map((el) => {
+      el.data.map((el2) => {
+        inputs[el2.name] = { str: '', rev: '', dop: '' };
+      });
+    });
+    setInputs({ ...inputs });
+  }, []);
   return (
     <div className="flex-col mt-5">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
-      <StepLines arr={inputsParams} inputs={inputs} setInputs={setInputs} />
+      <StepLines arr={inputsParams} inputs={inputs} setInputs={setInputs} invalid={invalid} />
     </div>
   );
 };

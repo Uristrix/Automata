@@ -4,22 +4,40 @@ import Button from '../../../components/Button/Button';
 import Timer from '../../../components/Timer/Timer';
 import { useTimer } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
-import { Inputs } from '../../../model/Control2';
 import { Task4_1 } from '../../../components/Exercise/components/Task4_1';
+import User from '../../../store/user';
+import { sendTest } from '../../../utils/test';
 
 export const Test4 = () => {
-  //TODO: Заполнять автоматом инпуты из стора.
-  const [inputs, setInputs] = useState<Inputs>({});
+  const [inputs, setInputs] = useState({});
+  const [invalid, setInvalid] = useState({});
+  const [result, setResult] = useState({});
+  const [disable, setDisable] = useState(false);
   const [randomVal, setRandomVal] = useState<{ A: number; B: number }>({ A: 0, B: 0 });
   //TODO: Заглушка пока нет серверного времени.
   const { seconds } = useTimer(new Date(Date.now() + 60 * 60 * 1000));
   const navigate = useNavigate();
 
-  const SendResult = (e?: { preventDefault: () => void }) => {
-    //TODO: Поправить, когда появится запрос
-    // axios.post('postFirstLab', inputs);
+  const SendResult = async (e?: { preventDefault: () => void }) => {
     e?.preventDefault();
-    console.log(inputs);
+    let data = {
+      A_var: randomVal.A,
+      B_var: randomVal.B,
+      stud_id: User.user?.id,
+    };
+    for (const el in inputs) {
+      data = {
+        ...data,
+        [el]: { str: inputs[el]['str'].split(''), rev: inputs[el]['rev'].split(''), dop: inputs[el]['dop'].split('') },
+      };
+    }
+    const res = await sendTest(data, 4);
+    if (res.payload.checked) {
+      setInvalid(res.payload.checked);
+      setResult(res.payload.checked.score);
+    }
+    console.log(res.payload);
+    setDisable(true);
   };
 
   useEffect(() => {
@@ -48,10 +66,14 @@ export const Test4 = () => {
         onSubmit={SendResult}
         className="flex flex-col mx-auto mt-5 md:mt-10 w-[330px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
-        <Task4_1 inputs={inputs} setInputs={setInputs} />
-        <Button type="submit" style="!mx-auto mt-5">
-          Отправить ответ
-        </Button>
+        <Task4_1 inputs={inputs} setInputs={setInputs} invalid={invalid} />
+        {!disable ? (
+          <Button style="mx-auto mt-5" type="submit">
+            Отправить ответ
+          </Button>
+        ) : (
+          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result} / 100`}</div>
+        )}
       </form>
     </div>
   );

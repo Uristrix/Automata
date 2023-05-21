@@ -3,11 +3,10 @@ import Button from '../../../components/Button/Button';
 import { useEffect, useState } from 'react';
 import Timer from '../../../components/Timer/Timer';
 import { useTimer } from '../../../hooks';
-import { sendTest1 } from '../../../utils/test';
+import { sendTest } from '../../../utils/test';
 import User from '../../../store/user';
 
 export const Test1 = () => {
-  //TODO: Заполнять автоматом инпуты из стора.
   const [inputs, setInputs] = useState({});
   const [invalid, setInvalid] = useState({});
   const [result, setResult] = useState({});
@@ -29,12 +28,12 @@ export const Test1 = () => {
       stud_id: User.user?.id,
       score: '',
     };
-    const res = await sendTest1(data);
+    const res = await sendTest(data, 1);
     if (res.payload.checked) {
       setInvalid(res.payload.checked);
       setResult(res.payload.checked.score);
     }
-    console.log(res);
+    console.log(res.payload);
     setDisable(true);
   };
 
@@ -70,7 +69,7 @@ export const Test1 = () => {
             Отправить ответ
           </Button>
         ) : (
-          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result}`}</div>
+          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result} / 100`}</div>
         )}
       </form>
     </div>

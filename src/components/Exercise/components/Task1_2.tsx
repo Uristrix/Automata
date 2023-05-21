@@ -30,7 +30,7 @@ export const Task1_2 = ({
   }, []);
 
   useEffect(() => {
-    const temp = invalid['numb_with_system'];
+    const temp = invalid[task];
     temp?.map((el) => {
       for (const i in inputs[task]) {
         if (el?.system_from === inputs[task][i].system_from && el?.system_to === inputs[task][i].system_to) {
