@@ -15,6 +15,8 @@ import notification from '../../../../store/notification';
 import { getAllUsers, getFullUser } from '../../../../utils/user';
 import { getAllGroup } from '../../../../utils/group';
 import { Inputs } from '../../../../model/Inputs';
+// eslint-disable-next-line import/namespace,import/default
+import EditUser from './components/EditUser';
 
 const options = [
   { value: 'name+', label: 'По имени(возр.)' },
@@ -27,9 +29,7 @@ const header = ['ФИО', 'Группа', 'КР1', 'КР2', 'КР3', 'КР4', '�
 
 const style = 'bg-transparent text-sm w-full focus:outline-0';
 
-const Item = (exUser, groups, inputs, setInputs, edit) => {
-  console.log(inputs[exUser.user.id]);
-
+const Item = (exUser, groups, inputs, setInputs, setEdit, openModal) => {
   const tests = Array.from(Array(8).keys()).map((el, i) => (
     <input
       className={style}
@@ -38,6 +38,7 @@ const Item = (exUser, groups, inputs, setInputs, edit) => {
         setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], [`test${i + 1}`]: e.target.value } })
       }
       key={`test${i + 1}_${exUser.id}`}
+      disabled={true}
     />
   ));
 
@@ -47,11 +48,27 @@ const Item = (exUser, groups, inputs, setInputs, edit) => {
       value={inputs[exUser.user.id]?.name || ''}
       onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], user: e.target.value } })}
       key={`name${exUser.id}`}
+      disabled={true}
     />,
-    <select key={`select${exUser.id}`} className={style} />,
+    <Select
+      options={groups}
+      value={groups.filter((el) => el.value === exUser.user.group_id)}
+      key={`select${exUser.id}`}
+      className={style}
+      classes={{
+        select: { border: 'none', fontSize: '12px', background: 'none', padding: '0px' },
+        value: { padding: '0px' },
+        menu: { width: '150%' },
+      }}
+    />,
     ...tests,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exUser.id}`}>
-      {edit ? <Check /> : <Edit />}
+      <Edit
+        onClick={() => {
+          openModal(true);
+          setEdit(exUser);
+        }}
+      />
       <Close />
     </div>,
   ];
@@ -61,12 +78,13 @@ const Journal = () => {
   const [searchInput, setSearchInput] = useState('');
   const [selectedSort, setSelectedSort] = useState<{ value: string; label: string } | null>(null);
   const [openGroup, setOpenGroup] = useState(false);
-  const [openUser, setOpenUser] = useState(false);
+  const [openEditUser, setOpenEditUser] = useState(false);
+  const [openAddUser, setOpenAddUser] = useState(false);
   const [groups, setGroups] = useState<Array<group>>([]);
   const [users, setUsers] = useState<Array<exUser>>([]);
 
   const [inputs, setInputs] = useState<Inputs>({});
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState<exUser>(users[0]);
   const [trigger, setTrigger] = useState<boolean>(true);
 
   const getGroups = async () => {
@@ -93,7 +111,7 @@ const Journal = () => {
     if (users) {
       for (const el of users) {
         const data = {};
-        el.test.map((t) => (data[`${t.test_name}`] = t.test_score ? t.test_score?.toString() : ''));
+        el.test.map((t) => (data[`${t.test_name}`] = t.test_score ? t.test_score?.toString() : '0'));
         setInputs((prev) => ({
           ...prev,
           [`${el.user.id}`]: {
@@ -109,7 +127,7 @@ const Journal = () => {
   const generateItems = () => {
     if (users && groups) {
       return users?.map((u) => {
-        return Item(u, optionsGroup, inputs, setInputs, edit);
+        return Item(u, optionsGroup, inputs, setInputs, setEdit, setOpenEditUser);
       });
     }
     return [[]];
@@ -129,7 +147,7 @@ const Journal = () => {
             placeholder="Сортировать по"
             classes={{ root: 'min-w-[300px] w-full' }}
           />
-          <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenUser(true)}>
+          <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenAddUser(true)}>
             Добавить пользователей
           </Button>
           <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenGroup(true)}>
@@ -147,8 +165,12 @@ const Journal = () => {
         <Group groups={groups || []} trigger={() => setTrigger(!trigger)} />
       </Modal>
 
-      <Modal open={openUser} setOpen={setOpenUser}>
+      <Modal open={openAddUser} setOpen={setOpenAddUser}>
         <AddUser groups={groups || []} trigger={() => setTrigger(!trigger)} />
+      </Modal>
+
+      <Modal open={openEditUser} setOpen={setOpenEditUser}>
+        <EditUser exUser={edit} groups={groups} trigger={() => setTrigger(!trigger)} />
       </Modal>
     </>
   );
