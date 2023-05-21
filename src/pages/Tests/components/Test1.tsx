@@ -28,12 +28,12 @@ export const Test1 = () => {
       stud_id: User.user?.id,
       score: '',
     };
+    console.log(data);
     const res = await sendTest(data, 1);
     if (res.payload.checked) {
       setInvalid(res.payload.checked);
       setResult(res.payload.checked.score);
     }
-    console.log(data);
     setDisable(true);
   };
 
