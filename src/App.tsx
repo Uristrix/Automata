@@ -60,7 +60,7 @@ const App = observer(() => {
     <>
       <Header />
       <div className="w-full min-h-screen flex flex-col justify-between">
-        <main className="flex flex-col w-full md:max-w-[710px] min-[1000px]:max-w-[1250px] lg:max-w-[1600px] pt-[70px] md:pt-[100px] mx-auto relative ">
+        <main className="flex flex-col w-full min-[770px]:max-w-[710px] min-[900px]:max-w-[900px] lg:max-w-[1600px] pt-[70px] md:pt-[100px] mx-auto relative ">
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/account" element={<Account />} />

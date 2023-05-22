@@ -33,33 +33,14 @@ const Item = (exUser, groups, inputs, setInputs, setEdit, openModal, deleteUser)
     <input
       className={style}
       value={inputs[exUser.user.id]?.[`test${i + 1}`] || ''}
-      onChange={(e) =>
-        setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], [`test${i + 1}`]: e.target.value } })
-      }
       key={`test${i + 1}_${exUser.id}`}
       disabled={true}
     />
   ));
 
   return [
-    <input
-      className={style}
-      value={inputs[exUser.user.id]?.name || ''}
-      onChange={(e) => setInputs({ ...inputs, [exUser.user.id]: { ...inputs[exUser.user.id], user: e.target.value } })}
-      key={`name${exUser.id}`}
-      disabled={true}
-    />,
-    <Select
-      options={groups}
-      value={groups.filter((el) => el.value === exUser.user.group_id)}
-      key={`select${exUser.id}`}
-      className={style}
-      classes={{
-        select: { border: 'none', fontSize: '12px', background: 'none', padding: '0px' },
-        value: { padding: '0px' },
-        menu: { width: '150%' },
-      }}
-    />,
+    <div key={`name${exUser.id}`}>{exUser?.user?.name}</div>,
+    <div key={`select${exUser.id}`}>{exUser?.group?.name}</div>,
     ...tests,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exUser.id}`}>
       <Edit
@@ -106,6 +87,7 @@ const Journal = () => {
       .catch(() => notification.setMessage('Пользователь не удалён', 'error'));
     setTrigger(!trigger);
   };
+
   useEffect(() => {
     (async () => {
       await getGroups();
@@ -125,8 +107,6 @@ const Journal = () => {
         setInputs((prev) => ({
           ...prev,
           [`${el.user.id}`]: {
-            name: el.user.name,
-            group: el.user.group_id.toString(),
             ...data,
           },
         }));
@@ -191,7 +171,7 @@ const Journal = () => {
         <Table
           header={header}
           items={generateItems()}
-          classes={{ td: 'max-w-[60px] first:max-w-[120px] last:max-w-[40px]' }}
+          classes={{ td: 'max-w-[60px] first:max-w-[120px] lg:last:max-w-[40px]' }}
         />
       </div>
 

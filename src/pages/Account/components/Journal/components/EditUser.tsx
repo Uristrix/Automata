@@ -74,7 +74,7 @@ const EditUser = ({ exUser, groups, trigger }: { exUser: exUser; groups: Array<G
     trigger();
   };
   return (
-    <form className="p-3 flex flex-col items-center md:min-w-[390px]" onSubmit={handlerSubmit}>
+    <form className="p-3 flex flex-col items-center min-w-[300px] md:min-w-[390px]" onSubmit={handlerSubmit}>
       <h2 className="w-full text-center text-xl font-semibold mb-5">Изменить пользователя</h2>
       <div className="w-full flex flex-col items-center justify-between gap-4 mb-5">
         <Input
@@ -103,7 +103,7 @@ const EditUser = ({ exUser, groups, trigger }: { exUser: exUser; groups: Array<G
           {Array.from(Array(8).keys()).map((el, i) => (
             <Input
               label={`КР №${i + 1}`}
-              classes={{ root: '!w-[85px]' }}
+              classes={{ root: 'min-w-[40px] !w-[30px] md:!w-[85px]' }}
               type="number"
               value={inputs?.['test']?.[`test${i + 1}`]}
               onChange={(e) =>

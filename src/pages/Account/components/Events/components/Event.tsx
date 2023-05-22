@@ -28,22 +28,28 @@ const AddEvent = ({ trigger }: { trigger: () => void }) => {
     // }
   };
   return (
-    <form className="h-[400px] w-[300px] md:w-[650px] md:w-full p-3" onSubmit={handlerSubmit}>
+    <form className="w-[300px] md:w-[650px] md:w-full p-3" onSubmit={handlerSubmit}>
       <h2 className="w-full text-center text-xl font-semibold mb-5">Добавить событие</h2>
-      <div className="w-full flex flex-col items-center justify-between gap-4 mb-5">
+      <div className="w-full flex flex-col items-center justify-between gap-4">
         <Input
-          placeholder={'продолжительность(мин)'}
-          value={inputUser[event]?.name || ''}
-          onChange={(e) => setInputUser({ ...inputUser, [event]: { ...inputUser[event], name: e.target.value } })}
-        />
-        <Select value={InputEvent} onChange={setInputEvent} classes={{ root: 'w-full' }} placeholder={'Работа'} />
-        <Input
-          type={'datetime-local'}
+          type="datetime-local"
           placeholder={'Дата'}
           value={inputUser[event]?.password || ''}
           onChange={(e) => setInputUser({ ...inputUser, [event]: { ...inputUser[event], password: e.target.value } })}
         />
-        <Button style="w-full md:w-[300px] mt-28" type="submit">
+        <Input
+          placeholder={'продолжительность (мин)'}
+          value={inputUser[event]?.name || ''}
+          onChange={(e) => setInputUser({ ...inputUser, [event]: { ...inputUser[event], name: e.target.value } })}
+        />
+        <Select value={InputEvent} onChange={setInputEvent} classes={{ root: 'w-full' }} placeholder={'Контрольная'} />
+        <Input
+          variant="textarea"
+          classes={{ input: 'min-h-[80px]' }}
+          value={inputUser[event]?.password || ''}
+          onChange={(e) => setInputUser({ ...inputUser, [event]: { ...inputUser[event], password: e.target.value } })}
+        />
+        <Button style="w-full md:w-[300px] mt-5" type="submit">
           Добавить
         </Button>
       </div>
