@@ -52,7 +52,7 @@ const Input = ({
       {label && (
         <label
           htmlFor={id}
-          className={classNames('text-xs', invalid ? 'text-error' : 'text-pseudo-black', classes.label)}
+          className={classNames('text-xs w-full', invalid ? 'text-error' : 'text-pseudo-black', classes.label)}
         >
           {label}
         </label>
