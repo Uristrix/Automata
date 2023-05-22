@@ -4,10 +4,9 @@ import Select from '../../../../../components/Select/Select';
 import React, { useEffect, useState } from 'react';
 import notification from '../../../../../store/notification';
 import { Group } from '../../../../../model/group';
-import { Inputs } from '../../../../../model/Inputs';
-import { postUser, putUser } from '../../../../../utils/user';
+import { putUser } from '../../../../../utils/user';
 import { exUser } from '../../../../../model/user';
-import { checkTest, postTest, updateTest } from '../../../../../utils/test';
+import { postTest, updateTest } from '../../../../../utils/test';
 
 const EditUser = ({ exUser, groups, trigger }: { exUser: exUser; groups: Array<Group>; trigger: () => void }) => {
   const [InputGroup, setInputGroup] = useState<{ value: string; label: string } | null>(null);

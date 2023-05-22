@@ -9,6 +9,8 @@ import { Inputs } from '../../../../model/Inputs';
 import { deleteEvent, EventStatus, getAllEvent } from '../../../../utils/event';
 import notification from '../../../../store/notification';
 import Table from '../../../../components/Table/Table';
+import { ReactComponent as Edit } from '../../../../assets/edit.svg';
+import { ReactComponent as Close } from '../../../../assets/close.svg';
 
 // const sortCreatedAtAsc = (a, b) => {
 //   if (new Date(a.created ?? null) < new Date(b.created ?? null)) {
@@ -45,6 +47,16 @@ const Item = (exEvent, setEdit, setOpenEvent, DeleteEvent) => {
     <div key={`test_num${exEvent?.id}`}>{`КР${exEvent.test_num}`}</div>,
     <div key={`test_status${exEvent?.id}`}>{EventStatus(exEvent.test_status)}</div>,
     <div key={`description${exEvent?.id}`}>{exEvent.description}</div>,
+    <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exEvent.id}`}>
+      <Edit
+        className="cursor-pointer"
+        onClick={() => {
+          setEdit(exEvent);
+          setOpenEvent(true);
+        }}
+      />
+      <Close className="cursor-pointer" onClick={() => DeleteEvent(exEvent.id)} />
+    </div>,
   ];
 };
 const Events = () => {
@@ -53,7 +65,6 @@ const Events = () => {
   const [openEvent, setOpenEvent] = useState(false);
   const [event, setEvent] = useState<Array<exEvent>>([]);
   const [filterEvent, setFilterEvent] = useState<Array<exEvent>>([]);
-  const [inputs, setInputs] = useState<Inputs>({});
   const [edit, setEdit] = useState<exEvent | null>(null);
   const [trigger, setTrigger] = useState<boolean>(true);
 
@@ -92,7 +103,6 @@ const Events = () => {
   };
 
   const generateItems = () => {
-    console.log(event, filterEvent);
     if (filterEvent) {
       return filterEvent?.map((e) => {
         return Item(e, setEdit, setOpenEvent, DeleteEvent);
@@ -100,6 +110,7 @@ const Events = () => {
     }
     return [[]];
   };
+
   return (
     <>
       <div className="flex flex-col gap-4 w-full m-3 md:m-0 items-start w-full">
@@ -112,14 +123,20 @@ const Events = () => {
             placeholder="Сортировать по"
             classes={{ root: 'min-w-[300px] w-full' }}
           />
-          <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenEvent(true)}>
+          <Button
+            style="min-w-full lg:min-w-[200px]"
+            onClick={() => {
+              setEdit(null);
+              setOpenEvent(true);
+            }}
+          >
             Добавить Событие
           </Button>
         </div>
         <Table header={header} items={generateItems()} classes={{ td: 'first:max-w-[100px] last:max-w-[40px]' }} />
       </div>
       <Modal open={openEvent} setOpen={setOpenEvent}>
-        <AddEvent trigger={() => setTrigger(!trigger)} />
+        <AddEvent data={edit} trigger={() => setTrigger(!trigger)} />
       </Modal>
     </>
   );
