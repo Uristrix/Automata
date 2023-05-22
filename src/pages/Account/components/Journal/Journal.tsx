@@ -8,11 +8,10 @@ import { Group as group } from '../../../../model/group';
 import { exUser } from '../../../../model/user';
 import Group from './components/Group';
 import AddUser from './components/Users';
-import { ReactComponent as Check } from '../../../../assets/checkbox.svg';
 import { ReactComponent as Edit } from '../../../../assets/edit.svg';
 import { ReactComponent as Close } from '../../../../assets/close.svg';
 import notification from '../../../../store/notification';
-import { getAllUsers, getFullUser } from '../../../../utils/user';
+import { deleteUser, getAllUsers, getFullUser } from '../../../../utils/user';
 import { getAllGroup } from '../../../../utils/group';
 import { Inputs } from '../../../../model/Inputs';
 // eslint-disable-next-line import/namespace,import/default
@@ -29,7 +28,7 @@ const header = ['ФИО', 'Группа', 'КР1', 'КР2', 'КР3', 'КР4', '�
 
 const style = 'bg-transparent text-sm w-full focus:outline-0';
 
-const Item = (exUser, groups, inputs, setInputs, setEdit, openModal) => {
+const Item = (exUser, groups, inputs, setInputs, setEdit, openModal, deleteUser) => {
   const tests = Array.from(Array(8).keys()).map((el, i) => (
     <input
       className={style}
@@ -64,25 +63,26 @@ const Item = (exUser, groups, inputs, setInputs, setEdit, openModal) => {
     ...tests,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exUser.id}`}>
       <Edit
+        className="cursor-pointer"
         onClick={() => {
           openModal(true);
           setEdit(exUser);
         }}
       />
-      <Close />
+      <Close className="cursor-pointer" onClick={() => deleteUser(exUser.user.id)} />
     </div>,
   ];
 };
 
 const Journal = () => {
   const [searchInput, setSearchInput] = useState('');
-  const [selectedSort, setSelectedSort] = useState<{ value: string; label: string } | null>(null);
+  const [selectedSort, setSelectedSort] = useState<{ value: string; label: string } | null>(options[0]);
   const [openGroup, setOpenGroup] = useState(false);
   const [openEditUser, setOpenEditUser] = useState(false);
   const [openAddUser, setOpenAddUser] = useState(false);
   const [groups, setGroups] = useState<Array<group>>([]);
   const [users, setUsers] = useState<Array<exUser>>([]);
-
+  const [filterUser, setFilterUser] = useState<Array<exUser>>([]);
   const [inputs, setInputs] = useState<Inputs>({});
   const [edit, setEdit] = useState<exUser>(users[0]);
   const [trigger, setTrigger] = useState<boolean>(true);
@@ -100,6 +100,12 @@ const Journal = () => {
     setUsers(result);
   };
 
+  const DeleteUser = async (id) => {
+    await deleteUser(id)
+      .then(() => notification.setMessage('Пользователь удалён', 'success'))
+      .catch(() => notification.setMessage('Пользователь не удалён', 'error'));
+    setTrigger(!trigger);
+  };
   useEffect(() => {
     (async () => {
       await getGroups();
@@ -108,8 +114,12 @@ const Journal = () => {
   }, [trigger]);
 
   useEffect(() => {
-    if (users) {
-      for (const el of users) {
+    sorting();
+  }, [users, selectedSort]);
+
+  useEffect(() => {
+    if (filterUser) {
+      for (const el of filterUser) {
         const data = {};
         el.test.map((t) => (data[`${t.test_name}`] = t.test_score ? t.test_score?.toString() : '0'));
         setInputs((prev) => ({
@@ -122,12 +132,36 @@ const Journal = () => {
         }));
       }
     }
-  }, [users]);
+  }, [filterUser]);
+
+  const sorting = () => {
+    let data: Array<exUser> = [];
+    switch (selectedSort?.value) {
+      case 'name+':
+        data = [...users].sort((a, b) => a.user.name.localeCompare(b.user.name));
+        break;
+      case 'name-':
+        data = [...users].sort((a, b) => a.user.name.localeCompare(b.user.name)).reverse();
+        break;
+      case 'group+':
+        data = [...users].sort((a, b) => a.group.name.localeCompare(b.group.name));
+        break;
+      case 'group-':
+        data = [...users].sort((a, b) => a.group.name.localeCompare(b.group.name)).reverse();
+        break;
+      default:
+        break;
+    }
+    setFilterUser(data.filter((el) => el.user.name.toLowerCase().includes(searchInput.toLowerCase())));
+  };
+  useEffect(() => {
+    sorting();
+  }, [selectedSort, searchInput]);
 
   const generateItems = () => {
-    if (users && groups) {
-      return users?.map((u) => {
-        return Item(u, optionsGroup, inputs, setInputs, setEdit, setOpenEditUser);
+    if (filterUser && groups) {
+      return filterUser?.map((u) => {
+        return Item(u, optionsGroup, inputs, setInputs, setEdit, setOpenEditUser, DeleteUser);
       });
     }
     return [[]];
