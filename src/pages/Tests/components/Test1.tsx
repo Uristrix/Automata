@@ -45,7 +45,7 @@ export const Test1 = () => {
   }, [seconds]);
 
   return (
-    <div className="mx-3 md:mx-auto lg:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
+    <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
       <Timer seconds={seconds} />
       <h2 className="text-2xl text-center font-bold mb-4">Контрольная работа № 1</h2>
       <form className="flex flex-col justify-between gap-5 text-justify" onSubmit={SendResult}>

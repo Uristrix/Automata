@@ -3,7 +3,7 @@ import Button from '../../../components/Button/Button';
 
 export const Test6 = () => {
   return (
-    <div className="mx-3 md:mx-auto lg:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
+    <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
       <h1 className="text-2xl text-center font-bold">Контрольная работа № 6</h1>
       <h2 className="text-xl text-center font-bold">А = 3/16, В = 9/16</h2>
       <h3 className="text-xl text-center font-bold mt-2">Умножение чисел в обратном коде с корректирующими шагами: </h3>

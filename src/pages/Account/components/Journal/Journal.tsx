@@ -151,8 +151,8 @@ const Journal = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 w-full min-[1080px]:max-w-[1080px] items-start ">
-        <div className="flex flex-col lg:flex-row w-full gap-4 items-center">
+      <div className="flex flex-col gap-4 w-full items-start lg:max-w-[580px] xl:max-w-[780px] 2xl:max-w-[1300px] ">
+        <div className="flex flex-col 2xl:flex-row w-full gap-4 items-center">
           <Search value={searchInput} onChange={setSearchInput} placeholder="Поиск" classes={{ root: 'w-full' }} />
           <Select
             value={selectedSort}
@@ -161,10 +161,10 @@ const Journal = () => {
             placeholder="Сортировать по"
             classes={{ root: 'min-w-[300px] w-full' }}
           />
-          <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenAddUser(true)}>
+          <Button style="min-w-full 2xl:min-w-[200px]" onClick={() => setOpenAddUser(true)}>
             Добавить пользователей
           </Button>
-          <Button style="min-w-full lg:min-w-[200px]" onClick={() => setOpenGroup(true)}>
+          <Button style="min-w-full 2xl:min-w-[200px]" onClick={() => setOpenGroup(true)}>
             Управление группами
           </Button>
         </div>
