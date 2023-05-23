@@ -58,13 +58,12 @@ const MainPage = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-
   return (
-    <section className="flex flex-col lg:flex-row justify-between gap-2 mx-5 md:mx-0">
+    <section className="flex flex-col xl:flex-row justify-between gap-2 mx-5 md:mx-0">
       <Topics />
-      <div className="flex flex-col-reverse lg:flex-col gap-2">
+      <div className="flex flex-col-reverse xl:flex-col gap-2">
         <TeacherCard />
-        <Events data={event_mock} />
+        <Events />
       </div>
     </section>
   );

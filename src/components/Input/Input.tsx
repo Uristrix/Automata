@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 const defaultInputClassname = (
   value: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>['value'],
-  invalid?: any | undefined,
+  invalid?: boolean | undefined,
 ) => {
   const classes = [
     'border-[2px] border-solid focus:outline-0 focus:!border-ocean',
@@ -36,6 +36,7 @@ const Input = ({
   name,
   placeholder,
   value,
+  defaultValue,
   type = 'text',
   required,
   invalid,
@@ -51,7 +52,7 @@ const Input = ({
       {label && (
         <label
           htmlFor={id}
-          className={classNames('text-xs', invalid ? 'text-error' : 'text-pseudo-black', classes.label)}
+          className={classNames('text-xs w-full', invalid ? 'text-error' : 'text-pseudo-black', classes.label)}
         >
           {label}
         </label>
@@ -64,6 +65,7 @@ const Input = ({
           name={name}
           type={type}
           placeholder={placeholder}
+          defaultValue={defaultValue}
           value={value}
           required={required}
           disabled={disabled}

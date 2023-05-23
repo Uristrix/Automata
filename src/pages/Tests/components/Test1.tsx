@@ -3,11 +3,10 @@ import Button from '../../../components/Button/Button';
 import { useEffect, useState } from 'react';
 import Timer from '../../../components/Timer/Timer';
 import { useTimer } from '../../../hooks';
-import { sendTest1 } from '../../../utils/test';
+import { sendTest } from '../../../utils/test';
 import User from '../../../store/user';
 
 export const Test1 = () => {
-  //TODO: Заполнять автоматом инпуты из стора.
   const [inputs, setInputs] = useState({});
   const [invalid, setInvalid] = useState({});
   const [result, setResult] = useState({});
@@ -29,12 +28,12 @@ export const Test1 = () => {
       stud_id: User.user?.id,
       score: '',
     };
-    const res = await sendTest1(data);
+    console.log(data);
+    const res = await sendTest(data, 1);
     if (res.payload.checked) {
       setInvalid(res.payload.checked);
       setResult(res.payload.checked.score);
     }
-    console.log(res);
     setDisable(true);
   };
 
@@ -46,7 +45,7 @@ export const Test1 = () => {
   }, [seconds]);
 
   return (
-    <div className="mx-3 md:mx-auto lg:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
+    <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
       <Timer seconds={seconds} />
       <h2 className="text-2xl text-center font-bold mb-4">Контрольная работа № 1</h2>
       <form className="flex flex-col justify-between gap-5 text-justify" onSubmit={SendResult}>
@@ -70,7 +69,7 @@ export const Test1 = () => {
             Отправить ответ
           </Button>
         ) : (
-          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result}`}</div>
+          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result} / 100`}</div>
         )}
       </form>
     </div>

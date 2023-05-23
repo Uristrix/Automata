@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Timer from '../../../components/Timer/Timer';
 import { Task2_1, Task2_2, Task2_3, Task2_4, Task2_5 } from '../../../components/Exercise';
 import Button from '../../../components/Button/Button';
+import User from '../../../store/user';
 
 const varSegments: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'm', 'g', 'l'];
 
@@ -21,10 +22,14 @@ export const Test2 = () => {
   });
 
   const SendResult = (e?: { preventDefault: () => void }) => {
-    //TODO: Поправить, когда появится запрос
-    // axios.post('postFirstLab', inputs);
     e?.preventDefault();
-    console.log(inputs);
+    const data = {
+      ...variant,
+      ...inputs,
+      stud_id: User.user?.id,
+      score: '',
+    };
+    console.log(data);
   };
 
   useEffect(() => {
@@ -36,10 +41,10 @@ export const Test2 = () => {
   }, [seconds]);
 
   return (
-    <div className="mx-3 md:mx-auto lg:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
+    <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
       <Timer seconds={seconds} />
       <h2 className="text-2xl text-center font-bold">Контрольная работа № 2</h2>
-      <form className="flex flex-col gap-5 text-justify">
+      <form className="flex flex-col gap-5 text-justify" onSubmit={SendResult}>
         <Task2_1
           inputs={inputs}
           setInputs={setInputs}

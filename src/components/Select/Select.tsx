@@ -7,7 +7,7 @@ export type DefaultSelectOption = { label: string; value: string };
 
 type AdditionalSelectProps = {
   label?: string;
-  classes?: { root?: string; label?: string };
+  classes?: { root?: string; label?: string; select?: object; value?: object; menu?: object };
   invalid?: boolean;
   id?: string;
 };
@@ -19,7 +19,7 @@ function Select<
 >({ label, classes, invalid, ...props }: Props<Option, IsMulti, Group> & AdditionalSelectProps) {
   const instanceId = useId();
   return (
-    <div className={classes?.root}>
+    <span className={classes?.root}>
       {label && <span className={cn('text-pseudo-black text-xs pb-1', classes?.label)}>{label}</span>}
       <ReactSelect<Option, IsMulti, Group>
         {...props}
@@ -38,6 +38,7 @@ function Select<
             textOverflow: 'ellipsis',
             border: '2px solid #bebebe',
             borderColor: invalid ? '#c70000' : state.isFocused ? '#006a8d' : '#BEBEBE',
+            ...classes?.select,
             ':hover': {
               borderColor: '#006a8d',
             },
@@ -48,13 +49,17 @@ function Select<
             padding: '0',
             cursor: 'pointer',
           }),
+          valueContainer: (base) => ({
+            ...base,
+            ...classes?.value,
+          }),
           menuList: (base) => ({
             ...base,
             borderRadius: '0.75rem',
             border: '2px solid #BEBEBE',
             padding: '6px 12px',
           }),
-          menu: (base) => ({ ...base, borderRadius: '16px', zIndex: '15' }),
+          menu: (base) => ({ ...base, borderRadius: '16px', zIndex: '15', ...classes?.menu }),
           option: (base, state) => ({
             ...base,
             color: '#000000',
@@ -73,7 +78,7 @@ function Select<
           }),
         }}
       />
-    </div>
+    </span>
   );
 }
 

@@ -1,4 +1,4 @@
 export interface Group {
   id?: number;
-  name: string | null;
+  name: string;
 }

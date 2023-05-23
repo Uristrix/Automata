@@ -15,7 +15,7 @@ const Button = ({ type = 'button', disabled, onClick, style, children }: PropsWi
       onClick={onClick}
       disabled={disabled}
       className={classNames(
-        ' bg-ocean transition hover:bg-green border-0 rounded-xl text-base text-white text-center h-10 w-36',
+        ' bg-ocean transition hover:bg-green border-0 rounded-xl text-base text-white text-center h-10 w-36 relative',
         style,
       )}
     >

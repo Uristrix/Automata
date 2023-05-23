@@ -6,6 +6,8 @@ import notification from '../../../../../store/notification';
 import { Group } from '../../../../../model/group';
 import { Inputs } from '../../../../../model/Inputs';
 import { postUser } from '../../../../../utils/user';
+import { read, utils } from 'xlsx';
+import { User } from '../../../../../model/user';
 
 const users = 'user';
 
@@ -13,6 +15,31 @@ const AddUser = ({ groups, trigger }: { groups: Array<Group>; trigger: () => voi
   const [InputGroup, setInputGroup] = useState<{ value: string; label: string } | null>(null);
   const [inputUser, setInputUser] = useState<Inputs>({});
   const generateOption = groups.map((el) => ({ value: `${el.id}` || '', label: el.name || '' }));
+
+  const handleImport = ($event) => {
+    const files = $event.target.files;
+    if (files.length) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const wb = read(event.target?.result);
+        const sheets = wb.SheetNames;
+        const result: Array<User> = utils.sheet_to_json(wb.Sheets[sheets[0]]);
+        const data: Array<User> = [];
+        result.map((el) =>
+          data.push({
+            ...el,
+            role: false,
+            group_id: groups?.find((el2) => el2.name === el.group_id.toString())?.id || 1,
+          }),
+        );
+        await Promise.all(data?.map((el) => postUser(el)));
+        trigger();
+        notification.setMessage('пользователи успешно добавлены', 'success');
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  };
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
@@ -50,9 +77,24 @@ const AddUser = ({ groups, trigger }: { groups: Array<Group>; trigger: () => voi
           value={inputUser[users]?.password || ''}
           onChange={(e) => setInputUser({ ...inputUser, [users]: { ...inputUser[users], password: e.target.value } })}
         />
-        <Button style="w-full md:w-[300px] mt-5" type="submit">
-          Добавить
-        </Button>
+        <div className="flex flex-col md:flex-row gap-2 justify-between mt-5 w-full">
+          <Button style="w-full md:w-[200px]">
+            <label className="w-full h-full absolute left-0 top-0 items-center pt-2" htmlFor="inputGroupFile">
+              Выбрать файл
+            </label>
+          </Button>
+          <Button style="w-full md:w-[200px]" type="submit">
+            Добавить
+          </Button>
+        </div>
+        <Input
+          type="file"
+          className="hidden"
+          id="inputGroupFile"
+          required
+          onChange={handleImport}
+          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        />
       </div>
     </form>
   );

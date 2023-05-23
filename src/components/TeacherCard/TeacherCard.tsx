@@ -10,7 +10,7 @@ const TeacherCard = () => {
         alt="Efremov"
       />
       <img className="object-contain backdrop-blur-lg h-[350px] md:h-[260px]" src={Efremov} alt="Efremov" />
-      <div className="w-full px-4 lg:px-8 pb-4 flex flex-col justify-between">
+      <div className="w-full px-4 pb-2 flex flex-col justify-between">
         <h2 className="text-xl font-bold py-2">Ефремов Николай Владимирович</h2>
         <div className="flex flex-col text-lg [&>a]:w-auto text-sm">
           <div className="[&>span]:font-bold">
