@@ -45,7 +45,9 @@ const Item = (exEvent, setEdit, setOpenEvent, DeleteEvent) => {
     <div key={`date${exEvent?.id}`}>{new Date(exEvent.date).toLocaleTimeString('ru', formateDate)}</div>,
     <div key={`length${exEvent?.id}`}>{`${exEvent.length} мин`}</div>,
     <div key={`test_num${exEvent?.id}`}>{`КР${exEvent.test_num}`}</div>,
-    <div key={`description${exEvent?.id}`}>{exEvent.description}</div>,
+    <div key={`description${exEvent?.id}`} className="break-all">
+      {exEvent.description}
+    </div>,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exEvent.id}`}>
       <Edit
         className="cursor-pointer"
@@ -132,7 +134,7 @@ const Events = () => {
             Добавить Событие
           </Button>
         </div>
-        <Table header={header} items={generateItems()} classes={{ td: 'first:max-w-[100px] last:max-w-[40px]' }} />
+        <Table header={header} items={generateItems()} classes={{ td: 'first:max-w-[100px] last:w-[40px]' }} />
       </div>
       <Modal open={openEvent} setOpen={setOpenEvent}>
         <AddEvent data={edit} trigger={() => setTrigger(!trigger)} rerender={Math.random()} />
