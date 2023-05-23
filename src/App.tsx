@@ -51,6 +51,11 @@ import {
   Topic3_20,
   Topic3_21,
   Topic3_22,
+  Topic2_1,
+  Topic2_2,
+  Topic2_3,
+  Topic2_4,
+  Topic2_5,
 } from './pages/Lectures';
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
@@ -73,6 +78,11 @@ const App = observer(() => {
             <Route path="/test7" element={<Test7 />} />
             <Route path="/test8" element={<Test8 />} />
             <Route path="/lecture">
+              <Route path="/lecture/2_1" element={<Topic2_1 />} />
+              <Route path="/lecture/2_2" element={<Topic2_2 />} />
+              <Route path="/lecture/2_3" element={<Topic2_3 />} />
+              <Route path="/lecture/2_4" element={<Topic2_4 />} />
+              <Route path="/lecture/2_5" element={<Topic2_5 />} />
               <Route path="/lecture/3_1" element={<Topic3_1 />} />
               <Route path="/lecture/3_2" element={<Topic3_2 />} />
               <Route path="/lecture/3_3" element={<Topic3_3 />} />
