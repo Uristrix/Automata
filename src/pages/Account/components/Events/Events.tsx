@@ -38,14 +38,13 @@ const options = [
   { value: 'date-', label: 'По дате (убыв.)' },
 ];
 
-const header = ['Дата', 'Продолжительность', 'КР', 'Статус', 'Описание', ''];
+const header = ['Дата', 'Продолжительность', 'КР', 'Описание', ''];
 
 const Item = (exEvent, setEdit, setOpenEvent, DeleteEvent) => {
   return [
     <div key={`date${exEvent?.id}`}>{new Date(exEvent.date).toLocaleTimeString('ru', formateDate)}</div>,
     <div key={`length${exEvent?.id}`}>{`${exEvent.length} мин`}</div>,
     <div key={`test_num${exEvent?.id}`}>{`КР${exEvent.test_num}`}</div>,
-    <div key={`test_status${exEvent?.id}`}>{EventStatus(exEvent.test_status)}</div>,
     <div key={`description${exEvent?.id}`}>{exEvent.description}</div>,
     <div className="flex items-center p-1 justify-end gap-2 w-full" key={`edit${exEvent.id}`}>
       <Edit
@@ -82,8 +81,8 @@ const Events = () => {
 
   const DeleteEvent = async (id) => {
     await deleteEvent(id)
-      .then(() => notification.setMessage('Пользователь удалён', 'success'))
-      .catch(() => notification.setMessage('Пользователь не удалён', 'error'));
+      .then(() => notification.setMessage('Событие удалёно', 'success'))
+      .catch(() => notification.setMessage('Событие не удалёно', 'error'));
     setTrigger(!trigger);
   };
 
@@ -136,7 +135,7 @@ const Events = () => {
         <Table header={header} items={generateItems()} classes={{ td: 'first:max-w-[100px] last:max-w-[40px]' }} />
       </div>
       <Modal open={openEvent} setOpen={setOpenEvent}>
-        <AddEvent data={edit} trigger={() => setTrigger(!trigger)} />
+        <AddEvent data={edit} trigger={() => setTrigger(!trigger)} rerender={Math.random()} />
       </Modal>
     </>
   );

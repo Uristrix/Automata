@@ -71,7 +71,7 @@ const Journal = () => {
   const getGroups = async () => {
     await getAllGroup()
       .then((res) => setGroups(res.payload.groups))
-      .catch(() => notification.setMessage('Группы не обновлены', 'error'));
+      .catch(() => notification.setMessage('Группы не полученв', 'error'));
   };
 
   const getUsers = async () => {

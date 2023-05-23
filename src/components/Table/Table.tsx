@@ -15,8 +15,8 @@ const Table = observer(({ header, items, classes }: PropsWithChildren<Table>) =>
         classes?.root,
       )}
     >
-      <table className={classNames('w-full', classes?.table)}>
-        <thead className={classNames('bg-ocean text-white w-full', classes?.thead)}>
+      <table className={classNames('w-full relative', classes?.table)}>
+        <thead className={classNames('bg-ocean text-white w-full sticky', classes?.thead)}>
           <tr className={classNames('[&>th]:text-left [&>th]:px-2', classes?.tr)}>
             {header?.map((el, i) => (
               <th key={`th${i}`} className={classNames(classes?.th)}>
@@ -25,7 +25,7 @@ const Table = observer(({ header, items, classes }: PropsWithChildren<Table>) =>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="overflow-y-scroll overflow-hidden">
           {items?.map((el, i) => {
             return (
               <tr

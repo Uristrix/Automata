@@ -20,7 +20,16 @@ export const getEvent = async (id) => {
 
 export const addEvent = async (data) => {
   try {
-    const response = await axios.post(`/api/event/`, data);
+    const response = await axios.post(`/api/event`, data);
+    return { payload: response.data };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const updateEvent = async (data) => {
+  try {
+    const response = await axios.put(`/api/event`, data);
     return { payload: response.data };
   } catch (error) {
     return { error };
