@@ -19,6 +19,7 @@ export const Task1_1 = ({
   precision: number;
   header?: string;
 }) => {
+  const placehopderType = 'XXXX... , XXXX...';
   useEffect(() => {
     inputs[task] = { A_dvoich: '', A_oct: '', A_hex: '' };
     setInputs({ ...inputs });
@@ -38,7 +39,7 @@ export const Task1_1 = ({
           <Input
             invalid={invalid['A_dvoich']}
             value={inputs[task]?.A_dvoich || ''}
-            placeholder={'XXX,XXX'}
+            placeholder={placehopderType}
             onChange={(e) => {
               setInputs({ ...inputs, [task]: { ...inputs[task], A_dvoich: e.target.value } });
             }}
@@ -51,7 +52,7 @@ export const Task1_1 = ({
           <Input
             invalid={invalid['A_oct']}
             value={inputs[task]?.A_oct || ''}
-            placeholder={'XXX,XXX'}
+            placeholder={placehopderType}
             onChange={(e) => {
               setInputs({ ...inputs, [task]: { ...inputs[task], A_oct: e.target.value } });
             }}
@@ -64,7 +65,7 @@ export const Task1_1 = ({
           <Input
             invalid={invalid['A_hex']}
             value={inputs[task]?.A_hex || ''}
-            placeholder={'XXX,XXX'}
+            placeholder={placehopderType}
             onChange={(e) => {
               setInputs({ ...inputs, [task]: { ...inputs[task], A_hex: e.target.value } });
             }}

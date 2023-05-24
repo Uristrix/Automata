@@ -29,7 +29,7 @@ export const Task2_4 = ({
         следующую разметку карты Карно.
       </p>
       <MapCarno inputs={inputs} setInputs={setInputs} name={task} />
-      <p className="mb-2">Пример: (x1 & x2 & nx3) | (x3 & nx4 & nx2) </p>
+      <p className="mb-2">Пример: (x1 & x2 & nx3) v (x3 & nx4 & nx2) </p>
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> ТДНФ = </span>
         <Input
@@ -40,7 +40,7 @@ export const Task2_4 = ({
           }}
         />
       </div>
-      <p className="mb-2">Пример: (x1 | x2 | nx3) & (x3 | nx4 | nx2) </p>
+      <p className="mb-2">Пример: (x1 v x2 v nx3) & (x3 v nx4 v nx2) </p>
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> ТКНФ = </span>
         <Input

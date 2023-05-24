@@ -19,12 +19,12 @@ export const Task1_2 = ({
 }) => {
   useEffect(() => {
     inputs[task] = [
-      { system_from: '10', system_to: '2', numb: '', result: '' },
-      { system_from: '10', system_to: p, numb: '', result: '' },
-      { system_from: '2', system_to: '10', numb: '', result: '' },
-      { system_from: '2', system_to: p, numb: '', result: '' },
-      { system_from: p, system_to: '2', numb: '', result: '' },
-      { system_from: p, system_to: '10', numb: '', result: '' },
+      { system_from: '10', system_to: '2', numb: '', result: '', placeholderFrom: 'XXX', placeholderTo: 'XXXXXXXX' },
+      { system_from: '10', system_to: p, numb: '', result: '', placeholderFrom: 'XXX', placeholderTo: 'X...XX' },
+      { system_from: '2', system_to: '10', numb: '', result: '', placeholderFrom: 'XXXXXXXX', placeholderTo: 'XXX' },
+      { system_from: '2', system_to: p, numb: '', result: '', placeholderFrom: 'XXXXXXXX', placeholderTo: 'X...XX' },
+      { system_from: p, system_to: '2', numb: '', result: '', placeholderFrom: 'X...XX', placeholderTo: 'XXXXXXXX' },
+      { system_from: p, system_to: '10', numb: '', result: '', placeholderFrom: 'X...XX', placeholderTo: 'XXX' },
     ];
     setInputs({ ...inputs, [task]: inputs[task] });
   }, []);
@@ -54,6 +54,7 @@ export const Task1_2 = ({
             <Input
               type="number"
               value={inputs[task]?.[i]?.['numb'] || ''}
+              placeholder={el.placeholderFrom || ''}
               classes={{ root: '!max-w-[120px]' }}
               onChange={(e) => {
                 inputs[task][i] = { ...inputs?.[task]?.[i], numb: e.target.value };
@@ -70,6 +71,7 @@ export const Task1_2 = ({
                   ? false
                   : undefined
               }
+              placeholder={el.placeholderTo || ''}
               onChange={(e) => {
                 inputs[task][i] = { ...inputs?.[task]?.[i], result: e.target.value, invalid: '' };
                 setInputs({ ...inputs, [task]: inputs[task] });

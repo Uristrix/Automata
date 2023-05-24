@@ -21,6 +21,7 @@ const Line = ({ id, name, inputs, setInputs, invalid, style }: PropsWithChildren
       <Input
         classes={{ input: '!rounded-none' }}
         invalid={invalid?.[id]?.str}
+        placeholder={'X.XXXXXX'}
         value={inputs[id]?.str || ''}
         onChange={(e) => {
           setInputs({ ...inputs, [id]: { ...inputs[id], str: e.target.value } });
@@ -29,6 +30,7 @@ const Line = ({ id, name, inputs, setInputs, invalid, style }: PropsWithChildren
       <Input
         classes={{ input: '!rounded-none' }}
         invalid={invalid?.[id]?.rev}
+        placeholder={'X.XXXXXX'}
         value={inputs[id]?.rev || ''}
         onChange={(e) => {
           setInputs({ ...inputs, [id]: { ...inputs[id], rev: e.target.value } });
@@ -37,6 +39,7 @@ const Line = ({ id, name, inputs, setInputs, invalid, style }: PropsWithChildren
       <Input
         classes={{ input: '!rounded-none' }}
         invalid={invalid?.[id]?.dop}
+        placeholder={'X.XXXXXX'}
         value={inputs[id]?.dop || ''}
         onChange={(e) => {
           setInputs({ ...inputs, [id]: { ...inputs[id], dop: e.target.value } });
