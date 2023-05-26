@@ -57,6 +57,13 @@ import {
   Topic2_4,
   Topic2_5,
 } from './pages/Lectures';
+import Training from './pages/Training/Training';
+import Training1 from './pages/Training/components/Training1';
+import Training2 from './pages/Training/components/Training2';
+import Training3 from './pages/Training/components/Training3';
+import Training4 from './pages/Training/components/Training4';
+import Training5 from './pages/Training/components/Training5';
+import Training6 from './pages/Training/components/Training6';
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 
@@ -68,6 +75,13 @@ const App = observer(() => {
         <main className="flex flex-col items-center w-full md:max-w-[710px] lg:max-w-[900px] xl:max-w-[1100px] 2xl:max-w-[1500px] pt-[70px] md:pt-[100px] mx-auto relative ">
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route path="/training" element={<Training />} />
+            <Route path="/training/1" element={<Training1 />} />
+            <Route path="/training/2" element={<Training2 />} />
+            <Route path="/training/3" element={<Training3 />} />
+            <Route path="/training/4" element={<Training4 />} />
+            <Route path="/training/5" element={<Training5 />} />
+            <Route path="/training/6" element={<Training6 />} />
             <Route path="/account" element={<Account />} />
             <Route path="/test1" element={<Test1 />} />
             <Route path="/test2" element={<Test2 />} />

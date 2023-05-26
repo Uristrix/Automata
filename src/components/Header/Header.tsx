@@ -22,9 +22,9 @@ const Header = observer(() => {
             </div>
           </Link>
           {/*TODO:Добавить потом*/}
-          {/*<Link to="/training" className="align-middle">*/}
-          {/*  Тренажёр*/}
-          {/*</Link>*/}
+          <Link to="/training" className="align-middle">
+            Тренажёр
+          </Link>
           <Link to="/schedule">Расписание</Link>
         </div>
 

@@ -25,7 +25,34 @@ const Block = () => {
   );
 };
 
-export const Task5_1 = () => {
+const AddBlock = ({ countBlock }: { countBlock?: number }) => {
+  return (
+    <div className="relative flex flex-col gap-2 w-full">
+      {[...Array(countBlock)].map((countBlock) => (
+        <div className="flex gap-2 w-full" key={countBlock}>
+          <span className="min-w-[120px]" />
+          <Input classes={{ input: '!rounded-none' }} />
+          <Input classes={{ input: '!rounded-none' }} />
+        </div>
+      ))}
+      {countBlock == 1 ? (
+        <div className="absolute top-[28px] left-[85px] font-bold">+</div>
+      ) : (
+        <div className="absolute top-[78px] left-[85px] font-bold">+</div>
+      )}
+      <div className="flex gap-2 w-full">
+        <div className="flex min-w-[120px]">
+          <Input classes={{ input: '!rounded-none w-[50px]' }} />
+        </div>
+        <Input classes={{ input: '!rounded-none' }} />
+        <Input classes={{ input: '!rounded-none' }} />
+      </div>
+      <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
+    </div>
+  );
+};
+
+export const Task5_1 = ({ props }: { props?: number }) => {
   const [inputCount, setInputCount] = useState(0);
   return (
     <div className="m-auto max-w-[300px] md:max-w-[400px] flex flex-col gap-2">
@@ -39,7 +66,7 @@ export const Task5_1 = () => {
       </div>
       <Block />
       {[...Array(inputCount)].map((inputCount) => (
-        <Block key={inputCount} />
+        <AddBlock countBlock={props} key={inputCount} />
       ))}
       <div className="flex gap-2">
         <span className="min-w-[120px]" />
