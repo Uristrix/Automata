@@ -16,7 +16,7 @@ export const Training5 = () => {
         <Button style="mx-auto mt-5" type="submit">
           Проверить
         </Button>
-        <Link className="w-[90%]" to={'/lecture/4_12'}>
+        <Link className="w-[90%]" to={'/lecture/4_10'}>
           Перейти к примеру
         </Link>
       </form>
