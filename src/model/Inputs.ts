@@ -16,6 +16,12 @@ export interface InputsDict {
   };
 }
 
+export interface InputsMulti {
+  [keys: string]: {
+    [keys: string]: string | null | { [keys: string]: string };
+  };
+}
+
 export interface InputsCode {
   [keys: string]: {
     str?: string | null;
