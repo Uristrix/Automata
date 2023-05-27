@@ -11,14 +11,16 @@ export const Training3 = () => {
         //onSubmit={SendResult}
         className="flex flex-col mx-auto mt-2 md:mt-5 w-[350px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
-        <Task5_1 props={1} />
+        <Task5_1 countBlock={1} />
 
         <Button style="mx-auto mt-5" type="submit">
           Проверить
         </Button>
-        <Link className="w-[90%]" to={'/lecture/4_12'}>
-          Перейти к примеру
-        </Link>
+        <Button style="min-w-[300px] mt-5 ml-auto">
+          <Link className="w-[90%]" to={'/lecture/4_12'}>
+            Перейти к примеру →
+          </Link>
+        </Button>
       </form>
     </div>
   );

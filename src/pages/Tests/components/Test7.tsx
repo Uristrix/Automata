@@ -11,7 +11,7 @@ export const Test7 = () => {
         //onSubmit={SendResult}
         className="flex flex-col mx-auto mt-2 md:mt-5 w-[330px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
-        <Task5_1 props={2} />
+        <Task5_1 countBlock={2} />
         <Button style="mx-auto mt-5" type="submit">
           Отправить ответ
         </Button>
