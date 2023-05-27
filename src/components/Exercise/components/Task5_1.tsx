@@ -3,15 +3,28 @@ import Input from '../../Input/Input';
 import { Dispatch, PropsWithChildren, useState } from 'react';
 
 import Button from '../../Button/Button';
-import { Inputs } from '../../../model/Inputs';
+import { InputsMulti } from '../../../model/Inputs';
 
+const task = 'multi';
 const comment = 'Комментарий';
-const Block = () => {
+
+const Block = ({ inputs, setInputs }: { inputs: InputsMulti; setInputs: Dispatch<InputsMulti> }) => {
   return (
     <div className="relative flex flex-col gap-2 w-full">
       <div className="flex gap-2 w-full">
         <span className="min-w-[115px]" />
-        <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} />
+        <Input
+          type="number"
+          classes={{ input: '!rounded-none' }}
+          placeholder={'X.XXX...'}
+          // value={(inputs[task]?.['S']?.['S0'] as string) || ''}
+          // onChange={(e) => {
+          //   setInputs({
+          //     ...inputs,
+          //     [task]: { ...inputs[task], ['S']: { ...(inputs[task]?.['S'] as object), ['S0']: e.target.value } },
+          //   });
+          // }}
+        />
         <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
       </div>
       <div className="absolute top-[28px] left-[85px] font-bold">+</div>
@@ -19,7 +32,7 @@ const Block = () => {
         <div className="flex min-w-[115px]">
           <Input classes={{ input: '!rounded-none w-[50px]' }} placeholder={'XX'} maxLength={2} />
         </div>
-        <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} />
+        <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} type="number" />
         <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
       </div>
       <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
@@ -27,13 +40,43 @@ const Block = () => {
   );
 };
 
-const AddBlock = ({ countBlock }: { countBlock?: number }) => {
+const AddBlock = ({
+  inputs,
+  setInputs,
+  countBlock,
+  invalid,
+  index,
+}: {
+  inputs: InputsMulti;
+  setInputs: Dispatch<InputsMulti>;
+  countBlock?: number;
+  invalid: object;
+  index: number;
+}) => {
   return (
     <div className="relative flex flex-col gap-2 w-full">
-      {[...Array(countBlock)].map((countBlock) => (
-        <div className="flex gap-2 w-full" key={countBlock}>
+      {[...Array(countBlock)].map((el, i) => (
+        <div className="flex gap-2 w-full" key={`S${index + 1}`}>
           <span className="min-w-[115px]" />
-          <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} />
+          <Input
+            type="number"
+            invalid={invalid?.['S']?.[`S${index + 1}`]}
+            classes={{ input: '!rounded-none' }}
+            placeholder={'X.XXX...'}
+            value={(inputs[task]?.['S']?.[i === 0 ? `S${index + 1}` : `S${index + 1}_correct`] as string) || ''}
+            onChange={(e) => {
+              setInputs({
+                ...inputs,
+                [task]: {
+                  ...inputs[task],
+                  ['S']: {
+                    ...(inputs[task]?.['S'] as object),
+                    [i === 0 ? `S${index + 1}` : `S${index + 1}_correct`]: e.target.value,
+                  },
+                },
+              });
+            }}
+          />
           <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
         </div>
       ))}
@@ -46,7 +89,12 @@ const AddBlock = ({ countBlock }: { countBlock?: number }) => {
         <div className="flex min-w-[115px]">
           <Input classes={{ input: '!rounded-none w-[50px]' }} placeholder={'XX'} maxLength={2} />
         </div>
-        <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} />
+        <Input
+          classes={{ input: '!rounded-none' }}
+          placeholder={'X.XXX...'}
+          type="number"
+          invalid={invalid?.['S']?.[`S${index + 1}`]}
+        />
         <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
       </div>
       <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
@@ -55,8 +103,8 @@ const AddBlock = ({ countBlock }: { countBlock?: number }) => {
 };
 
 interface Props {
-  inputs: Inputs;
-  setInputs: Dispatch<Inputs>;
+  inputs: InputsMulti;
+  setInputs: Dispatch<InputsMulti>;
   invalid: object;
   countBlock?: number;
 }
@@ -69,13 +117,25 @@ export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChi
         <span className="min-w-[115px]" />
         <Input variant="textarea" classes={{ input: 'min-h-[150px]' }} placeholder="Для перевода чисел" />
       </div>
-      <Block />
-      {[...Array(inputCount)].map((inputCount) => (
-        <AddBlock countBlock={countBlock} key={inputCount} />
+      <Block inputs={inputs} setInputs={setInputs} />
+      {[...Array(inputCount)].map((el, i) => (
+        <AddBlock invalid={invalid} index={i} inputs={inputs} setInputs={setInputs} countBlock={countBlock} key={i} />
       ))}
       <div className="flex gap-2">
         <span className="min-w-[115px]" />
-        <Input classes={{ input: '!rounded-none' }} placeholder={'Результат'} />
+        <Input
+          type="number"
+          invalid={invalid?.['S']?.['correct']}
+          classes={{ input: '!rounded-none' }}
+          placeholder={'Результат'}
+          value={(inputs[task]?.['S']?.['correct'] as string) || ''}
+          onChange={(e) => {
+            setInputs({
+              ...inputs,
+              [task]: { ...inputs[task], ['S']: { ...(inputs[task]?.['S'] as object), correct: e.target.value } },
+            });
+          }}
+        />
         <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
       </div>
       <div className="ml-[130px] flex gap-2">
@@ -98,7 +158,15 @@ export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChi
       </div>
       <div className="flex items-center mt-2 ">
         <span className="min-w-[50px]">[Z]п = </span>
-        <Input classes={{ input: '' }} placeholder={'X.XXXXXXXXX'} />
+        <Input
+          type="number"
+          invalid={invalid?.['result']}
+          placeholder={'X.XXXXXXXXX'}
+          value={(inputs[task]?.result as string) || ''}
+          onChange={(e) => {
+            setInputs({ ...inputs, [task]: { ...inputs[task], result: e.target.value } });
+          }}
+        />
       </div>
     </div>
   );
