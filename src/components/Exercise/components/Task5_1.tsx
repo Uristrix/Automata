@@ -1,8 +1,9 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import Input from '../../Input/Input';
-import { useState } from 'react';
+import { Dispatch, PropsWithChildren, useState } from 'react';
 
 import Button from '../../Button/Button';
+import { Inputs } from '../../../model/Inputs';
 
 const comment = 'Комментарий';
 const Block = () => {
@@ -53,7 +54,14 @@ const AddBlock = ({ countBlock }: { countBlock?: number }) => {
   );
 };
 
-export const Task5_1 = ({ countBlock }: { countBlock?: number }) => {
+interface Props {
+  inputs: Inputs;
+  setInputs: Dispatch<Inputs>;
+  invalid: object;
+  countBlock?: number;
+}
+
+export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChildren<Props>) => {
   const [inputCount, setInputCount] = useState(0);
   return (
     <div className="m-auto max-w-[300px] md:max-w-[400px] flex flex-col gap-2">
