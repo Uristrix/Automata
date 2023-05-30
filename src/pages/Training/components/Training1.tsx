@@ -1,9 +1,10 @@
 import { Task5_1 } from '../../../components/Exercise/components/Task5_1';
 import Button from '../../../components/Button/Button';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { sendTest } from '../../../utils/test';
 import User from '../../../store/user';
+import Select from '../../../components/Select/Select';
 
 const C = [8, 16, 32];
 
