@@ -21,10 +21,11 @@ const Header = observer(() => {
               Теория автоматов
             </div>
           </Link>
-          {/*TODO:Добавить потом*/}
-          <Link to="/training" className="align-middle">
-            Тренажёр
-          </Link>
+          {User.user && (
+            <Link to="/training" className="align-middle">
+              Тренажёр
+            </Link>
+          )}
           <Link to="/schedule">Расписание</Link>
         </div>
 

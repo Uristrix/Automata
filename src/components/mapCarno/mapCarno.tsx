@@ -50,10 +50,12 @@ export const MapCarno = ({
   inputs,
   setInputs,
   name,
+  invalid,
 }: {
   inputs: Inputs;
   setInputs: Dispatch<Inputs>;
   name: string;
+  invalid: object;
 }) => {
   return (
     <div className="relative m-10 w-[200px] h-[200px] box-content">
@@ -70,6 +72,7 @@ export const MapCarno = ({
             onChange={(e) => {
               setInputs({ ...inputs, [name]: { ...inputs[name], [`carno_${i}`]: e.target.value } });
             }}
+            invalid={invalid?.['Carno']?.[`carno_${i}`]}
           />
         ))}
         {termClasses.map((el, i) => (

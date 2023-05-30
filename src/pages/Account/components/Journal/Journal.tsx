@@ -171,7 +171,7 @@ const Journal = () => {
         <Table
           header={header}
           items={generateItems()}
-          classes={{ td: 'max-w-[60px] first:max-w-[120px] last:w-[40px]' }}
+          classes={{ td: 'max-w-[60px] first:max-w-[120px] last:w-[40px]', root: 'max-h-[450px] md:max-h-full' }}
         />
       </div>
 

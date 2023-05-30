@@ -38,7 +38,7 @@ const options = [
   { value: 'date-', label: 'По дате (убыв.)' },
 ];
 
-const header = ['Дата', 'Продолжительность', 'КР', 'Описание', ''];
+const header = ['Дата', 'Время', 'КР', 'Описание', ''];
 
 const Item = (exEvent, setEdit, setOpenEvent, DeleteEvent) => {
   return [
@@ -125,7 +125,7 @@ const Events = () => {
             classes={{ root: 'min-w-[300px] w-full' }}
           />
           <Button
-            style="min-w-full xl:min-w-[200px]"
+            style="min-w-full 2xl:min-w-[200px]"
             onClick={() => {
               setEdit(null);
               setOpenEvent(true);
@@ -134,7 +134,11 @@ const Events = () => {
             Добавить Событие
           </Button>
         </div>
-        <Table header={header} items={generateItems()} classes={{ td: 'first:max-w-[100px] last:w-[40px]' }} />
+        <Table
+          header={header}
+          items={generateItems()}
+          classes={{ td: 'first:min-w-[100px] last:w-[40px]', root: 'max-h-[450px] md:max-h-full' }}
+        />
       </div>
       <Modal open={openEvent} setOpen={setOpenEvent}>
         <AddEvent data={edit} trigger={() => setTrigger(!trigger)} rerender={Math.random()} />

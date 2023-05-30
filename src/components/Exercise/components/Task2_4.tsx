@@ -9,10 +9,12 @@ export const Task2_4 = ({
   inputs,
   setInputs,
   header,
+  invalid,
 }: {
   inputs: Inputs;
   setInputs: Dispatch<Inputs>;
   header?: string;
+  invalid: object;
 }) => {
   useEffect(() => {
     inputs[task] = { tdnf: '', tknf: '' };
@@ -28,7 +30,7 @@ export const Task2_4 = ({
         Минимизируйте функцию из п. 3 методом Карно. Найдите тупиковую ДНФ, тупиковую КНФ. Рекомендуется использовать
         следующую разметку карты Карно.
       </p>
-      <MapCarno inputs={inputs} setInputs={setInputs} name={task} />
+      <MapCarno inputs={inputs} setInputs={setInputs} name={task} invalid={invalid} />
       <p className="mb-2">Пример: (x1 & x2 & nx3) v (x3 & nx4 & nx2) </p>
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> ТДНФ = </span>
@@ -38,6 +40,7 @@ export const Task2_4 = ({
           onChange={(e) => {
             setInputs({ ...inputs, [task]: { ...inputs[task], tdnf: e.target.value } });
           }}
+          invalid={invalid['carno_tdnf']}
         />
       </div>
       <p className="mb-2">Пример: (x1 v x2 v nx3) & (x3 v nx4 v nx2) </p>
@@ -49,6 +52,7 @@ export const Task2_4 = ({
           onChange={(e) => {
             setInputs({ ...inputs, [task]: { ...inputs[task], tknf: e.target.value } });
           }}
+          invalid={invalid['carno_tknf']}
         />
       </div>
     </div>

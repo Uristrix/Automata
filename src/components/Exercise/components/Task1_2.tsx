@@ -35,12 +35,10 @@ export const Task1_2 = ({
       for (const i in inputs[task]) {
         if (el?.system_from === inputs[task][i].system_from && el?.system_to === inputs[task][i].system_to) {
           inputs[task][i] = { ...inputs?.[task]?.[i], invalid: el?.result.toString() };
-          console.log(el?.result);
         }
       }
     });
     setInputs({ ...inputs, [task]: inputs[task] });
-    console.log(inputs);
   }, [invalid]);
 
   return (

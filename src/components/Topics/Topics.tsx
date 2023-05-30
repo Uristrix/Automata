@@ -98,7 +98,6 @@ const Links = [
       { name: 'Обоснование блокировок.', link: 'lecture/4_17' },
       { name: 'Машинный нуль и бесконечность.', link: 'lecture/4_18' },
       { name: 'Десятичные двоично-кодированные системы.', link: 'lecture/4_19' },
-      { name: 'Десятичные двоично-кодированные системы.', link: 'topics_1_7' },
     ],
   },
 ];
@@ -107,7 +106,7 @@ import { Link } from 'react-router-dom';
 
 const TopicLink = ({ name, link }: { name: string; link: string }) => {
   return (
-    <li className="flex justify-start items-center min-h-6 w-full gap-2 px-2">
+    <li className="flex justify-start items-center min-h-6 w-full gap-2 px-2 last:mb-6">
       <div className="w-4 h-4 rounded-[50%] bg-ocean"> </div>
       <Link className="w-[90%]" to={link}>
         {name}

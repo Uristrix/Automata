@@ -9,10 +9,12 @@ export const Task2_5 = ({
   inputs,
   setInputs,
   header,
+  invalid,
 }: {
   inputs: Inputs;
   setInputs: Dispatch<Inputs>;
   header?: string;
+  invalid: object;
 }) => {
   useEffect(() => {
     inputs[task] = { base: '', sheffer: '', pirs: '' };
@@ -30,6 +32,7 @@ export const Task2_5 = ({
             variant="textarea"
             value={inputs[task]?.base || ''}
             onChange={(e) => setInputs({ ...inputs, [task]: { ...inputs[task], base: e.target.value } })}
+            invalid={invalid['Base']}
           />
         </div>
         <div className="flex items-center gap-1">
@@ -39,6 +42,7 @@ export const Task2_5 = ({
             variant="textarea"
             value={inputs[task]?.sheffer || ''}
             onChange={(e) => setInputs({ ...inputs, [task]: { ...inputs[task], sheffer: e.target.value } })}
+            invalid={invalid['Sheffer']}
           />
         </div>
         <div className="flex items-center gap-1">
@@ -56,6 +60,7 @@ export const Task2_5 = ({
             variant="textarea"
             value={inputs[task]?.pirs || ''}
             onChange={(e) => setInputs({ ...inputs, [task]: { ...inputs[task], pirs: e.target.value } })}
+            invalid={invalid['Pirs']}
           />
         </div>
       </div>

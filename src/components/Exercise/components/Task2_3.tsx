@@ -8,10 +8,12 @@ export const Task2_3 = ({
   inputs,
   setInputs,
   header,
+  invalid,
 }: {
   inputs: Inputs;
   setInputs: Dispatch<Inputs>;
   header?: string;
+  invalid: object;
 }) => {
   useEffect(() => {
     inputs[task] = { sdnf: '', sdnf_answer: '', sknf: '', sknf_answer: '' };
@@ -29,6 +31,7 @@ export const Task2_3 = ({
           onChange={(e) => {
             setInputs({ ...inputs, [task]: { ...inputs[task], sdnf: e.target.value } });
           }}
+          invalid={invalid['Quine_DNF']}
         />
       </div>
       <p className="mb-2">Пример: (x1 & x2 & nx3) v (x3 & nx4 & nx2) </p>
@@ -39,6 +42,7 @@ export const Task2_3 = ({
           onChange={(e) => {
             setInputs({ ...inputs, [task]: { ...inputs[task], sdnf_answer: e.target.value } });
           }}
+          invalid={invalid['Quine_MC_DNF']}
         />
       </div>
       <div className="flex items-center mb-2">
@@ -49,6 +53,7 @@ export const Task2_3 = ({
           onChange={(e) => {
             setInputs({ ...inputs, [task]: { ...inputs[task], sknf: e.target.value } });
           }}
+          invalid={invalid['Quine_KNF']}
         />
       </div>
       <p className="mb-2">Пример: (x1 v x2 v nx3) & (x3 v nx4 v nx2) </p>
@@ -59,6 +64,7 @@ export const Task2_3 = ({
           onChange={(e) => {
             setInputs({ ...inputs, [task]: { ...inputs[task], sknf_answer: e.target.value } });
           }}
+          invalid={invalid['Quine_MC_KNF']}
         />
       </div>
     </div>

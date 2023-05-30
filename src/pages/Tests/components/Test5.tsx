@@ -4,22 +4,40 @@ import React, { useEffect, useState } from 'react';
 import Select from '../../../components/Select/Select';
 import { sendTest } from '../../../utils/test';
 import User from '../../../store/user';
+import notification from '../../../store/notification';
+import { observer } from 'mobx-react-lite';
+import { useTimer } from '../../../hooks';
+import Event from '../../../store/event';
+import { useNavigate } from 'react-router-dom';
+import Timer from '../../../components/Timer/Timer';
 const C = [8, 16, 32];
 
 const options = [
   { value: '1', label: 'Алгоритм бута' },
   { value: '2', label: 'Умножение на 2 разряда множителя' },
 ];
-export const Test5 = () => {
+export const Test5 = observer(() => {
   const [inputs, setInputs] = useState({});
   const [invalid, setInvalid] = useState({});
   const [selectedSort, setSelectedSort] = useState<{ value: string; label: string } | null>(options[0]);
   const [result, setResult] = useState({});
+  const { seconds } = useTimer(
+    new Date(new Date(Event.event?.date || Date.now()).getTime() + (Event?.event?.length || 0) * 60000),
+  );
   const [variant, setVariant] = useState({
     C: C[Math.floor(Math.random() * 3)],
     A: 1,
     B: 1,
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    //console.log(seconds);
+    if (seconds < 1) {
+      SendResult();
+      navigate('/');
+    }
+  }, [seconds]);
 
   useEffect(() => {
     setVariant((prev) => ({
@@ -46,14 +64,18 @@ export const Test5 = () => {
         ['S']: { ...data['S'], [el]: inputs?.['multi']?.['S']?.[el]?.split('') },
       };
     }
-    const res = await sendTest(data, 5);
-    console.log(data, 5);
-    console.log(selectedSort);
-    if (res.payload.checked) {
-      setInvalid(res.payload.checked);
-      setResult(res.payload.checked.score);
+    try {
+      const res = await sendTest(data, 5);
+      console.log(data, 5);
+      if (res.payload.checked) {
+        setInvalid(res.payload.checked);
+        setResult(res.payload.checked.score);
+      }
+      console.log(res.payload);
+      if (res.error !== undefined) notification.setMessage('Ошибка отправки/алгоритма', 'error');
+    } catch {
+      notification.setMessage('Ошибка отправки/алгоритма', 'error');
     }
-    console.log(res.payload);
   };
   return (
     <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
@@ -77,6 +99,7 @@ export const Test5 = () => {
           Отправить ответ
         </Button>
       </form>
+      <Timer seconds={seconds} />
     </div>
   );
-};
+});

@@ -102,7 +102,7 @@ const EditUser = ({ exUser, groups, trigger }: { exUser: exUser; groups: Array<G
           {Array.from(Array(8).keys()).map((el, i) => (
             <Input
               label={`КР №${i + 1}`}
-              classes={{ root: 'min-w-[40px] !w-[30px] md:!w-[85px]' }}
+              classes={{ root: '!min-w-[40px] !w-[40px] md:!w-[85px]' }}
               type="number"
               value={inputs?.['test']?.[`test${i + 1}`]}
               onChange={(e) =>

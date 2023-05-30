@@ -6,15 +6,19 @@ import { useTimer } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { sendTest } from '../../../utils/test';
 import User from '../../../store/user';
+import notification from '../../../store/notification';
+import { observer } from 'mobx-react-lite';
+import Event from '../../../store/event';
 
-export const Test3 = () => {
+export const Test3 = observer(() => {
   const [inputs, setInputs] = useState({});
   const [invalid, setInvalid] = useState({});
   const [result, setResult] = useState({});
   const [disable, setDisable] = useState(false);
   const [randomVal, setRandomVal] = useState<{ A: number; B: number }>({ A: 0, B: 0 });
-  //TODO: Заглушка пока нет серверного времени.
-  const { seconds } = useTimer(new Date(Date.now() + 60 * 60 * 1000));
+  const { seconds } = useTimer(
+    new Date(new Date(Event.event?.date || Date.now()).getTime() + (Event?.event?.length || 0) * 60000),
+  );
   const navigate = useNavigate();
 
   const SendResult = async (e?: { preventDefault: () => void }) => {
@@ -30,13 +34,18 @@ export const Test3 = () => {
         [el]: { str: inputs[el]['str'].split(''), rev: inputs[el]['rev'].split(''), dop: inputs[el]['dop'].split('') },
       };
     }
-    const res = await sendTest(data, 3);
-    if (res.payload.checked) {
-      setInvalid(res.payload.checked);
-      setResult(res.payload.checked.score);
+    try {
+      const res = await sendTest(data, 3);
+      if (res.payload.checked) {
+        setInvalid(res.payload.checked);
+        setResult(res.payload.checked.score);
+        setDisable(true);
+        console.log(res.payload);
+      }
+      if (res.error !== undefined) notification.setMessage('Ошибка отправки/алгоритма', 'error');
+    } catch {
+      notification.setMessage('Ошибка отправки/алгоритма', 'error');
     }
-    console.log(res.payload);
-    setDisable(true);
   };
 
   useEffect(() => {
@@ -55,7 +64,7 @@ export const Test3 = () => {
     }
   }, [seconds]);
   return (
-    <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
+    <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white p-2 md:p-4 md:rounded-2xl md:shadow-2xl">
       <Timer seconds={seconds} />
       <h2 className="text-2xl text-center font-bold">Контрольная работа № 3</h2>
       <h3 className="text-xl text-center font-bold">
@@ -76,4 +85,4 @@ export const Test3 = () => {
       </form>
     </div>
   );
-};
+});
