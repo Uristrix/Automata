@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 
 const TeacherCard = () => {
   return (
-    <section className=" relative max-w-[350px] md:max-w-full rounded-2xl bg-white flex flex-col md:flex-row shadow-md overflow-hidden mx-auto md:mx-0">
+    <section className=" relative md:max-w-full rounded-2xl bg-white flex flex-col md:flex-row shadow-md overflow-hidden mx-auto md:mx-0">
       <img
         className="absolute object-cover backdrop-blur-3xl h-[350px] md:h-[260px] w-full md:w-auto"
         src={Efremov}

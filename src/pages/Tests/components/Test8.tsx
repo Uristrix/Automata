@@ -19,6 +19,7 @@ export const Test8 = observer(() => {
   const [invalid, setInvalid] = useState({});
   const [selectedSort, setSelectedSort] = useState<{ value: string; label: string } | null>(options[0]);
   const [result, setResult] = useState({});
+  const [disable, setDisable] = useState(false);
   const { seconds } = useTimer(
     new Date(new Date(Event.event?.date || Date.now()).getTime() + (Event?.event?.length || 0) * 60000),
   );
@@ -64,10 +65,10 @@ export const Test8 = observer(() => {
     }
     try {
       const res = await sendTest(data, 8);
-      console.log(data, 8);
       if (res.payload.checked) {
         setInvalid(res.payload.checked);
         setResult(res.payload.checked.score);
+        setDisable(true);
         console.log(res.payload);
       }
       if (res.error !== undefined) notification.setMessage('Ошибка отправки/алгоритма', 'error');
@@ -85,9 +86,13 @@ export const Test8 = observer(() => {
         className="flex flex-col mx-auto mt-2 md:mt-5 w-[350px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
         <Task5_1 inputs={inputs} setInputs={setInputs} invalid={invalid} countBlock={2} />
-        <Button style="mx-auto mt-5" type="submit">
-          Отправить ответ
-        </Button>
+        {!disable ? (
+          <Button style="mx-auto mt-5" type="submit">
+            Отправить ответ
+          </Button>
+        ) : (
+          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result} / 100`}</div>
+        )}
       </form>
       <Timer seconds={seconds} />
     </div>

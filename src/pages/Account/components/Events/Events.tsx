@@ -125,7 +125,7 @@ const Events = () => {
             classes={{ root: 'min-w-[300px] w-full' }}
           />
           <Button
-            style="min-w-full 2xl:min-w-[200px]"
+            style="min-w-full xl:min-w-[200px]"
             onClick={() => {
               setEdit(null);
               setOpenEvent(true);

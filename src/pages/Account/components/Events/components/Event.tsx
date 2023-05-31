@@ -133,7 +133,10 @@ const AddEvent = ({ data, trigger, rerender }: { data: exEvent | null; trigger: 
   };
 
   return (
-    <form className="w-[300px] md:w-[800px] md:w-full p-3 flex flex-col items-center" onSubmit={handlerSubmit}>
+    <form
+      className="w-[350px] md:w-[700px] lg:w-[1000px] xl:w-[1100px] p-3 flex flex-col items-center"
+      onSubmit={handlerSubmit}
+    >
       <h2 className="w-full text-center text-xl font-semibold mb-5">
         {data === null ? 'Добавить событие' : 'Изменить событие'}
       </h2>

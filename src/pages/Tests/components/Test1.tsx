@@ -16,7 +16,6 @@ export const Test1 = observer(() => {
   const [invalid, setInvalid] = useState({});
   const [result, setResult] = useState({});
   const [disable, setDisable] = useState(false);
-  //TODO: Заглушка пока нет серверного времени.
   const { seconds } = useTimer(
     new Date(new Date(Event.event?.date || Date.now()).getTime() + (Event?.event?.length || 0) * 60000),
   );
@@ -41,10 +40,10 @@ export const Test1 = observer(() => {
       if (res.payload.checked) {
         setInvalid(res.payload.checked);
         setResult(res.payload.checked.score);
+        setDisable(true);
         console.log(res.payload);
       }
       if (res.error !== undefined) notification.setMessage('Ошибка отправки/алгоритма', 'error');
-      setDisable(true);
     } catch {
       notification.setMessage('Ошибка отправки/алгоритма', 'error');
     }

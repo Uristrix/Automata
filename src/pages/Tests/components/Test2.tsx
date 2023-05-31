@@ -12,6 +12,7 @@ import Event from '../../../store/event';
 
 const varSegments: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'm', 'g', 'l'];
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const Test2 = observer(() => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
@@ -20,6 +21,7 @@ export const Test2 = observer(() => {
   );
   const [invalid, setInvalid] = useState({});
   const [result, setResult] = useState({});
+  const [disable, setDisable] = useState(false);
   const [variant, setVariant] = useState({
     segment: varSegments[Math.floor(Math.random() * 8)], // от  0 до 8
     D: Math.floor(Math.random() * 2), // 0 до 1
@@ -54,6 +56,7 @@ export const Test2 = observer(() => {
       if (res.payload.checked) {
         setInvalid(res.payload.checked);
         setResult(res.payload.checked.score);
+        setDisable(true);
         console.log(res.payload);
       }
       if (res.error !== undefined) notification.setMessage('Ошибка отправки/алгоритма', 'error');
@@ -93,9 +96,13 @@ export const Test2 = observer(() => {
         <Task2_3 inputs={inputs} setInputs={setInputs} invalid={invalid} header="Задание 3." />
         <Task2_4 inputs={inputs} setInputs={setInputs} invalid={invalid} header="Задание 4." />
         <Task2_5 inputs={inputs} setInputs={setInputs} invalid={invalid} header="Задание 5." />
-        <Button style="mx-auto mt-5" type="submit">
-          Отправить ответ
-        </Button>
+        {!disable ? (
+          <Button style="mx-auto mt-5" type="submit">
+            Отправить ответ
+          </Button>
+        ) : (
+          <div className="text-lg text-center font-semibold text-green">{`Результат: ${result} / 100`}</div>
+        )}
       </form>
     </div>
   );

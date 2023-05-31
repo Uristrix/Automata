@@ -31,7 +31,7 @@ const Events = observer(() => {
     })();
   }, [User.user]);
   return (
-    <section className="bg-white overflow-hidden rounded-2xl shadow-lg h-[300px] lg:h-[480px] mx-auto md:mx-0 max-w-[350px] md:max-w-full">
+    <section className="bg-white overflow-hidden rounded-2xl shadow-lg h-[300px] lg:h-[480px] mx-auto md:mx-0 w-full md:max-w-full">
       <h3 className="font-bold text-center bg-ocean text-white">Ближайшие События</h3>
       <div className="w-full h-full overflow-scroll md:overflow-hidden">
         {data?.length !== 0 ? (
