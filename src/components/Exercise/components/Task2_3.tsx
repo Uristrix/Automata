@@ -20,11 +20,12 @@ export const Task2_3 = ({
     setInputs({ ...inputs });
   }, []);
   return (
-    <div className="lg:max-w-[400px]">
+    <div className="lg:max-w-[700px]">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">Выполните минимизацию функции из п. 4 методом Квайна, Квайна-мак-Класки.</p>
+      <p className=" mb-2 text-sm text-gray-500">*Пример: (x1 & x2 & nx3) v (x3 & nx4 & nx2) </p>
       <div className="flex flex-nowrap items-center mb-2">
-        <span className="min-w-[60px]"> СДНФ = </span>
+        <span className="min-w-[150px]"> ДНФ Квайна = </span>
         <Input
           variant="textarea"
           value={inputs[task]?.sdnf || ''}
@@ -34,9 +35,8 @@ export const Task2_3 = ({
           invalid={invalid['Quine_DNF']}
         />
       </div>
-      <p className="mb-2">Пример: (x1 & x2 & nx3) v (x3 & nx4 & nx2) </p>
       <div className="flex items-center mb-2">
-        <span className="min-w-[60px]"> Ответ = </span>
+        <span className="min-w-[150px]"> ДНФ Квайна-МК = </span>
         <Input
           value={inputs[task]?.sdnf_answer || ''}
           onChange={(e) => {
@@ -45,8 +45,9 @@ export const Task2_3 = ({
           invalid={invalid['Quine_MC_DNF']}
         />
       </div>
+      <p className="mb-2 text-sm text-gray-500">*Пример: (x1 v x2 v nx3) & (x3 v nx4 v nx2) </p>
       <div className="flex items-center mb-2">
-        <span className="min-w-[60px]"> СКНФ = </span>
+        <span className="min-w-[150px]"> КНФ Квайна = </span>
         <Input
           variant="textarea"
           value={inputs[task]?.sknf || ''}
@@ -56,9 +57,8 @@ export const Task2_3 = ({
           invalid={invalid['Quine_KNF']}
         />
       </div>
-      <p className="mb-2">Пример: (x1 v x2 v nx3) & (x3 v nx4 v nx2) </p>
       <div className="flex items-center">
-        <span className="min-w-[60px]"> Ответ = </span>
+        <span className="min-w-[150px]"> КНФ Квайна-МК = </span>
         <Input
           value={inputs[task]?.sknf_answer || ''}
           onChange={(e) => {

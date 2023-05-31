@@ -63,6 +63,16 @@ export const Task2_2 = ({
           ))}
         </div>
       </div>
+      <div className="lg:max-w-[400px] flex flex-col mt-5">
+        <div className="flex flex-nowrap items-center mb-2">
+          <span className="min-w-[60px]"> СДНФ = </span>
+          <Input variant="textarea" invalid={invalid['Fsdnf']} />
+        </div>
+        <div className="flex flex-nowrap items-center mb-2">
+          <span className="min-w-[60px]"> СКНФ = </span>
+          <Input variant="textarea" invalid={invalid['Fsknf']} />
+        </div>
+      </div>
     </div>
   );
 };

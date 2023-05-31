@@ -24,7 +24,7 @@ export const Task2_4 = ({
     setInputs({ ...inputs });
   }, []);
   return (
-    <div className="lg:max-w-[400px]">
+    <div className="lg:max-w-[700px]">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">
         Минимизируйте функцию из п. 3 методом Карно. Найдите тупиковую ДНФ, тупиковую КНФ. Рекомендуется использовать
