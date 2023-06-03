@@ -4,7 +4,7 @@ import youtube from '../../assets/social/youtube.svg';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-blue min-h-[100px] w-full flex flex-col md:flex-row items-center justify-between text-pseudo-white px-2 md:px-6 mt-10">
+    <footer className="bg-dark-blue min-h-[100px] w-full flex flex-col md:flex-row items-center justify-between text-pseudo-white px-2 md:px-6 mt-10 py-20 lg:py-0">
       <div className="flex flex-col gap-2 text-center md:text-start w-[300px] md:w-auto">
         <a href="https://mf.bmstu.ru/">Мытищинский филиал МГТУ им. Н.Э.Баумана.</a>
         <a href="https://yandex.ru/maps/-/CCU8n0uWLB">

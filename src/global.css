@@ -22,7 +22,7 @@ body {
 }
 /* Track */
 ::-webkit-scrollbar-track {
- background: none;
+ background: #e3e3e3;
 }
 ::-webkit-scrollbar-thumb {
  background: #858585;

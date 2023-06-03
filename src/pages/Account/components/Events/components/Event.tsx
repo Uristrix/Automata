@@ -80,7 +80,7 @@ const AddEvent = ({ data, trigger, rerender }: { data: exEvent | null; trigger: 
         ...prev,
         [event]: {
           length: data?.length,
-          date: new Date(data?.date).toISOString().split(':').slice(0, 2).join(':'),
+          date: new Date(data?.date).toLocaleString('af-ZA').replace(' ', 'T').slice(0, -3),
           description: data?.description,
         },
       }));
@@ -124,8 +124,8 @@ const AddEvent = ({ data, trigger, rerender }: { data: exEvent | null; trigger: 
       };
       console.log(put);
       const res = await updateEvent(put)
-        .then(() => notification.setMessage('Событие добавлено', 'success'))
-        .catch(() => notification.setMessage('Событие не добавлено', 'error'));
+        .then(() => notification.setMessage('Событие обновлено', 'success'))
+        .catch(() => notification.setMessage('Событие не обновлено', 'error'));
 
       console.log(res);
     }
@@ -145,9 +145,8 @@ const AddEvent = ({ data, trigger, rerender }: { data: exEvent | null; trigger: 
           <Input
             type="datetime-local"
             placeholder={'Дата'}
-            value={input[event]?.date || new Date().toISOString()}
+            value={input[event]?.date || new Date().toUTCString()}
             onChange={(e) => {
-              console.log(new Date(input[event]?.date));
               setInput({ ...input, [event]: { ...input[event], date: e.target.value } });
             }}
           />

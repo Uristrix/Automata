@@ -27,7 +27,7 @@ import { ReactComponent as Close } from '../../../../assets/close.svg';
 // };
 const formateDate: object = {
   year: 'numeric',
-  month: 'long',
+  month: 'numeric',
   day: 'numeric',
   hour: 'numeric',
   minute: 'numeric',
@@ -92,10 +92,10 @@ const Events = () => {
     let data: Array<exEvent> = [];
     switch (selectedSort?.value) {
       case 'date+':
-        data = [...event].sort((a, b) => a.date.localeCompare(b.date));
+        data = [...event].sort((a, b) => +new Date(a?.date) - +new Date(b?.date));
         break;
       case 'date-':
-        data = [...event].sort((a, b) => a.date.localeCompare(b.date)).reverse();
+        data = [...event].sort((a, b) => +new Date(b?.date) - +new Date(a?.date));
         break;
       default:
         break;
@@ -114,8 +114,8 @@ const Events = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 w-full m-3 md:m-0 items-start w-full lg:max-w-[580px] xl:max-w-[780px] 2xl:max-w-[1300px]">
-        <div className="flex flex-col xl:flex-row w-full gap-4 items-center">
+      <div className="flex flex-col gap-4 w-full items-start lg:max-w-[580px] xl:max-w-[780px] 2xl:max-w-[1300px]">
+        <div className="flex flex-col 2xl:flex-row w-full gap-4 items-center">
           <Search value={searchInput} onChange={setSearchInput} placeholder="Поиск" classes={{ root: 'w-full' }} />
           <Select
             value={selectedSort}
@@ -125,7 +125,7 @@ const Events = () => {
             classes={{ root: 'min-w-[300px] w-full' }}
           />
           <Button
-            style="min-w-full xl:min-w-[200px]"
+            style="min-w-full 2xl:min-w-[200px]"
             onClick={() => {
               setEdit(null);
               setOpenEvent(true);

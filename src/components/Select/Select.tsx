@@ -73,7 +73,7 @@ function Select<
               backgroundColor: 'transparent',
             },
             fontWeight: state.isSelected ? 'bold' : base.fontWeight,
-            overflowY: 'scroll',
+            overflowY: 'auto',
             Height: '5rem',
           }),
         }}

@@ -117,7 +117,7 @@ const TopicLink = ({ name, link }: { name: string; link: string }) => {
 
 const Topics = () => {
   return (
-    <section className="rounded-2xl bg-white shadow-md overflow-hidden mx-auto w-full xl:max-w-[870px] h-[300px] md:h-[500px] xl:h-[750px]">
+    <section className="rounded-2xl bg-white shadow-md overflow-hidden mx-auto w-full lg:max-w-[870px] h-[300px] md:h-[500px] xl:h-[750px]">
       <h2 className="text-center text-white font-bold bg-ocean">Учебный материал</h2>
       <ul className="flex flex-col gap-2 !list-disc w-full h-full overflow-y-scroll ">
         {Links &&

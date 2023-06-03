@@ -16,8 +16,8 @@ const AddUser = ({ groups, trigger }: { groups: Array<Group>; trigger: () => voi
   const [inputUser, setInputUser] = useState<Inputs>({});
   const generateOption = groups.map((el) => ({ value: `${el.id}` || '', label: el.name || '' }));
 
-  const handleImport = ($event) => {
-    const files = $event.target.files;
+  const handleImport = (event) => {
+    const files = event.target.files;
     if (files.length) {
       const file = files[0];
       const reader = new FileReader();
@@ -41,8 +41,7 @@ const AddUser = ({ groups, trigger }: { groups: Array<Group>; trigger: () => voi
     }
   };
 
-  const handlerSubmit = async (e) => {
-    e.preventDefault();
+  const handlerSubmit = async () => {
     if (InputGroup !== null) {
       await postUser({
         name: inputUser[users]?.name || '',
@@ -58,9 +57,9 @@ const AddUser = ({ groups, trigger }: { groups: Array<Group>; trigger: () => voi
   };
 
   return (
-    <form className="h-[400px] w-[300px] md:w-[650px] md:w-full p-3" onSubmit={handlerSubmit}>
+    <form className="h-[400px] w-[300px] md:w-[650px] md:w-full p-3">
       <h2 className="w-full text-center text-xl font-semibold mb-5">Управление пользователями</h2>
-      <div className="w-full flex flex-col items-center justify-between gap-4 mb-5">
+      <div className="w-full flex flex-col items-center justify-between gap-4">
         <Input
           placeholder={'ФИО'}
           value={inputUser[users]?.name || ''}
@@ -77,13 +76,13 @@ const AddUser = ({ groups, trigger }: { groups: Array<Group>; trigger: () => voi
           value={inputUser[users]?.password || ''}
           onChange={(e) => setInputUser({ ...inputUser, [users]: { ...inputUser[users], password: e.target.value } })}
         />
-        <div className="flex flex-col md:flex-row gap-2 justify-between mt-5 w-full">
+        <div className="flex flex-col md:flex-row gap-2 justify-between mt-5 md:mt-16 w-full">
           <Button style="w-full md:w-[200px]">
             <label className="w-full h-full absolute left-0 top-0 items-center pt-2" htmlFor="inputGroupFile">
               Выбрать файл
             </label>
           </Button>
-          <Button style="w-full md:w-[200px]" type="submit">
+          <Button style="w-full md:w-[200px]" type="button" onClick={handlerSubmit}>
             Добавить
           </Button>
         </div>
