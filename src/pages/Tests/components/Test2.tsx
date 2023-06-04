@@ -49,6 +49,7 @@ export const Test2 = observer(() => {
       carno_tknf: inputs?.['Carno']?.['tknf'],
       Pirs: inputs?.['sintez']?.['pirs'].replace('↓', '>') || '',
       Sheffer: inputs?.['sintez']?.['sheffer'] || '',
+      Base: inputs?.['sintez']?.['base'] || '',
     };
     console.log(data);
     try {

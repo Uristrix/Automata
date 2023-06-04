@@ -112,7 +112,7 @@ interface Props {
 export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChildren<Props>) => {
   const [inputCount, setInputCount] = useState(0);
   return (
-    <div className="m-auto max-w-[300px] md:max-w-[400px] flex flex-col gap-2">
+    <div className="m-auto max-w-[300px] md:max-w-[500px] flex flex-col gap-2">
       <div className="flex gap-2 items-center">
         <span className="min-w-[115px]" />
         <Input variant="textarea" classes={{ input: 'min-h-[150px]' }} placeholder="Для перевода чисел" />
@@ -142,6 +142,17 @@ export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChi
         <Button
           style="text-sm md:text-base"
           onClick={() => {
+            setInputs({
+              ...inputs,
+              [task]: {
+                ...inputs[task],
+                ['S']: {
+                  ...(inputs[task]?.['S'] as object),
+                  [`S${inputCount + 1}`]: inputs[task]?.['S']?.['correct'],
+                  ['correct']: '',
+                },
+              },
+            });
             setInputCount(inputCount + 1);
           }}
         >

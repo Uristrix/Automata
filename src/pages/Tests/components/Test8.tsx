@@ -54,6 +54,7 @@ export const Test8 = observer(() => {
       Y: variant.B,
       S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '' },
       result: inputs['multi']?.result?.split(''),
+      Z: [],
       score: 0,
     };
 

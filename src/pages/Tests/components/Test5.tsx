@@ -65,6 +65,7 @@ export const Test5 = observer(() => {
         ['S']: { ...data['S'], [el]: inputs?.['multi']?.['S']?.[el]?.split('') },
       };
     }
+    console.log(inputs);
     try {
       const res = await sendTest(data, 5);
       if (res.payload.checked) {
@@ -92,7 +93,7 @@ export const Test5 = observer(() => {
           onChange={setSelectedSort}
           options={options}
           placeholder="Выберите алгоритм"
-          classes={{ root: 'min-w-[300px] w-[300px] m-auto mb-2' }}
+          classes={{ root: 'min-w-[300px] md:min-w-[500px] m-auto mb-2' }}
         />
         <Task5_1 inputs={inputs} setInputs={setInputs} invalid={invalid} countBlock={2} />
 

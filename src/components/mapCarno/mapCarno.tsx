@@ -21,7 +21,7 @@ const termClasses = [
     span: 'mx-auto border-t border-ocean leading-3 mb-0.5',
     text: 'X4',
   },
-  { div: 'border-2 items-end w-[100px] h-[50px] left-[25%] -bottom-5', span: 'mx-auto leading-3', text: 'X3' },
+  { div: 'border-2 items-end w-[100px] h-[50px] left-[25%] -bottom-5', span: 'mx-auto leading-3', text: 'X4' },
   {
     div: 'items-end w-[50px] h-[50px] right-0 -bottom-5',
     span: 'mx-auto border-t border-ocean leading-3 mb-0.5',
@@ -35,7 +35,7 @@ const termClasses = [
   {
     div: 'border-2 justify-end items-center w-[50px] h-[100px] top-[25%] -right-5',
     span: 'leading-3',
-    text: 'X4',
+    text: 'X3',
   },
   {
     div: 'justify-end items-center w-[50px] h-[50px] bottom-0 -right-5',

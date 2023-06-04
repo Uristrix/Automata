@@ -91,7 +91,7 @@ export const Test6 = observer(() => {
           onChange={setSelectedSort}
           options={options}
           placeholder="Выберите алгоритм"
-          classes={{ root: 'min-w-[300px] w-[300px] m-auto mb-2' }}
+          classes={{ root: 'min-w-[300px] md:min-w-[500px] m-auto mb-2' }}
         />
         <Task5_1 inputs={inputs} setInputs={setInputs} invalid={invalid} countBlock={2} />
 

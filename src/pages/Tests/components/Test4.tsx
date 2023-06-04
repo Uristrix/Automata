@@ -32,7 +32,11 @@ export const Test4 = observer(() => {
     for (const el in inputs) {
       data = {
         ...data,
-        [el]: { str: inputs[el]['str'].split(''), rev: inputs[el]['rev'].split(''), dop: inputs[el]['dop'].split('') },
+        [el]: {
+          str: inputs[el]['str'].replace('.', '').split(''),
+          rev: inputs[el]['rev'].replace('.', '').split(''),
+          dop: inputs[el]['dop'].replace('.', '').split(''),
+        },
       };
     }
     try {

@@ -30,7 +30,32 @@ export const Task2_4 = ({
         Минимизируйте функцию из п. 3 методом Карно. Найдите тупиковую ДНФ, тупиковую КНФ. Рекомендуется использовать
         следующую разметку карты Карно.
       </p>
-      <MapCarno inputs={inputs} setInputs={setInputs} name={task} invalid={invalid} />
+      <div className="flex gap-5 flex-col md:flex-row w-full">
+        <MapCarno inputs={inputs} setInputs={setInputs} name={task} invalid={invalid} />
+        <div className="w-full lg:w-[55%] flex flex-col gap-4 lg:mt-10">
+          <div className="flex flex-nowrap items-center">
+            <span className="min-w-[60px]"> СДНФ = </span>
+            <Input
+              variant="textarea"
+              invalid={invalid['Fsdnf']}
+              value={(inputs?.['table']?.['sdnf']?.[0] as string) || ''}
+              classes={{ input: 'min-h-[90px] text-[12px]' }}
+              disabled={true}
+            />
+          </div>
+          <div className="flex flex-nowrap items-center">
+            <span className="min-w-[60px]"> СКНФ = </span>
+            <Input
+              variant="textarea"
+              invalid={invalid['Fsknf']}
+              value={(inputs?.['table']?.['sknf']?.[0] as string) || ''}
+              classes={{ input: 'min-h-[90px] text-[12px]' }}
+              disabled={true}
+            />
+          </div>
+        </div>
+      </div>
+
       <p className="mb-2">Пример: (x1 & x2 & nx3) v (x3 & nx4 & nx2) </p>
       <div className="flex items-center mb-2">
         <span className="min-w-[60px]"> ТДНФ = </span>

@@ -8,6 +8,8 @@ const inputsParams = [
     data: [
       { name: 'A`', id: 'A+B_A' },
       { name: 'B`', id: 'A+B_B' },
+      { name: 'S`', id: 'S`_A+B' },
+      { name: 'S0', id: 'S0_A+B' },
       { name: 'A+B', id: 'A+B' },
     ],
   },
@@ -16,6 +18,8 @@ const inputsParams = [
     data: [
       { name: 'A`', id: 'A-B_A' },
       { name: 'B`', id: 'A-B_B' },
+      { name: 'S`', id: 'S`_A-B' },
+      { name: 'S0', id: 'S0_A-B' },
       { name: 'A-B', id: 'A-B' },
     ],
   },
@@ -24,6 +28,8 @@ const inputsParams = [
     data: [
       { name: 'A`', id: '-A+B_A' },
       { name: 'B`', id: '-A+B_B' },
+      { name: 'S`', id: 'S`_-A+B' },
+      { name: 'S0', id: 'S0_-A+B' },
       { name: '-A+B', id: '-A+B' },
     ],
   },
@@ -32,6 +38,8 @@ const inputsParams = [
     data: [
       { name: 'A`', id: '-A-B_A' },
       { name: 'B`', id: '-A-B_B' },
+      { name: 'S`', id: 'S`_-A-B' },
+      { name: 'S0', id: 'S0_-A-B' },
       { name: '-A-B', id: '-A-B' },
     ],
   },
@@ -67,7 +75,7 @@ const StepLines = ({ arr, inputs, setInputs, invalid }: PropsWithChildren<StepLi
             {el.data?.map((el2, i2) => (
               <>
                 <Line id={el2.id} name={el2.name} inputs={inputs} setInputs={setInputs} invalid={invalid} />
-                {i2 == 1 && <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />}
+                {i2 == 3 && <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />}
               </>
             ))}
           </div>

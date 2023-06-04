@@ -1,6 +1,6 @@
 import Input from '../../Input/Input';
 import { Dispatch, useEffect } from 'react';
-import { InputsDict } from '../../../model/Inputs';
+import { Inputs, InputsDict } from '../../../model/Inputs';
 import classNames from 'classnames';
 
 const task = 'table';
@@ -26,15 +26,35 @@ export const Task2_2 = ({
     table2.map((el) => {
       inputs[task][el] = Array.from(Array(16).keys()).map(() => '');
     });
+    for (let i = 1; i < 5; i++) {
+      inputs[task][`x${i}`] = Array.from(Array(16).keys()).map((el, j) =>
+        Number(Math.floor(j / Math.pow(2, 4 - i)) % 2 !== 0).toString(),
+      );
+    }
   }, []);
+
+  useEffect(() => {
+    setInputs({
+      ...inputs,
+      [task]: { ...inputs?.[task], ['sdnf']: [getFun('СДНФ', 'v')], ['sknf']: [getFun('СКНФ', '&')] },
+    });
+  }, [inputs]);
+
+  const getFun = (tag: string, sep: string) => {
+    let res = '';
+    inputs?.[task]?.[tag]?.map((el) => {
+      if (el !== '') {
+        res += `( ${el} ) `;
+      }
+    });
+    return res.split(') (').join(`) ${sep} (`);
+  };
 
   return (
     <div className="">
       {header && <h2 className="text-xl font-semibold">{header}</h2>}
       <p className="mb-2">Доопределите функцию и представьте её в СДНФ и СКНФ.</p>
-      <p className="mb-2 text-sm text-gray-500">
-        *Формат СДНФ/СКНФ - ( nx1 & x2 & x3 & nx4 ) ИЛИ ( nx1 v x2 v x3 v nx4 )
-      </p>
+      <p className="mb-2 text-sm text-gray-500">*Формат СДНФ/СКНФ - nx1 & x2 & x3 & nx4 ИЛИ nx1 v x2 v x3 v nx4</p>
       <div className="relative w-full">
         <div className="grid grid-cols-7 w-full">
           {table1.map((el, i) => (
@@ -63,14 +83,26 @@ export const Task2_2 = ({
           ))}
         </div>
       </div>
-      <div className="lg:max-w-[400px] flex flex-col mt-5">
+      <div className="lg:max-w-[700px] flex flex-col mt-5">
         <div className="flex flex-nowrap items-center mb-2">
           <span className="min-w-[60px]"> СДНФ = </span>
-          <Input variant="textarea" invalid={invalid['Fsdnf']} />
+          <Input
+            variant="textarea"
+            invalid={invalid['Fsdnf']}
+            value={inputs[task]?.['sdnf']?.[0] || ''}
+            classes={{ input: 'min-h-[100px]' }}
+            disabled={true}
+          />
         </div>
         <div className="flex flex-nowrap items-center mb-2">
           <span className="min-w-[60px]"> СКНФ = </span>
-          <Input variant="textarea" invalid={invalid['Fsknf']} />
+          <Input
+            variant="textarea"
+            invalid={invalid['Fsknf']}
+            value={inputs[task]?.['sknf']?.[0] || ''}
+            classes={{ input: 'min-h-[100px]' }}
+            disabled={true}
+          />
         </div>
       </div>
     </div>
