@@ -30,16 +30,14 @@ export const Test2 = observer(() => {
 
   const SendResult = async (e?: { preventDefault: () => void }) => {
     e?.preventDefault();
-    const Fsdnf = inputs?.['table']?.['СДНФ'];
-    const Fsknf = inputs?.['table']?.['СКНФ'];
     console.log(inputs);
     const data: object = {
       ...variant,
       stud_id: User.user?.id,
       score: 0,
       var_seg: inputs?.['table']?.['var_seg'] || '',
-      Fsdnf: Fsdnf || [],
-      Fsknf: Fsknf || [],
+      Fsdnf: inputs?.['table']?.['sdnf'][0] || '',
+      Fsknf: inputs?.['table']?.['sknf'][0] || '',
       Quine_DNF: inputs?.['kvain']?.['sdnf'] || '',
       Quine_KNF: inputs?.['kvain']?.['sknf'] || '',
       Quine_MC_DNF: inputs?.['kvain']?.['sdnf_answer'] || '',

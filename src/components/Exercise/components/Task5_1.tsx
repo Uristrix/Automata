@@ -5,7 +5,6 @@ import { Dispatch, PropsWithChildren, useState } from 'react';
 import Button from '../../Button/Button';
 import { InputsMulti } from '../../../model/Inputs';
 
-const task = 'multi';
 const comment = 'Комментарий';
 
 const Block = ({ inputs, setInputs }: { inputs: InputsMulti; setInputs: Dispatch<InputsMulti> }) => {
@@ -46,12 +45,14 @@ const AddBlock = ({
   countBlock,
   invalid,
   index,
+  name,
 }: {
   inputs: InputsMulti;
   setInputs: Dispatch<InputsMulti>;
   countBlock?: number;
   invalid: object;
   index: number;
+  name: string;
 }) => {
   return (
     <div className="relative flex flex-col gap-2 w-full">
@@ -60,17 +61,17 @@ const AddBlock = ({
           <span className="min-w-[115px]" />
           <Input
             type="number"
-            invalid={invalid?.['S']?.[`S${index + 1}`]}
+            invalid={invalid?.[name]?.['S']?.[`S${index + 1}`]}
             classes={{ input: '!rounded-none' }}
             placeholder={'X.XXX...'}
-            value={(inputs[task]?.['S']?.[i === 0 ? `S${index + 1}` : `S${index + 1}_correct`] as string) || ''}
+            value={(inputs[name]?.['S']?.[i === 0 ? `S${index + 1}` : `S${index + 1}_correct`] as string) || ''}
             onChange={(e) => {
               setInputs({
                 ...inputs,
-                [task]: {
-                  ...inputs[task],
+                [name]: {
+                  ...inputs[name],
                   ['S']: {
-                    ...(inputs[task]?.['S'] as object),
+                    ...(inputs[name]?.['S'] as object),
                     [i === 0 ? `S${index + 1}` : `S${index + 1}_correct`]: e.target.value,
                   },
                 },
@@ -93,7 +94,7 @@ const AddBlock = ({
           classes={{ input: '!rounded-none' }}
           placeholder={'X.XXX...'}
           type="number"
-          invalid={invalid?.['S']?.[`S${index + 1}`]}
+          invalid={invalid?.[name]?.['S']?.[`S${index + 1}`]}
         />
         <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
       </div>
@@ -106,49 +107,83 @@ interface Props {
   inputs: InputsMulti;
   setInputs: Dispatch<InputsMulti>;
   invalid: object;
+  name?: string;
   countBlock?: number;
+  header?: string;
+  text?: string;
+  Z?: boolean;
 }
 
-export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChildren<Props>) => {
+export const Task5_1 = ({
+  inputs,
+  setInputs,
+  invalid,
+  countBlock,
+  header,
+  text,
+  Z,
+  name = 'multi',
+}: PropsWithChildren<Props>) => {
   const [inputCount, setInputCount] = useState(0);
   return (
     <div className="m-auto max-w-[300px] md:max-w-[500px] flex flex-col gap-2">
+      {header && <h2 className="text-xl font-semibold">{header}</h2>}
+      {text && <p className="">{text}</p>}
       <div className="flex gap-2 items-center">
         <span className="min-w-[115px]" />
         <Input variant="textarea" classes={{ input: 'min-h-[150px]' }} placeholder="Для перевода чисел" />
       </div>
       <Block inputs={inputs} setInputs={setInputs} />
       {[...Array(inputCount)].map((el, i) => (
-        <AddBlock invalid={invalid} index={i} inputs={inputs} setInputs={setInputs} countBlock={countBlock} key={i} />
+        <AddBlock
+          invalid={invalid}
+          index={i}
+          inputs={inputs}
+          setInputs={setInputs}
+          countBlock={countBlock}
+          key={i}
+          name={name}
+        />
       ))}
       <div className="flex gap-2">
         <span className="min-w-[115px]" />
         <Input
           type="number"
-          invalid={invalid?.['S']?.['correct']}
+          invalid={invalid?.[name]?.['S']?.['correct']}
           classes={{ input: '!rounded-none' }}
           placeholder={'Результат'}
-          value={(inputs[task]?.['S']?.['correct'] as string) || ''}
+          value={(inputs[name]?.['S']?.['correct'] as string) || ''}
           onChange={(e) => {
             setInputs({
               ...inputs,
-              [task]: { ...inputs[task], ['S']: { ...(inputs[task]?.['S'] as object), correct: e.target.value } },
+              [name]: { ...inputs[name], ['S']: { ...(inputs[name]?.['S'] as object), correct: e.target.value } },
             });
           }}
         />
-        <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
+        <Input
+          invalid={invalid?.[name]?.['Z']}
+          classes={{ input: '!rounded-none' }}
+          placeholder={Z ? 'Z' : comment}
+          value={(inputs[name]?.['Z'] as string) || ''}
+          onChange={(e) => {
+            setInputs({
+              ...inputs,
+              [name]: { ...inputs[name], ['Z']: e.target.value },
+            });
+          }}
+        />
       </div>
-      <div className="ml-[130px] flex gap-2">
+      <div className="pl-[125px] flex gap-2 w-full">
         <Button
-          style="text-sm md:text-base"
+          style="text-sm md:text-base w-full"
           onClick={() => {
             setInputs({
               ...inputs,
-              [task]: {
-                ...inputs[task],
+              [name]: {
+                ...inputs[name],
                 ['S']: {
-                  ...(inputs[task]?.['S'] as object),
-                  [`S${inputCount + 1}`]: inputs[task]?.['S']?.['correct'],
+                  ...(inputs[name]?.['S'] as object),
+                  [`S${inputCount + 1}`]: inputs[name]?.['S']?.['correct'],
                   ['correct']: '',
                 },
               },
@@ -159,7 +194,7 @@ export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChi
           Добавить блок
         </Button>
         <Button
-          style="text-sm md:text-base"
+          style="text-sm md:text-base w-full"
           onClick={() => {
             if (inputCount > 0) setInputCount(inputCount - 1);
           }}
@@ -171,11 +206,11 @@ export const Task5_1 = ({ inputs, setInputs, invalid, countBlock }: PropsWithChi
         <span className="min-w-[50px]">[Z]п = </span>
         <Input
           type="number"
-          invalid={invalid?.['result']}
-          placeholder={'X.XXXXXXXXX'}
-          value={(inputs[task]?.result as string) || ''}
+          invalid={invalid?.[name]?.['result']}
+          placeholder={Z ? 'XXXX' : 'X.XXXXXXXXX'}
+          value={(inputs[name]?.result as string) || ''}
           onChange={(e) => {
-            setInputs({ ...inputs, [task]: { ...inputs[task], result: e.target.value } });
+            setInputs({ ...inputs, [name]: { ...inputs[name], result: e.target.value } });
           }}
         />
       </div>

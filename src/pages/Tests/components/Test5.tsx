@@ -2,7 +2,7 @@ import { Task5_1 } from '../../../components/Exercise/components/Task5_1';
 import Button from '../../../components/Button/Button';
 import React, { useEffect, useState } from 'react';
 import Select from '../../../components/Select/Select';
-import { sendTest } from '../../../utils/test';
+import { getRandom, sendTest } from '../../../utils/test';
 import User from '../../../store/user';
 import notification from '../../../store/notification';
 import { observer } from 'mobx-react-lite';
@@ -10,25 +10,23 @@ import { useTimer } from '../../../hooks';
 import Event from '../../../store/event';
 import { useNavigate } from 'react-router-dom';
 import Timer from '../../../components/Timer/Timer';
-const C = [8, 16, 32];
 
-const options = [
-  { value: '1', label: 'Алгоритм бута' },
-  { value: '2', label: 'Умножение на 2 разряда множителя' },
-];
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const Test5 = observer(() => {
   const [inputs, setInputs] = useState({});
   const [invalid, setInvalid] = useState({});
-  const [selectedSort, setSelectedSort] = useState<{ value: string; label: string } | null>(options[0]);
   const [result, setResult] = useState({});
   const [disable, setDisable] = useState(false);
   const { seconds } = useTimer(
     new Date(new Date(Event.event?.date || Date.now()).getTime() + (Event?.event?.length || 0) * 60000),
   );
-  const [variant, setVariant] = useState({
-    C: C[Math.floor(Math.random() * 3)],
-    A: 1,
-    B: 1,
+  const [variant] = useState({
+    C1: 16,
+    A1: getRandom(8, 16),
+    B1: getRandom(1, 16),
+    C2: 16,
+    A2: getRandom(1, 16),
+    B2: getRandom(1, 16),
   });
   const navigate = useNavigate();
 
@@ -40,32 +38,38 @@ export const Test5 = observer(() => {
     }
   }, [seconds]);
 
-  useEffect(() => {
-    setVariant((prev) => ({
-      ...prev,
-      A: Math.floor(Math.random() * (prev.C - 1) + 1),
-      B: Math.floor(Math.random() * (prev.C - 1) + 1),
-    }));
-  }, []);
-
   const SendResult = async (e?: { preventDefault: () => void }) => {
     e?.preventDefault();
     let data: object = {
       stud_id: User.user?.id,
-      X: variant.A,
-      Y: variant.B,
-      S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '' },
-      result: inputs['multi']?.result?.split(''),
       score: 0,
+      first: {
+        X: variant.A1,
+        Y: variant.B1,
+        S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
+        result: inputs['first']?.result?.replace('.', '')?.split('') || [],
+      },
+      second: {
+        X: variant.A2,
+        Y: variant.B2,
+        S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
+        result: inputs['second']?.result?.replace('.', '')?.split('') || [],
+      },
     };
+    ['first', 'second'].map((name) => {
+      for (const el in inputs?.[name]?.['S']) {
+        data = {
+          ...data,
+          [name]: {
+            ...data?.[name],
+            ['S']: { ...data?.[name]?.['S'], [el]: inputs?.[name]?.['S']?.[el]?.replace('.', '')?.split('') },
+          },
+        };
+      }
+    });
 
-    for (const el in inputs?.['multi']?.['S']) {
-      data = {
-        ...data,
-        ['S']: { ...data['S'], [el]: inputs?.['multi']?.['S']?.[el]?.split('') },
-      };
-    }
     console.log(inputs);
+    console.log(data);
     try {
       const res = await sendTest(data, 5);
       if (res.payload.checked) {
@@ -82,21 +86,28 @@ export const Test5 = observer(() => {
   return (
     <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
       <h1 className="text-2xl text-center font-bold">Контрольная работа № 5</h1>
-      <h2 className="text-xl text-center font-bold">{`А = ${variant.A}/${variant.C}, В = ${variant.B}/${variant.C}`}</h2>
-      <h3 className="text-xl text-center font-bold mt-2">Умножение в прямом коде </h3>
       <form
         onSubmit={SendResult}
-        className="flex flex-col mx-auto mt-2 md:mt-5 w-[350px] md:w-full overflow-x-scroll md:overflow-hidden"
+        className="flex flex-col mx-auto mt-2 md:mt-5 w-[350px] md:w-full overflow-x-scroll md:overflow-hidden gap-4"
       >
-        <Select
-          value={selectedSort}
-          onChange={setSelectedSort}
-          options={options}
-          placeholder="Выберите алгоритм"
-          classes={{ root: 'min-w-[300px] md:min-w-[500px] m-auto mb-2' }}
+        <Task5_1
+          inputs={inputs}
+          setInputs={setInputs}
+          invalid={invalid}
+          countBlock={2}
+          name="first"
+          header="Задание 1."
+          text={`Выполните умножение ${variant.A1}/${variant.C1} на ${variant.B1}/${variant.C1} в прямом коде, используя алгоритм Бута.`}
         />
-        <Task5_1 inputs={inputs} setInputs={setInputs} invalid={invalid} countBlock={2} />
-
+        <Task5_1
+          inputs={inputs}
+          setInputs={setInputs}
+          invalid={invalid}
+          countBlock={2}
+          name="second"
+          header="Задание 2."
+          text={`Выполните умножение ${variant.A2}/${variant.C2} на ${variant.B2}/${variant.C2} в прямом коде c помощью умножения на 2 разряда множителей.`}
+        />
         {!disable ? (
           <Button style="mx-auto mt-5" type="submit">
             Отправить ответ

@@ -34,9 +34,11 @@ export const Task2_2 = ({
   }, []);
 
   useEffect(() => {
+    const sdnf = getFun('СДНФ', 'v');
+    const sknf = getFun('СКНФ', '&');
     setInputs({
       ...inputs,
-      [task]: { ...inputs?.[task], ['sdnf']: [getFun('СДНФ', 'v')], ['sknf']: [getFun('СКНФ', '&')] },
+      [task]: { ...inputs?.[task], ['sdnf']: [sdnf], ['sknf']: [sknf] },
     });
   }, [inputs]);
 
