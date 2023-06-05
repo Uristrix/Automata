@@ -1,71 +1,84 @@
 import { Task5_1 } from '../../../components/Exercise/components/Task5_1';
 import Button from '../../../components/Button/Button';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { sendTest } from '../../../utils/test';
+import React, { useEffect, useState } from 'react';
+import { getRandom, sendTrainer } from '../../../utils/training';
 import User from '../../../store/user';
+import notification from '../../../store/notification';
 
-const C = [8, 16, 32];
 export const Training6 = () => {
   const [inputs, setInputs] = useState({});
   const [invalid, setInvalid] = useState({});
   const [result, setResult] = useState({});
-  const [variant, setVariant] = useState({
-    C: C[Math.floor(Math.random() * 3)],
-    A: 1,
-    B: 1,
+  const [disable, setDisable] = useState(false);
+  const [variant] = useState({
+    C1: 16,
+    A1: getRandom(-15, 16),
+    B1: getRandom(-15, 16),
   });
-
-  useEffect(() => {
-    setVariant((prev) => ({
-      ...prev,
-      A: Math.floor(Math.random() * (prev.C - 1) + 1),
-      B: Math.floor(Math.random() * (prev.C - 1) + 1),
-    }));
-  }, []);
-
   const SendResult = async (e?: { preventDefault: () => void }) => {
     e?.preventDefault();
     let data: object = {
       stud_id: User.user?.id,
-      X: variant.A,
-      Y: variant.B,
-      S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '' },
-      result: inputs['multi']?.result?.split(''),
       score: 0,
+      first: {
+        X: variant.A1,
+        Y: variant.B1,
+        S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
+        result: inputs['first']?.result?.replace('.', '')?.split('') || [],
+      },
+      second: {
+        X: variant.A1,
+        Y: variant.B1,
+        S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
+        result: inputs['second']?.result?.replace('.', '')?.split('') || [],
+      },
     };
-
-    for (const el in inputs?.['multi']?.['S']) {
-      data = {
-        ...data,
-        ['S']: { ...data['S'], [el]: inputs?.['multi']?.['S']?.[el]?.split('') },
-      };
+    ['second'].map((name) => {
+      for (const el in inputs?.[name]?.['S']) {
+        data = {
+          ...data,
+          [name]: {
+            ...data?.[name],
+            ['S']: { ...data?.[name]?.['S'], [el]: inputs?.[name]?.['S']?.[el]?.replace('.', '')?.split('') },
+          },
+        };
+      }
+    });
+    try {
+      const res = await sendTrainer(data, 7);
+      if (res.payload.checked) {
+        setInvalid(res.payload.checked);
+        setResult(res.payload.checked.score);
+        setDisable(true);
+        console.log(res.payload);
+      }
+      if (res.error !== undefined) notification.setMessage('Ошибка отправки/алгоритма', 'error');
+    } catch {
+      notification.setMessage('Ошибка отправки/алгоритма', 'error');
     }
-    console.log(data);
-    const res = await sendTest(data, 5);
-    if (res.payload.checked) {
-      setInvalid(res.payload.checked);
-      setResult(res.payload.checked.score);
-    }
-    console.log(res.payload);
   };
   return (
     <div className="mx-3 md:mx-auto w-full xl:w-[1000px] md:bg-white md:p-4 md:rounded-2xl md:shadow-2xl">
-      <h1 className="text-2xl text-center font-bold">
-        Умножение используя анализ смежных разрядов множителя (дополнительный код)
-      </h1>
-      <h2 className="text-xl text-center font-bold">А = 3/16, В = 9/16</h2>
       <form
         onSubmit={SendResult}
         className="flex flex-col mx-auto mt-2 md:mt-5 w-[350px] md:w-full overflow-x-scroll md:overflow-hidden"
       >
-        <Task5_1 inputs={inputs} setInputs={setInputs} invalid={invalid} countBlock={1} />
+        <Task5_1
+          inputs={inputs}
+          setInputs={setInputs}
+          invalid={invalid}
+          countBlock={2}
+          name="second"
+          header="Задание"
+          text={`Выполните умножение ${variant.A1}/${variant.C1} на ${variant.B1}/${variant.C1} в дополнителььном коде, используя анализ смежных разрядов множителя.`}
+        />
 
         <Button style="mx-auto mt-5" type="submit">
           Проверить
         </Button>
         <Button style="min-w-[300px] mt-5 ml-auto">
-          <Link className="w-[90%]" to={'/lecture/4_11'}>
+          <Link className="w-[90%]" to={'/lecture/4_12'}>
             Перейти к примеру →
           </Link>
         </Button>
