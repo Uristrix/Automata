@@ -59,21 +59,21 @@ export const Test8 = observer(() => {
         Y: variant.B1,
         S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
         result: inputs['first']?.result?.replace('.', '')?.split('') || [],
-        Z: inputs['first']?.Z?.split('') || ['', '', '', ''],
+        Z: [],
       },
       second: {
         X: variant.A2,
         Y: variant.B2,
         S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
         result: inputs['second']?.result?.replace('.', '')?.split('') || [],
-        Z: inputs['second']?.Z?.split('') || ['', '', '', ''],
+        Z: [],
       },
       third: {
         X: variant.A3,
         Y: variant.B3,
         S: { S1: '', S2: '', S3: '', S4: '', S5: '', S6: '', S7: '', S8: '', correct: '' },
         result: inputs['third']?.result?.replace('.', '')?.split('') || [],
-        Z: inputs['third']?.Z?.split('') || ['', '', '', ''],
+        Z: [],
       },
     };
     ['first', 'second', 'third'].map((name) => {
@@ -88,6 +88,7 @@ export const Test8 = observer(() => {
       }
     });
 
+    console.log(data);
     try {
       const res = await sendTest(data, 8);
       if (res.payload.checked) {
