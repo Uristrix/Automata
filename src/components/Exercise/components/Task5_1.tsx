@@ -7,7 +7,7 @@ import { InputsMulti } from '../../../model/Inputs';
 
 const comment = 'Комментарий';
 
-const Block = ({ inputs, setInputs }: { inputs: InputsMulti; setInputs: Dispatch<InputsMulti> }) => {
+const Block = ({ Z }: { Z?: boolean }) => {
   return (
     <div className="relative flex flex-col gap-2 w-full">
       <div className="flex gap-2 w-full">
@@ -32,7 +32,7 @@ const Block = ({ inputs, setInputs }: { inputs: InputsMulti; setInputs: Dispatch
           <Input classes={{ input: '!rounded-none w-[50px]' }} placeholder={'XX'} maxLength={2} />
         </div>
         <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} type="number" />
-        <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
+        <Input classes={{ input: '!rounded-none' }} placeholder={`${comment}${Z ? ' / Z' : ''}`} />
       </div>
       <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
     </div>
@@ -46,6 +46,7 @@ const AddBlock = ({
   invalid,
   index,
   name,
+  Z,
 }: {
   inputs: InputsMulti;
   setInputs: Dispatch<InputsMulti>;
@@ -53,6 +54,7 @@ const AddBlock = ({
   invalid: object;
   index: number;
   name: string;
+  Z?: boolean;
 }) => {
   return (
     <div className="relative flex flex-col gap-2 w-full">
@@ -96,7 +98,7 @@ const AddBlock = ({
           type="number"
           invalid={invalid?.[name]?.['S']?.[`S${index + 1}`]}
         />
-        <Input classes={{ input: '!rounded-none' }} placeholder={comment} />
+        <Input classes={{ input: '!rounded-none' }} placeholder={`${comment}${Z ? ' / Z' : ''}`} />
       </div>
       <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
     </div>
@@ -133,7 +135,7 @@ export const Task5_1 = ({
         <span className="min-w-[115px]" />
         <Input variant="textarea" classes={{ input: 'min-h-[150px]' }} placeholder="Для перевода чисел" />
       </div>
-      <Block inputs={inputs} setInputs={setInputs} />
+      <Block Z={Z} />
       {[...Array(inputCount)].map((el, i) => (
         <AddBlock
           invalid={invalid}
@@ -143,13 +145,14 @@ export const Task5_1 = ({
           countBlock={countBlock}
           key={i}
           name={name}
+          Z={Z}
         />
       ))}
       <div className="flex gap-2">
         <span className="min-w-[115px]" />
         <Input
           type="number"
-          invalid={invalid?.[name]?.['S']?.['correct']}
+          invalid={Array.isArray(invalid?.[name]?.['S']?.['correct']) ? false : invalid?.[name]?.['S']?.['correct']}
           classes={{ input: '!rounded-none' }}
           placeholder={'Результат'}
           value={(inputs[name]?.['S']?.['correct'] as string) || ''}
@@ -163,14 +166,14 @@ export const Task5_1 = ({
         <Input
           invalid={invalid?.[name]?.['Z']}
           classes={{ input: '!rounded-none' }}
-          placeholder={Z ? 'Z' : comment}
+          placeholder={`${comment}${Z ? ' / Z' : ''}`}
           value={(inputs[name]?.['Z'] as string) || ''}
-          onChange={(e) => {
-            setInputs({
-              ...inputs,
-              [name]: { ...inputs[name], ['Z']: e.target.value },
-            });
-          }}
+          // onChange={(e) => {
+          //   setInputs({
+          //     ...inputs,
+          //     [name]: { ...inputs[name], ['Z']: e.target.value },
+          //   });
+          // }}
         />
       </div>
       <div className="pl-[125px] flex gap-2 w-full">

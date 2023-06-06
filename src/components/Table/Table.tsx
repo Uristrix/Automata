@@ -11,11 +11,11 @@ const Table = observer(({ header, items, classes }: PropsWithChildren<Table>) =>
   return (
     <div className={classNames('w-full shadow-lg box-border rounded-2xl h-full overflow-hidden', classes?.root)}>
       <div className="w-full box-border h-full overflow-auto">
-        <table className={classNames('w-full', classes?.table)}>
-          <thead className={classNames('bg-ocean text-white w-full', classes?.thead)}>
+        <table className={classNames('w-full relative', classes?.table)}>
+          <thead className={classNames('text-white w-full', classes?.thead)}>
             <tr className={classNames('[&>th]:text-left [&>th]:px-2', classes?.tr)}>
               {header?.map((el, i) => (
-                <th key={`th${i}`} className={classNames(classes?.th, '!sticky')}>
+                <th key={`th${i}`} className={classNames(classes?.th, '!sticky top-0 bg-ocean')}>
                   {el}
                 </th>
               ))}
