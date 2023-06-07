@@ -62,7 +62,7 @@ const MainPage = () => {
     <section className="flex flex-col 2xl:flex-row justify-between gap-2 mx-5 md:mx-0 max-w-[350px] md:max-w-full">
       <Topics />
       <div className="flex flex-col-reverse xl:flex-col gap-2 max-w-[350px] md:max-w-full">
-        <TeacherCard />
+        {/*<TeacherCard />*/}
         <Events />
       </div>
     </section>
