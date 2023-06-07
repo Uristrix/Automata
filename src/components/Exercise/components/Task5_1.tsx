@@ -13,7 +13,6 @@ const Block = ({ Z }: { Z?: boolean }) => {
       <div className="flex gap-2 w-full">
         <span className="min-w-[115px]" />
         <Input
-          type="number"
           classes={{ input: '!rounded-none' }}
           placeholder={'X.XXX...'}
           // value={(inputs[task]?.['S']?.['S0'] as string) || ''}
@@ -31,7 +30,7 @@ const Block = ({ Z }: { Z?: boolean }) => {
         <div className="flex min-w-[115px]">
           <Input classes={{ input: '!rounded-none w-[50px]' }} placeholder={'XX'} maxLength={2} />
         </div>
-        <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} type="number" />
+        <Input classes={{ input: '!rounded-none' }} placeholder={'X.XXX...'} />
         <Input classes={{ input: '!rounded-none' }} placeholder={`${comment}${Z ? ' / Z' : ''}`} />
       </div>
       <div className="w-full h-[2px] border-t-2 border-black border-solid mb-2" />
@@ -62,7 +61,6 @@ const AddBlock = ({
         <div className="flex gap-2 w-full" key={`S${index + 1}`}>
           <span className="min-w-[115px]" />
           <Input
-            type="number"
             invalid={invalid?.[name]?.['S']?.[`S${index + 1}`]}
             classes={{ input: '!rounded-none' }}
             placeholder={'X.XXX...'}
@@ -95,7 +93,6 @@ const AddBlock = ({
         <Input
           classes={{ input: '!rounded-none' }}
           placeholder={'X.XXX...'}
-          type="number"
           invalid={invalid?.[name]?.['S']?.[`S${index + 1}`]}
         />
         <Input classes={{ input: '!rounded-none' }} placeholder={`${comment}${Z ? ' / Z' : ''}`} />
@@ -151,7 +148,6 @@ export const Task5_1 = ({
       <div className="flex gap-2">
         <span className="min-w-[115px]" />
         <Input
-          type="number"
           invalid={Array.isArray(invalid?.[name]?.['S']?.['correct']) ? false : invalid?.[name]?.['S']?.['correct']}
           classes={{ input: '!rounded-none' }}
           placeholder={'Результат'}
@@ -208,7 +204,6 @@ export const Task5_1 = ({
       <div className="flex items-center mt-2 ">
         <span className="min-w-[50px]">[Z]п = </span>
         <Input
-          type="number"
           invalid={invalid?.[name]?.['result']}
           placeholder={Z ? 'XXXX' : 'X.XXXXXXXXX'}
           value={(inputs[name]?.result as string) || ''}
