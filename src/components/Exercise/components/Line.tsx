@@ -20,7 +20,7 @@ const Line = ({ id, name, inputs, setInputs, invalid, style }: PropsWithChildren
       <Input
         classes={{ input: '!rounded-none' }}
         invalid={invalid?.[id]?.str}
-        placeholder={'X.XXXXXX'}
+        placeholder={'X.XXXXXXX'}
         value={inputs[id]?.str || ''}
         onChange={(e) => {
           setInputs({ ...inputs, [id]: { ...inputs[id], str: e.target.value } });
@@ -29,7 +29,7 @@ const Line = ({ id, name, inputs, setInputs, invalid, style }: PropsWithChildren
       <Input
         classes={{ input: '!rounded-none' }}
         invalid={invalid?.[id]?.rev}
-        placeholder={'X.XXXXXX'}
+        placeholder={'X.XXXXXXX'}
         value={inputs[id]?.rev || ''}
         onChange={(e) => {
           setInputs({ ...inputs, [id]: { ...inputs[id], rev: e.target.value } });
